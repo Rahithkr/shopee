@@ -1,0 +1,797 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">e_shopee</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">New Arrivals</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Brands</a>
+              </li>
+            </ul>
+            
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/user/login">Login</a></li>
+                  <li><a class="dropdown-item" href="/user/signup">Signup</a></li>
+                 
+                </ul>
+              </div>
+          </div>
+        </div>
+      </nav> -->
+
+
+
+      <!-- banner -->
+
+
+      <!-- <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://img.freepik.com/premium-vector/wireless-earphone-product-ads-banner_252779-450.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>First slide label</h5>
+              <p>Some representative placeholder content for the first slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://imageio.forbes.com/specials-images/imageserve/6419b4476af64ebf89bdef19/e-commerce/960x0.jpg?format=jpg&width=960" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide label</h5>
+              <p>Some representative placeholder content for the second slide.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://f.hellowork.com/blogdumoderateur/2023/05/ECommerce-Fevad-2023-.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Third slide label</h5>
+              <p>Some representative placeholder content for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+
+
+
+      <div id="line" class="text  text-center text-black fw-bold  fs-1">New Arrivals</div><br>
+
+
+
+
+      <div class="product-section">
+        <div class="container">
+            <div class="row">
+
+                
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="data:image/jpeg;base64,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" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Nordic Chair</h3>
+                        <strong class="product-price">$50.00</strong>
+
+                        <span class="icon-cross">
+                            <img src="images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div> 
+              
+
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="data:image/jpeg;base64,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" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Nordic Chair</h3>
+                        <strong class="product-price">$50.00</strong>
+
+                        <span class="icon-cross">
+                            <img src="images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div> 
+               
+
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="data:image/jpeg;base64,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" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Kruzo Aero Chair</h3>
+                        <strong class="product-price">$78.00</strong>
+
+                        <span class="icon-cross">
+                            <img src="images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div>
+                
+
+
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="cart.html">
+                        <img src="data:image/jpeg;base64,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" class="img-fluid product-thumbnail">
+                        <h3 class="product-title">Ergonomic Chair</h3>
+                        <strong class="product-price">$43.00</strong>
+
+                        <span class="icon-cross">
+                        </span>
+                    </a>
+                </div>
+                </div>
+        </div>
+        </div>
+                
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+        
+		<script src="js/bootstrap.bundle.min.js"></script>
+		<script src="js/tiny-slider.js"></script>
+		<script src="js/custom.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+<link rel="stylesheet" href="/styles/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+        <!-- Container wrapper -->
+        <div class="container">    
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent1"
+            aria-controls="navbarSupportedContent1"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+      
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent1">      
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-sm-0" href="https://mdbootstrap.com/">
+              <!-- <img
+                src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
+                height="20"
+                alt="MDB Logo"
+                loading="lazy"
+                
+              /> -->
+              <h3 class="text text-primary">e_Shopee</h3>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item active">
+                <a class="nav-link  " href="https://mdbootstrap.com/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="/user/productlist">Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link " href="https://mdbootstrap.com/docs/standard/getting-started/installation/">Categories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link  " href="https://mdbootstrap.com/education/bootstrap/">Brands</a>
+              </li>
+            </ul>
+            <!-- Left links -->      
+          </div>
+          <!-- Collapsible wrapper -->
+          
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <a class="nav-link me-3" href="/user/cart/:id">
+              <i class="fas fa-shopping-cart"></i>
+       
+            </a>
+            <a class="nav-link me-3" href="#">
+                <i id="icon" class=" fa-regular fa-heart"></i>
+         
+              </a>
+      
+            </a>
+        </div>
+       <% if(user){ %>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-regular fa-user"></i>
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+             
+            </ul>
+          </div>
+          <% }else{ %>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-regular fa-user"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="/user/login">LOGIN</a></li>
+                  <li><a class="dropdown-item" href="/user/signup">SIGNUP</a></li>
+                 
+                </ul>
+              </div>
+
+              <% } %>
+          
+          
+    
+           
+        
+          <!-- Right elements -->
+          
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+      
+      <!-- carousel -->
+      <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-mdb-target="#carouselExampleCaptions"
+            data-mdb-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-mdb-target="#carouselExampleCaptions"
+            data-mdb-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-mdb-target="#carouselExampleCaptions"
+            data-mdb-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="https://pagar.me/static/5390a38939014c7fe9a0a4e16c66a246/2f1b1/2021-04-08-seguranca-no-ecommerce.jpg" class="d-block w-100" alt="Wild Landscape"/>
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
+            <div class="carousel-caption d-none d-sm-block mb-5">
+              <h2 class="mb-4">
+                      <strong>Feel the best Experiance on SHopping</strong>
+                    </h2>
+      
+                <h3>
+                      <strong class="text text-warning">e_Shopee</strong>
+                    </h3>
+      
+                    <p class="mb-4 d-none d-md-block">
+                      <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video and written versions
+                        available. Create your own, stunning website.</strong>
+                    </p>
+      
+                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start free tutorial
+                      <i class="fas fa-graduation-cap ms-2"></i>
+                    </a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg" class="d-block w-100" alt="Camera"/>
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
+            <div class="carousel-caption d-none d-md-block mb-5">
+              <h1 class="mb-4">
+                      <strong>Learn Bootstrap 5 with MDB</strong>
+                    </h1>
+      
+                    <p>
+                      <strong>Best & free guide of responsive web design</strong>
+                    </p>
+      
+                    <p class="mb-4 d-none d-md-block">
+                      <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video and written versions
+                        available. Create your own, stunning website.</strong>
+                    </p>
+      
+                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start free tutorial
+                      <i class="fas fa-graduation-cap ms-2"></i>
+                    </a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%285%29.jpg" class="d-block w-100" alt="Exotic Fruits"/>
+            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
+            <div class="carousel-caption d-none d-md-block mb-5">
+              <h1 class="mb-4">
+                      <strong>Learn Bootstrap 5 with MDB</strong>
+                    </h1>
+      
+                    <p>
+                      <strong>Best & free guide of responsive web design</strong>
+                    </p>
+      
+                    <p class="mb-4 d-none d-md-block">
+                      <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video and written versions
+                        available. Create your own, stunning website.</strong>
+                    </p>
+      
+                    <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start free tutorial
+                      <i class="fas fa-graduation-cap ms-2"></i>
+                    </a>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      
+       <!--Main layout-->
+      <main>
+      <div class="container">
+        <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+      
+          <!-- Navbar brand -->
+          <a class="navbar-brand" href="#">Categories:</a>
+      
+          <!-- Toggle button -->
+          <button 
+             class="navbar-toggler" 
+             type="button" 
+             data-mdb-toggle="collapse" 
+             data-mdb-target="#navbarSupportedContent2" 
+             aria-controls="navbarSupportedContent2" 
+             aria-expanded="false" 
+             aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+      
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      
+              <!-- Link -->
+              <li class="nav-item acitve">
+                <a class="nav-link text-white" href="#">All</a>
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Shirts</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Sport wears</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Outwears</a>
+                  </li>
+      
+            </ul>
+      
+            <!-- Search -->
+            <form class="w-auto py-1" style="max-width: 12rem">
+              <input type="search" class="form-control rounded-0" placeholder="Search" aria-label="Search">
+            </form>
+      
+          </div>
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+      <!-- Navbar -->
+        
+      <!-- Products -->
+        <section>
+        <div class="text-center">
+          <div class="row">
+            <% product.forEach(product => { %>
+              
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img  src="/images/img/<%= product.image %> "
+                    class="w-100" />
+                  <a href="#!">
+                    <div class="mask">
+                      <!-- <div class="d-flex justify-content-start align-items-end h-100">
+                        <h5><span class="badge bg-dark ms-2">NEW</span></h5>
+                      </div> -->
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="/user/productpage/<%= product._id %>" class="text-reset">
+                    <h4 class="card-title mb-2"><%= product.name %></h4>
+                  </a>
+                  <a href="" class="text-reset ">
+                    
+                    <!-- <p>Shirt</p> -->
+                  </a>
+                  <h3 class="mb-3 price">&#8377; <%= product.price %></h3>
+                  <a href="#!" class="btn btn-warning shadow-0 me-1">Buy Now</a>
+                    <a href="/user/cart/<%= product._id %>" class="btn btn-primary shadow-0 me-1">Add to cart</a>
+                    <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a>
+                  
+                </div>
+              </div>
+            </div>
+
+            <% }); %>
+
+      
+            <!-- <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
+                    class="w-100" />
+                  <a href="/user/productpage">  
+                    <div class="mask">
+                      <div class="d-flex justify-content-start align-items-end h-100">
+                        <h5><span class="badge bg-primary ms-2">bestseller</span></h5>
+                      </div>
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="/user/productpage" class="text-reset">
+                    <h5 class="card-title mb-2">Sweatshirt</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Sport wear</p>
+                  </a>
+                  <h6 class="mb-3 price">139$</h6>
+                </div>
+              </div>
+            </div> -->
+            
+            <!-- <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
+                    class="w-100" />
+                  <a href="#!">              
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="/user/productpage" class="text-reset">
+                    <h5 class="card-title mb-2">Grey blouse</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Sport wear</p>
+                  </a>
+                  <h6 class="mb-3 price">99$</h6>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
+                    class="w-100" />
+                  <a href="#!">
+                    <div class="mask">
+                      <div class="d-flex justify-content-start align-items-end h-100">
+                        <h5><span class="badge sale-badge ms-2">-10%</span></h5>
+                      </div>
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="" class="text-reset">
+                    <h5 class="card-title mb-2">Black jacket</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Outwear</p>
+                  </a>
+                  <h6 class="mb-3 price">
+                    <s>199$</s><strong class="ms-2 sale">179$</strong>
+                  </h6>
+                </div>
+              </div>
+            </div> -->
+          </div>
+      
+          <!-- <div class="row">
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg"
+                    class="w-100" />
+                  <a href="#!">              
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="" class="text-reset">
+                    <h5 class="card-title mb-2">Sweatshirt</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Sport wear</p>
+                  </a>
+                  <h6 class="mb-3 price">139$</h6>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/14.jpg"
+                    class="w-100" />
+                  <a href="#!">
+                    <div class="mask">
+                      <div class="d-flex justify-content-start align-items-end h-100">
+                        <h5><span class="badge bg-success ms-2">Eco</span></h5>
+                      </div>
+                    </div>
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="" class="text-reset">
+                    <h5 class="card-title mb-2">Grey blouse</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Sport wear</p>
+                  </a>
+                  <h6 class="mb-3 price">99$</h6>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/15.jpg"
+                    class="w-100" />
+                  <a href="#!">              
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="" class="text-reset">
+                    <h5 class="card-title mb-2">Black jacket</h5>
+                  </a>
+                  <a href="" class="text-reset">
+                    <p>Outwear</p>
+                  </a>
+                  <h6 class="mb-3 price">199$</h6>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-lg-3 col-md-6 mb-4">
+              <div class="card">
+                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                  data-mdb-ripple-color="light">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg"
+                    class="w-100" />
+                  <a href="#!">              
+                    <div class="hover-overlay">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <a href="" class="text-reset">
+                    <h5 class="card-title mb-2">Denim shirt</h5>
+                  </a>
+                  <a href="" class="text-reset ">
+                    <p>Shirt</p>
+                  </a>
+                  <h6 class="mb-3 price">120$</h6>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </section>
+        
+      <!-- Pagination -->
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>  
+      <!-- Pagination -->  
+      </div>
+      </main>
+       <!--Main layout-->
+      
+      <footer class="text-center text-white mt-4" style="background-color: #607D8B">
+        
+        <!--Call to action-->
+          <div class="pt-4 pb-2">
+            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank" role="button">Download MDB
+              <i class="fas fa-download ms-2"></i>
+            </a>
+            <a class="btn btn-outline-white footer-cta mx-2" href="https://mdbootstrap.com/education/bootstrap/" target="_blank" role="button">Start free tutorial
+              <i class="fas fa-graduation-cap ms-2"></i>
+            </a>
+          </div>
+          <!--/.Call to action-->
+        
+        <hr class="text-dark">
+        
+        <div class="container">
+          <!-- Section: Social media -->
+          <section class="mb-3">
+            
+            <!-- Facebook -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+      
+            <!-- Twitter -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-twitter"></i
+            ></a>
+      
+            <!-- Google -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-google"></i
+            ></a>
+      
+            <!-- Instagram -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-instagram"></i
+            ></a>
+      
+            <!-- YouTube -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-youtube"></i
+            ></a>
+            <!-- Github -->
+            <a
+              class="btn-link btn-floating btn-lg text-white"
+              href="#!"
+              role="button"
+              data-mdb-ripple-color="dark"
+              ><i class="fab fa-github"></i
+            ></a>
+          </section>
+          <!-- Section: Social media -->
+        </div>
+        <!-- Grid container -->
+      
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color: #E0E0E0">
+          © 2022 Copyright:
+          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+      </footer>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+</body>
+</html>
