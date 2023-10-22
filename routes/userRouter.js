@@ -159,15 +159,9 @@ console.log(otp)
 
 })
 
-// router.post("/login",async(req,res)=>{
-//    const check=await userCollection.findOne({email:req.body.email,password:req.body.password})
-//     console.log(check)
-//     if(check.email===req.body.email && check.req.body.password){
-        
-//         res.redirect("/user/homepage")
-//     }
-   
-// })
+
+
+
 
 router.post("/login", async (req, res) => {
     try {
@@ -180,6 +174,8 @@ router.post("/login", async (req, res) => {
         //    const email= check.email
         user=true
             req.session.userId = check._id.toString();
+            const user123=req.session.userId
+            console.log('hiiiiiiiiiiiiiiiiiiiii',user123);
             console.log("login:",req.session.userId);
             
             res.redirect("/");
@@ -337,9 +333,6 @@ router.post("/newpass",async(req,res)=>{
 })
 
 
-// router.get("/productpage",(req,res)=>{
-//     res.render("user/productpage")
-// })
 router.get("/productpage/:id",async(req,res)=>{
     console.log("runnig")
     const id=req.params.id;
@@ -369,50 +362,44 @@ router.get("/productlist",async(req,res)=>{
 router.get('/',async(req,res)=>{
     console.log("home: ", req.session.userId);
 
+const user1 =req.session.userId
    const product = await productCollection.find()
-    res.render('user/index',{user,product})  
+
+
+       res.render('user/index',{user1,product})  
+  
+
+  
 })
+
+
 
 router.get("/logout",(req,res)=>{
-    user=false
+    req.session.userId=null;
     res.redirect("/user/login")
+ 
+    })
+        
 
-    // req.session.destroy(function(err){
-    //     if(err){
-    //         console.log("err")
-    //     }
-    //     else{
-    //         console.log("logout success");
-    //         res.redirect("/user/login")
-    //     }
-    // })
-   
-})
+  
 
-// router.get("/profile",async(req,res)=>{
-//     name=req.session.user;
-//  const user=await userCollection.findOne({name})
-//     res.render("user/profile",{user})
-// })
 
+
+
+// profile render
 
 router.get("/profile", async (req, res) => {
+    const userId=req.session.userId;
     try {
-        // if (!req.session.user) {
-        //     return res.redirect("/login"); // Redirect to login if the user is not authenticated
-        // }
+      
+      const user = await userCollection.findOne({_id:userId });
 
-        // const name = req.session.user;
-        const user = await userCollection.findOne({ email:email });
-
-        // if (user) {
-             // Handle the case when the user is not found
         console.log(user)
 
-        res.render("user/profile", { user });
+        res.render("user/profile",{user});
         }
-    
-            
+               
+                  
     
      catch (error) {
         console.error("Error:", error);
@@ -435,8 +422,7 @@ router.post("/profile/addaddress",async(req,res)=>{
         fulladdress:req.body.fulladdress,
         street:req.body.street,
         city:req.body.city,
-        state:req.body.state,
-       
+        state:req.body.state, 
         pincode:req.body.pincode,
     }]
     }
@@ -453,10 +439,10 @@ router.post("/profile/addaddress",async(req,res)=>{
 })
 
 router.get("/profile/showaddress",async(req,res)=>{
-    const address=req.session.user;
+    const userId=req.session.userId;
     console.log("running one");
 
-   const userData= await userCollection.findOne({email})
+   const userData= await userCollection.findOne({_id:userId})
  
     res.render("user/showaddress",{userData})
 })
@@ -528,6 +514,86 @@ router.post('/profile/updateprofile/:id', async (req, res) => {
     }
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.get("/profile/orderstatus",async(req,res)=>{
+
+    const userId=req.session.userId
+    const user=await userCollection.findOne({_id:userId})
+
+   
+
+    const orders= await userCollection.aggregate([{$unwind:"$orders"},{
+        $project:{
+          productName:"$orders.name",
+          category:"$orders.category",
+          quantity:"$orders.quantity",
+          price:"$orders.price",
+          image:"$orders.image",
+          
+         
+       
+  
+        }
+      }])
+
+
+      const order=user.orders;
+      console.log("ordersss:",order)
+    res.render("user/orderstatus",{order})
+     
+ 
+})
+
+
+router.get("/ordercancel/:id",async(req,res)=>{
+    const id=req.params.id;
+  
+  
+console.log("id;",id)
+const updatestatus= await userCollection.findOneAndUpdate( { "orders._id":id},
+
+{ $set: { "orders.$.status": "cancelled" } },
+{ new: true })
+if(updatestatus)(
+
+    res.redirect("/profile/orderstatus")
+)
+
+
+  })
+
+
+  router.get("/removeproduct/:id",async(req,res)=>{
+    const id=req.params.id;
+  
+  
+console.log("id;",id)
+const updateStatus = await userCollection.findOneAndUpdate(
+    { "cart.items._id": id }, // Match the item within the cart with the specified _id
+    { $pull: { "cart.items": { _id: id } } }, // Remove the item from the cart.items array
+    { new: true }
+);
+if(updateStatus)(
+
+    res.redirect("/user/cart",)
+)
+
+
+  })
+
 // router.get("/cart/:id/:image",async(req,res)=> {
 //     try{
 
@@ -565,9 +631,16 @@ router.post('/profile/updateprofile/:id', async (req, res) => {
 
 
 router.get("/cart/:id",async(req,res)=>{
+   
+    console.log('im in');
     const id = req.params.id;
-    let userId =  req.session.userId
-    const user = await userCollection.findOne({_id: userId},{cart:1, _id:0})
+    console.log(id);
+  let userId =  req.session.userId;
+  console.log("userid:",userId);
+  try{
+    const user = await userCollection.findOne({_id: userId},{'cart.items':1})
+    console.log(user);
+    
 
     let product = await productCollection.findOne({_id: id});
 
@@ -578,77 +651,122 @@ router.get("/cart/:id",async(req,res)=>{
         category:product.category,
         productId:product._id,
         price:product.price,
+        stock:product.stock,
+        userId:userId
+    
 
     }
-    
-     const result= await userCollection.findOneAndUpdate({_id:userId},{ $push: { 'cart.items': productData } });
+    console.log(productData);
+    const existingCartItem = user.cart.items.find(item => item.productId.toString() === id);
+    console.log("exitingcartitem:",existingCartItem)
+    if (!existingCartItem) {
 
+
+     const result= await userCollection.findOneAndUpdate({_id: userId},{ $push: { "cart.items": [productData] } });
+     console.log("rsult:",result)
      res.redirect(`/user/productpage/${id}`);
+    }
+    else{
 
-})
+        res.redirect("/user/cart")
+       
 
-// router.get("/cart/:id",(req,res)=>{
-//     res.render("user/cart")
-// })
-// router.get("/cart/:id",async(req,res)=>{
-//     id=req.params.id;
+    }
+}
+    catch (error)  {
+        console.error(error);
+        res.status(500).send('An error occurred');
+    }
 
-//     const result=await userCollection.insertOne(id,{
-//         productName:req.body.productName,
-//         price:req.body.price,
-//         quantity:req.body.quantity,
-//     })
+    
 
-//     res.redirect("/user/cart")
-
-// })
-
+});
+// router.post("/productlist/search",async(req,res)=>{
 
 
-// router.post("/update", async (req, res) => {
+
+  
 //     try {
-//         // if (!req.session.user) {
-//         //     return res.redirect("/login"); // Redirect to login if the user is not authenticated
-//         // }
 
-//         // const name = req.session.user;
-//         const user = await userCollection.updateOne({ email:email });
-
-//         // if (user) {
-//              // Handle the case when the user is not found
-//         console.log(user)
-
-//         res.render("user/profile", { user });
+//         const search = req.body.search;
+      
+//         if(search){
 //         }
-    
-            
-    
-//      catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).send("Internal Server Error"); // Handle the error appropriately
+       
+//         const product = await productCollection.find({name:search})
+
+       
+//         res.redirect('/user/productlist', {product:product });
+
+      
+//     } catch (error) {
+//         console.log(error.message);
 //     }
-// });
-
-
-// router.get("/cart",async(req,res)=>{
-//     console.log("carting")
-// const userId=req.session.userId;
-//     const cartData= await userCollection.findOne({_id:userId})
-
-//     if(cartData){
-
-//         res.render("user/cart",{cartData: cartData})
-//     }
-//     else
-//     {
-//         res.render("")
-//     }
-   
-
-
-
-    
 // })
+
+
+
+
+
+
+
+
+
+router.post("/product/cart/update/:cartid/:count/:productId", async (req, res) => {
+    const cartid=req.params.cartid;
+    const newQuantity = parseInt(req.params.count);
+    const productId = req.params.productId;
+    const userId = req.session.userId
+
+    console.log(cartid)
+    console.log(newQuantity)
+    console.log(productId)
+    console.log(userId)
+    
+
+    try {
+        const stockqty = await productCollection.findOne({_id:productId})
+        console.log(stockqty)
+        const stockUpdate=stockqty.stock
+        console.log(stockUpdate)
+        if(newQuantity > stockUpdate){
+            console.log('out of stock');
+       
+            const errorMessage = 'Out of Stock';
+            return res.redirect('user/cart', { cartData });
+        }else{
+            console.log('valid stock')
+        }
+      const result = await userCollection.findOneAndUpdate(
+        {
+          _id: userId,
+          "cart.items._id": cartid,
+        },
+        {
+          $set: { "cart.items.$.quantity": newQuantity },
+        }
+      );
+
+      
+  
+      if (result) {
+
+        console.log("Quantity updated successfully.");
+        res.sendStatus(200);
+      } else {
+        console.log("Cart item not found.");
+        res.sendStatus(404);
+      }
+
+   
+    } catch (error) {
+      console.error("Error updating quantity:", error);
+      res.sendStatus(500);
+    }
+  });
+  
+
+
 
 
 router.get("/cart", async (req, res) => {
@@ -656,11 +774,31 @@ router.get("/cart", async (req, res) => {
     const userId = req.session.userId;
 
     try {
-        const userData = await userCollection.findOne({ _id: userId },{cart:1});
+        const userData = await userCollection.findOne({ _id: userId },{cart:1,_id:1});
+        console.log('hiii');
+        console.log(userData);
         if (userData) {
             const cartData = userData.cart;
+            const userId=userData.id
+            console.log("userIdCart:",userId)
             console.log(" cart : ",cartData);
-            res.render("user/cart", { cartData });
+            console.log("cartData:",cartData)
+
+            // Calculate the total price
+const totalPrice = cartData.items.reduce((total, item) => {
+    return total + (item.price * item.quantity);
+}, 0);
+console.log("totalPrice:",totalPrice)
+
+// Update the user's cart with the total price
+const result = await userCollection.findOneAndUpdate(
+    { _id: userId },
+    { 
+        'cart.totalPrice': totalPrice
+    }
+   
+);
+            res.render("user/cart", { cartData ,userId,totalPrice});
         } else {
             // Handle the case where user data is not found.
             res.status(404).send("User not found.");
@@ -669,16 +807,118 @@ router.get("/cart", async (req, res) => {
         console.error("Error fetching cart data:", error);
         res.status(500).send("Error fetching cart data");
     }
+
+
 });
 
-// router.post("/cart/:id",async(req,res)=>{
-//     const id=req.params.id;
-    
- 
-//     const product =await productCollection.findOne({_id:id})
+router.get("/checkout",async(req,res)=>{
+    const userId=req.session.userId;
+   const userData1= await userCollection.findOne({_id:userId})
 
-//    res.redirect("user/cart",{user,product})
-// })
+   const userData = userData1.address
+  const userData2 = await userCollection.findOne({ _id: userId },{cart:1,_id:1});
+  const totalPrice= userData2.cart.totalPrice;
+  console.log(userData2)
+  console.log("userDatapassing:",userData)
+    res.render("user/checkout",{userData,totalPrice,userData2})
+})
+
+
+router.post("/checkout/addaddress", async (req, res) => {
+    try {
+        const filter = { email: req.body.email };
+        const newAddress = {
+            street: req.body.street,
+            city: req.body.city,
+            fulladdress: req.body.fulladdress,
+            state: req.body.state,
+            pincode: req.body.pincode,
+    
+        };
+        console.log("newAddress:",newAddress)
+        const update = {
+            $push: {
+                'address': newAddress // Use the $push operator to add the new address to the array
+            }
+        };
+
+        const options = { upsert: true };
+console.log("update:",update)
+        await userCollection.updateOne(filter, update, options);
+      
+        res.redirect("/user/checkout");
+    } catch (error) {
+        console.log("Address data error:", error);
+        // Handle the error and send an error response
+    }
+});
+
+
+
+router.post("/confirmorder", async (req, res) => {
+
+    const address = req.body.address;
+    console.log('selected : ',address);
+ 
+    // const address = {
+    //     street: "thala",
+    //     city: "thalaa",
+    //     fulladdress: "thala",
+    //     state: "thalaa",
+    //     pincode: "343543",
+    //     _id: "652f70e4e3fd97d90467f43c"
+    // };
+    
+
+
+
+    // const selectedAddress = req.query.selectedAddress;
+    // console.log("Selected Address:", selectedAddress);
+
+
+    const userId = req.session.userId;
+    // const address = req.query.address;
+    const payment = "COD";
+    // console.log("address:",address)
+
+    try {
+        // Fetch user data and cart data
+        const userData3 = await userCollection.findOne({ _id: userId });
+        const userData2 = await userCollection.findOne({ _id: userId }, { 'cart.items': 1, _id: 0 });
+console.log("userData2.cart:",userData2)
+console.log("userData2:",userData3)
+
+        // Push cart data to the 'orders' array
+        await userCollection.updateOne(
+            { _id: userId },
+            { $push: { orders: userData2.cart.items , userData3 } }
+        );
+
+        // await userCollection.updateOne(
+        //     { _id: userId },
+        //     { $push: { 'orders.address' : address } }
+        // );
+        // Clear the cart items
+        await userCollection.updateOne(
+            { _id: userId },
+            { $set: { 'cart.items': [] } }
+        );
+
+        
+
+        // Rendering the view
+        res.render("user/confirmorder", { userData3, userData2 });
+
+    } catch (error) {
+        console.error('Error updating user data:', error);
+        // Handle the error
+    }
+});
+
+
+
+
+
 const userRouter=router
 
 module.exports=userRouter

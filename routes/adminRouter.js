@@ -127,54 +127,51 @@ router.post("/usermanagement/block/:id",async(req,res)=>{
 //      res.render("/admin/usermanagement/search")
 // })
 
-// router.get("/usermanagement/search",async(req,res)=>{
+router.post("/usermanagement/search",async(req,res)=>{
 
 
-//     let search="";
-//     if(req.query.search){
-//         search=req.query.search
-    
 
-//     try{
-
-//         const user= await userCollection.find({_id:id},{name:{$regex:'.*'+search+'.*'}})
-
-//         res.render("/admin/usermanagement/search",{user:user})
-//     }
-//     catch(error)
-//     {
-//         console.log("error")
-
-//     }
-// }
-//     else{
-//         console.log("erororrr")
-//     }
-// })
-
-router.get("/admin/usermanagement/search", async (req, res) => {
-    let search = "";
-    if (req.query.search) {
-      search = req.query.search;
   
-      try {
-        const users = await userCollection.find({
-          $or: [
-            { name: { $regex: search, $options: 'i' } }, // Case-insensitive search for the name
-            { email: { $regex: search, $options: 'i' } }, // Case-insensitive search for the email
-          ],
-        });
-  
-        res.render("admin/usermanagement/search", { users: users, searchTerm: search });
-      } catch (error) {
-        console.log("Error:", error);
-        res.status(500).send("Internal Server Error"); // Handle the error appropriately
-      }
-    } else {
-      console.log("No search query provided");
-      res.status(400).send("Bad Request: No search query provided"); // Handle the case when no search query is provided
+    try {
+
+        const search = req.body.search;
+      
+        if(search){
+        }
+       
+        const usersData = await userCollection.find({name:search})
+console.log("userData:",usersData)
+       
+        res.redirect('/admin/usermanagement', { user: usersData });
+
+      
+    } catch (error) {
+        console.log(error.message);
     }
-  });
+})
+// router.get("/admin/usermanagement/search", async (req, res) => {
+//     let search = "";
+//     if (req.query.search) {
+//       search = req.query.search;
+  
+//       try {
+//         const users = await userCollection.find({
+//           $or: [
+//             { name: { $regex: search, $options: 'i' } }, // Case-insensitive search for the name
+//             { email: { $regex: search, $options: 'i' } }, // Case-insensitive search for the email
+//           ],
+//         });
+  
+//         res.render("admin/usermanagement/search", { users: users, searchTerm: search });
+//       } catch (error) {
+//         console.log("Error:", error);
+//         res.status(500).send("Internal Server Error"); // Handle the error appropriately
+//       }
+//     } else {
+//       console.log("No search query provided");
+//       res.status(400).send("Bad Request: No search query provided"); // Handle the case when no search query is provided
+//     }
+//   });
   
 
 router.post("/usermanagement/unblock/:id",async(req,res)=>{
@@ -427,6 +424,44 @@ router.get('/categorylist/delete/:id', async (req, res) => {
   });
   
 
+  router.get("/ordermanagement",async(req,res)=>{
+
+    const orders= await userCollection.aggregate([{$unwind:"$orders"},{
+      $project:{
+        productName:"$orders.name",
+        category:"$orders.category",
+        quantity:"$orders.quantity",
+        price:"$orders.price",
+        image:"$orders.image",
+        userId:"$orders.userId",
+        id:"$orders._id",
+        status:"$orders.status"
+
+     
+
+      }
+    }])
+   
+  
+    res.render("admin/ordermanagement",{orders})
+   
+  })
+  router.post("/orderstatus",async(req,res)=>{
+    const id=req.body.id;
+    const status=req.body.productcategory;
+    console.log(status)
+console.log("id;",id)
+const updatestatus= await userCollection.findOneAndUpdate( { "orders._id":id},
+
+{ $set: { "orders.$.status": status } },
+{ new: true })
+if(updatestatus)(
+
+    res.redirect("/admin/ordermanagement")
+)
+
+
+  })
 
 
 

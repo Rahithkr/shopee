@@ -201,7 +201,11 @@
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
                 <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input type="text" class="form-control" placeholder="Search products">
+                  <!-- <input type="text" class="form-control" placeholder="Search products"> -->
+                  <div class="form-group">
+                    <input type="text" id="product-search" class="form-control" placeholder="Search by product name">
+                </div>
+                
                 </form>
               </li>
             </ul>
@@ -441,6 +445,20 @@
       })
     })
   </script>
+  <script>
+    $(document).ready(function () {
+        // Initialize the DataTable
+        var table = $("table").DataTable({
+            order: [0, "desc"],
+        });
+
+        // Add an event listener to the search input
+        $("#product-search").on("keyup", function () {
+            table.search(this.value).draw();
+        });
+    });
+</script>
+
 
 
 <script>

@@ -202,10 +202,16 @@
 
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                <form action="/admin/usermanagement/search"  method="get" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <form action="/admin/usermanagement/search"  method="post" class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
                   <input type="text" class="form-control" placeholder="Search user name,number" name="search">
                   <button type="submit">Search</button>
                 </form>
+
+                <!-- <form>
+                  <input type="text" placeholder="Search her" name="search">
+                  <input type="submit" value="Search">
+                </form> -->
+
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
@@ -427,10 +433,20 @@
                               <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmationModal"
                                 data-action="block" data-userid="<%= row._id %>"
                                 onclick="block_user(this.form)">Block</button>
+                               
                             </form>
+
                             <% } %>
+                         
                           </td>
+                          <td>
+                            <form action="/admin/ordermanagement" post="">
+                              <button type="submit">orders</button>
+                            </form>
+                          </td>
+
                       </td>
+                     
                     </tr>                    
                    <% }) %>
                   </tbody>

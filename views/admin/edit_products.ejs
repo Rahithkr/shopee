@@ -436,10 +436,16 @@
                                               <p>Product Image:</p>
                                               <div class="custom-file">
       
-                                                  <input type="file" name="image" value="<%= product.image %>" accept="image/*" class="custom-file-input" id="productimage" required>
+                                                  <input type="file" name="image" value="<%= product.image[0] %>" accept="image/*" class="custom-file-input" id="productimage" required>
                                                   <label class="custom-file-label" for="productimage">Choose
                                                       file...</label>
                                                   <div class="invalid-feedback">File Format Not Supported</div>
+                                              </div>
+                                              <div style="margin-top: 20px;">
+                                                <% product.image.forEach(element => { %>
+                                                 
+                                                  <img style="margin-left: 20px;" width="100px" src="/images/img/<%= element %>" alt="">
+                                                <% }) %>
                                               </div>
                                               <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">update
                                                   Product</button>

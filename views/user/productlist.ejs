@@ -52,9 +52,11 @@
                 <input type="search" id="form1" class="form-control" />
                 <label class="form-label" for="form1">Search</label>
               </div>
+              <form action="/productlist/search" method="post">
               <button type="button" class="btn btn-primary shadow-0">
                 <i class="fas fa-search"></i>
               </button>
+            </form>
             </div>
           </div>
           <!-- Right elements -->
@@ -341,7 +343,7 @@
                 <div class="card">
                   <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                     data-mdb-ripple-color="light">
-                    <img src="/images/img/<%= product.image %>"
+                    <img src="/images/img/<%= product.image[0] %>"
                       class="w-100" />
                     <a href="#!">
                       <div class="mask">

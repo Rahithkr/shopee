@@ -507,3 +507,286 @@ footer {
       .icon-hover-danger:hover i {
         color: #dc4c64 !important;
       }
+
+
+
+
+      /* order status */
+
+
+
+        .gradient-custom-2 {
+            /* fallback for old browsers */
+            background: #a1c4fd;
+            
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));
+            
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))
+            }
+            
+            #progressbar-1 {
+            color: #455A64;
+            }
+            
+            #progressbar-1 li {
+            list-style-type: none;
+            font-size: 13px;
+            width: 33.33%;
+            float: left;
+            position: relative;
+            }
+            
+            #progressbar-1 #step1:before {
+            content: "1";
+            color: #fff;
+            width: 29px;
+            margin-left: 22px;
+            padding-left: 11px;
+            }
+            
+            #progressbar-1 #step2:before {
+            content: "2";
+            color: #fff;
+            width: 29px;
+            }
+            
+            #progressbar-1 #step3:before {
+            content: "3";
+            color: #fff;
+            width: 29px;
+            margin-right: 22px;
+            text-align: center;
+            }
+            
+            #progressbar-1 li:before {
+            line-height: 29px;
+            display: block;
+            font-size: 12px;
+            background: #455A64;
+            border-radius: 50%;
+            margin: auto;
+            }
+            
+            #progressbar-1 li:after {
+            content: '';
+            width: 121%;
+            height: 2px;
+            background: #455A64;
+            position: absolute;
+            left: 0%;
+            right: 0%;
+            top: 15px;
+            z-index: -1;
+            }
+            
+            #progressbar-1 li:nth-child(2):after {
+            left: 50%
+            }
+            
+            #progressbar-1 li:nth-child(1):after {
+            left: 25%;
+            width: 121%
+            }
+            
+            #progressbar-1 li:nth-child(3):after {
+            left: 25%;
+            width: 50%;
+            }
+            
+            #progressbar-1 li.active:before,
+            #progressbar-1 li.active:after {
+            background: #1266f1;
+            }
+            
+            .card-stepper {
+            z-index: 0
+            }
+
+
+
+
+            .card-stepper {
+                z-index: 0
+                }
+                
+                #progressbar-2 {
+                color: #455A64;
+                }
+                
+                #progressbar-2 li {
+                list-style-type: none;
+                font-size: 13px;
+                width: 33.33%;
+                float: left;
+                position: relative;
+                }
+                
+                #progressbar-2 #step1:before {
+                content: '\f058';
+                font-family: "Font Awesome 5 Free";
+                color: #fff;
+                width: 37px;
+                margin-left: 0px;
+                padding-left: 0px;
+                }
+                
+                #progressbar-2 #step2:before {
+                content: '\f058';
+                font-family: "Font Awesome 5 Free";
+                color: #fff;
+                width: 37px;
+                }
+                
+                #progressbar-2 #step3:before {
+                content: '\f058';
+                font-family: "Font Awesome 5 Free";
+                color: #fff;
+                width: 37px;
+                margin-right: 0;
+                text-align: center;
+                }
+                
+                #progressbar-2 #step4:before {
+                content: '\f111';
+                font-family: "Font Awesome 5 Free";
+                color: #fff;
+                width: 37px;
+                margin-right: 0;
+                text-align: center;
+                }
+                
+                #progressbar-2 li:before {
+                line-height: 37px;
+                display: block;
+                font-size: 12px;
+                background: #c5cae9;
+                border-radius: 50%;
+                }
+                
+                #progressbar-2 li:after {
+                content: '';
+                width: 100%;
+                height: 10px;
+                background: #c5cae9;
+                position: absolute;
+                left: 0%;
+                right: 0%;
+                top: 15px;
+                z-index: -1;
+                }
+                
+                #progressbar-2 li:nth-child(1):after {
+                left: 1%;
+                width: 100%
+                }
+                
+                #progressbar-2 li:nth-child(2):after {
+                left: 1%;
+                width: 100%;
+                }
+                
+                #progressbar-2 li:nth-child(3):after {
+                left: 1%;
+                width: 100%;
+                background: #c5cae9 !important;
+                }
+                
+                #progressbar-2 li:nth-child(4) {
+                left: 0;
+                width: 37px;
+                }
+                
+                #progressbar-2 li:nth-child(4):after {
+                left: 0;
+                width: 0;
+                }
+                
+                #progressbar-2 li.active:before,
+                #progressbar-2 li.active:after {
+                background: #6520ff;
+                }
+
+
+
+
+
+
+
+                .hh-grayBox {
+                    background-color: #F8F8F8;
+                    margin-bottom: 20px;
+                    padding: 35px;
+                  margin-top: 20px;
+                }
+                .pt45{padding-top:45px;}
+                .order-tracking{
+                    text-align: center;
+                    width: 33.33%;
+                    position: relative;
+                    display: block;
+                }
+                .order-tracking .is-complete{
+                    display: block;
+                    position: relative;
+                    border-radius: 50%;
+                    height: 30px;
+                    width: 30px;
+                    border: 0px solid #AFAFAF;
+                    background-color: #f7be16;
+                    margin: 0 auto;
+                    transition: background 0.25s linear;
+                    -webkit-transition: background 0.25s linear;
+                    z-index: 2;
+                }
+                .order-tracking .is-complete:after {
+                    display: block;
+                    position: absolute;
+                    content: '';
+                    height: 14px;
+                    width: 7px;
+                    top: -2px;
+                    bottom: 0;
+                    left: 5px;
+                    margin: auto 0;
+                    border: 0px solid #AFAFAF;
+                    border-width: 0px 2px 2px 0;
+                    transform: rotate(45deg);
+                    opacity: 0;
+                }
+                .order-tracking.completed .is-complete{
+                    border-color: #27aa80;
+                    border-width: 0px;
+                    background-color: #27aa80;
+                }
+                .order-tracking.completed .is-complete:after {
+                    border-color: #fff;
+                    border-width: 0px 3px 3px 0;
+                    width: 7px;
+                    left: 11px;
+                    opacity: 1;
+                }
+                .order-tracking p {
+                    color: #A4A4A4;
+                    font-size: 16px;
+                    margin-top: 8px;
+                    margin-bottom: 0;
+                    line-height: 20px;
+                }
+                .order-tracking p span{font-size: 14px;}
+                .order-tracking.completed p{color: #000;}
+                .order-tracking::before {
+                    content: '';
+                    display: block;
+                    height: 3px;
+                    width: calc(100% - 40px);
+                    background-color: #f7be16;
+                    top: 13px;
+                    position: absolute;
+                    left: calc(-50% + 20px);
+                    z-index: 0;
+                }
+                .order-tracking:first-child:before{display: none;}
+                .order-tracking.completed:before{background-color: #27aa80;}
+                

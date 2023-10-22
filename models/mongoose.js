@@ -75,18 +75,64 @@ cart:{
         },
         productId:{
             type:mongoose.Schema.Types.ObjectId,
-            required:true,
+           
         },
-        image:{
+        image:[{
             type:String,
             
-        },
+        }],
         category:{
             type:String,
-            required:true,
+           
+        },
+        address:{
+            type:String,
+
+        },
+        userId:{
+            type:mongoose.Schema.Types.ObjectId
         }
-    }]
-}
+    }],
+    totalPrice:{
+        type:Number,
+    },
+},
+orders:[{
+    userId:{
+      type:mongoose.Schema.Types.ObjectId,
+    },
+    quantity :{
+        type:Number,
+        default:1
+    },
+    status:{
+        type:String,
+        default:"Pending",
+    },
+    price:{
+        type:Number,
+    },
+    name:{
+        type:String,
+    },
+    productId:{
+        type:mongoose.Schema.Types.ObjectId,
+       
+    },
+    image:[{
+        type:String,
+        
+    }],
+    category:{
+        type:String,
+       
+    }, 
+     address:[{
+        type:String,
+       
+
+    }],
+}],
 })
 
  

@@ -248,7 +248,7 @@
           <!-- Right elements -->
           <div class="d-flex align-items-center">
             <!-- Icon -->
-            <a class="nav-link me-3" href="/user/cart/:id">
+            <a class="nav-link me-3" href="/user/cart">
               <i class="fas fa-shopping-cart"></i>
        
             </a>
@@ -259,7 +259,7 @@
       
             </a>
         </div>
-       <% if(user){ %>
+       <% if(user1){ %>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa-regular fa-user"></i>
@@ -461,7 +461,7 @@
               <div class="card">
                 <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                   data-mdb-ripple-color="light">
-                  <img  src="/images/img/<%= product.image %> "
+                  <img  src="/images/img/<%= product.image[0] %> "
                     class="w-100" />
                   <a href="#!">
                     <div class="mask">
