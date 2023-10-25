@@ -41,7 +41,7 @@ app.use(session({
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
-app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, 'assets'))); 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 
