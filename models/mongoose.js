@@ -109,6 +109,9 @@ orders:[{
         type:String,
         default:"Pending",
     },
+    paymentmethod:{
+        type: String
+    },
     price:{
         type:Number,
     },
@@ -129,10 +132,60 @@ orders:[{
     }, 
      address:[{
         type:String,
-       
-
     }],
 }],
+    wallet:{
+        total:{
+            type:Number,
+            default:0,
+        },
+        wallethistory:[{
+            amount:{
+                type:Number,
+            },
+            productName:{
+                type:String,
+            },
+            status:{
+                type:String
+            }
+        }]
+    },
+    coupens:[{
+        isused:{
+            type: String
+        },
+        coupenid:{
+            type: String,
+            unique:true,
+            
+        },
+        code: {
+            type: String,
+            required: true
+        },
+        discount: {
+            type: Number,
+            required: true
+        },
+        minvalue: {
+            type: Number,
+            require:true
+        },
+        expirydate: {
+            type: String,
+            required: true
+        },
+        discription: {
+            type: String,
+            required: true
+        }
+    }],
+    usedcoupens:[{
+        coupenid:{
+            type: String
+        }
+    }],
 })
 
  

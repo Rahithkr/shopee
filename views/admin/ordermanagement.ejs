@@ -152,11 +152,33 @@
             </a>
           </li> -->
           <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="/admin/ordermanagement">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
-              <span class="menu-title">Icons</span>
+              <span class="menu-title">order Management</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Coupon Management</span>
+            </a>
+            <div class="dropdown-menu" id="category-dropdown">
+              <!-- Dropdown items go here -->
+              <a class="dropdown-item" href="/admin/couponmanagement">Add New Coupon</a>
+              <a class="dropdown-item" href="/admin/couponlist">Coupon List</a>
+              <!-- Add more dropdown items as needed -->
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/returnorder">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Return Management</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -395,13 +417,14 @@
                     <th scope="col">Qty</th>
                     <th scope="col">price</th>
                     <th scope="col">OrderId</th>
+               
                     <th scope="col">Order Status</th>
                    
                   </tr>
                 </thead>
                 <tbody>
                   <% let index = 0; %>
-                    <% orders.forEach((row,index) => { %>
+                    <% orders.slice().reverse().forEach((row,index) => { %>
                         <tr class='align-middle'>
                           <td><%= index %></td>
                           <td><%= row.userId %></td>
@@ -413,6 +436,7 @@
                           <td><%= row.quantity %></td>
                           <td><%= row.price %></td>
                           <td id="orderid <%= index %>"><%= row.id %></td>
+                         
                           <td>
                             <%= row.status %> 
                             <button style="margin-left: 20px;" 

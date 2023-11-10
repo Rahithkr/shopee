@@ -188,7 +188,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>e_Shoppee</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
@@ -232,7 +232,7 @@
                 <a class="nav-link  " href="https://mdbootstrap.com/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="/user/productlist">Products</a>
+                <a class="nav-link " href="/user/productlists">Products</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " href="https://mdbootstrap.com/docs/standard/getting-started/installation/">Categories</a>
@@ -321,7 +321,7 @@
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="https://pagar.me/static/5390a38939014c7fe9a0a4e16c66a246/2f1b1/2021-04-08-seguranca-no-ecommerce.jpg" class="d-block w-100" alt="Wild Landscape"/>
+            <img src="https://i.ytimg.com/vi/RyxiPBj0HTA/maxresdefault.jpg" class="d-block w-100" alt="Wild Landscape"/>
             <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
             <div class="carousel-caption d-none d-sm-block mb-5">
               <h2 class="mb-4">
@@ -331,19 +331,17 @@
                 <h3>
                       <strong class="text text-warning">e_Shopee</strong>
                     </h3>
-      
-                    <p class="mb-4 d-none d-md-block">
-                      <strong>The most comprehensive tutorial for the Bootstrap 5. Loved by over 3 000 000 users. Video and written versions
-                        available. Create your own, stunning website.</strong>
-                    </p>
-      
+
+                    <a href="/user/productlists" class="btn btn-outline-primary shadow-0 border green-link">BUY NOW</a>
+
+        
                     <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-outline-white btn-lg">Start free tutorial
                       <i class="fas fa-graduation-cap ms-2"></i>
                     </a>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/8-col/img%283%29.jpg" class="d-block w-100" alt="Camera"/>
+            <img src="https://i.pinimg.com/originals/9a/13/dc/9a13dc79ca4368d6c87acb2e52cadf9d.jpg" class="d-block w-100" alt="Camera"/>
             <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
             <div class="carousel-caption d-none d-md-block mb-5">
               <h1 class="mb-4">
@@ -493,7 +491,7 @@
 
             <% }); %>
 
-      
+          </div>
             <!-- <div class="col-lg-3 col-md-6 mb-4">
               <div class="card">
                 <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
@@ -576,7 +574,7 @@
                 </div>
               </div>
             </div> -->
-          </div>
+          <!-- </div> -->
       
           <!-- <div class="row">
             
@@ -684,7 +682,7 @@
       </section>
         
       <!-- Pagination -->
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+        <!-- <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
         <ul class="pagination">
           <li class="page-item disabled">
             <a class="page-link" href="#" aria-label="Previous">
@@ -702,7 +700,32 @@
             </a>
           </li>
         </ul>
-      </nav>  
+      </nav>   -->
+
+
+
+      <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+        <ul class="pagination">
+            <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+                <a class="page-link" href="/?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                </a>
+            </li>
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                    <a class="page-link" href="/?page=<%= i %>"><%= i %></a>
+                </li>
+            <% } %>
+            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                <a class="page-link" href="/?page=<%= totalPages %>" aria-label="Last">
+                    <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+      
       <!-- Pagination -->  
       </div>
       </main>
@@ -784,12 +807,8 @@
         </div>
         <!-- Grid container -->
       
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); color: #E0E0E0">
-          © 2022 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
+     
+      
       </footer>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 

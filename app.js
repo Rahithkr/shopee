@@ -18,8 +18,8 @@ app.use((req,res,next)=>{
 })
  
 
-app.use(express.static("public"));
-app.use(express.urlencoded({extended:true}))
+// app.use(express.static("public"));
+
 app.use(session({
     secret: crypto.randomUUID(),
     saveUninitialized:true,
@@ -40,6 +40,7 @@ app.use(session({
 
 
 app.set("view engine","ejs");
+app.use(express.urlencoded({ extended: false }))
 app.set("views",path.join(__dirname,"views"));
 app.use(express.static(path.join(__dirname, 'assets'))); 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
@@ -62,7 +63,7 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 //         console.log("nouser");
 //         const user=false
 //        res.render('user/index',{user})
-//     }
+//     }  
 // })
 
 app.use('/',userRouter)

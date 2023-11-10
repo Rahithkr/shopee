@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.carousel.min.css">
     <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -22,6 +23,10 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+
 
   </head>
   <body>
@@ -92,7 +97,7 @@
             <a class="dropdown-item" href="/admin/productmanagement">Add New Products</a>
             <a class="dropdown-item" href="/admin/productdetails">Product List</a>
             <!-- Add more dropdown items as needed -->
-          </div>
+          </div> 
         </li>
       </li>
       <!-- <li class="nav-item menu-items">
@@ -152,11 +157,33 @@
             </a>
           </li> -->
           <li class="nav-item menu-items">
-            <a class="nav-link" href="pages/icons/mdi.html">
+            <a class="nav-link" href="/admin/ordermanagement">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
-              <span class="menu-title">Icons</span>
+              <span class="menu-title">order Management</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
+              <span class="menu-icon">
+                <i class="mdi mdi-laptop"></i>
+              </span>
+              <span class="menu-title">Coupon Management</span>
+            </a>
+            <div class="dropdown-menu" id="category-dropdown">
+              <!-- Dropdown items go here -->
+              <a class="dropdown-item" href="/admin/couponmanagement">Add New Coupon</a>
+              <a class="dropdown-item" href="/admin/couponlist">Coupon List</a>
+              <!-- Add more dropdown items as needed -->
+            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/returnorder">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Return Management</span>
             </a>
           </li>
           <li class="nav-item menu-items">
@@ -389,7 +416,7 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-            <table class="table">
+            <table class="table" id="myTable">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
@@ -430,6 +457,17 @@
                 
                   </tbody>
               </table>
+<!-- Pagination -->
+<nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+  <ul class="pagination">
+      <% for (let j = 1; j <= totalPages; j++) { %>
+          <li class="page-item <%= j === currentPage ? 'active' : '' %>">
+              <a class="page-link" href="/admin/productdetails?page=<%= j %>"><%= j %></a>
+          </li>
+      <% } %>
+  </ul>
+</nav>
+<!-- Pagination -->
 
 
 
@@ -445,7 +483,7 @@
       })
     })
   </script>
-  <script>
+  <!-- <script>
     $(document).ready(function () {
         // Initialize the DataTable
         var table = $("table").DataTable({
@@ -457,7 +495,7 @@
             table.search(this.value).draw();
         });
     });
-</script>
+</script> -->
 
 
 
@@ -495,6 +533,16 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="/assets/js/dashboard.js"></script>
+
+
     <!-- End custom js for this page -->
+
+    <script>
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+  } );
+</script>
+
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
   </body>
 </html>

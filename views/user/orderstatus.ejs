@@ -23,12 +23,12 @@
           </div>
           
            
-          <% order.forEach(element => { %>
+          <% order.slice().reverse().forEach(element => { %>
           <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- <div class="d-flex justify-content-between align-items-center mb-4">
               <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
               <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
-            </div>
+            </div> -->
            
             <div class="card shadow-0 border mb-4">
 
@@ -43,7 +43,7 @@
                       class="img-fluid" alt="">
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
-                    <p class="text-muted mb-0"><%= element.productName %></p>
+                    <p class="text-muted mb-0"><%= element.name %></p>
                   </div>
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small"><%= element.category %></p>
@@ -52,10 +52,24 @@
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small"><%= element.quantity %></p>
                   </div>
+                 
                   <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-0 small"><%= element.price %></p>
                   </div>
+                  <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                    <p class="text-muted mb-0 small">via: <%= element.paymentmethod %></p>
+                  </div>
+                  
                 </div>
+                <!-- <p class="text-muted mb-0 small"><%= element.address.fulladdress %></p> -->
+               
+               
+
+                      
+                   <p>
+                    <b>Full Address:</b> <i><%= element.address %></i><br>
+                    
+                  </p>
                 
          
                 <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
@@ -74,11 +88,17 @@
                       <p class="text-muted mt-1 mb-0 small ms-xl-5"></p>
                       
                       <div class="col-md-2">
-                        <% if( element.status =="cancelled" || element.status =="Delivered" ){ %>
+                        <% if( element.status =="cancelled" || element.status =="Delivered" || element.status =="approved" || element.status =="return rejected" || element.status =="return status pending"){ %>
                        <a ><%= element.status %></a>
                        <% } else{%>
                         <a href="/user/ordercancel/<%= element._id %>">Cancel</a>
                         <% } %>
+                      </div>
+                      <div class="col-md-2">
+                        <% if( element.status =="Delivered"){ %>
+                          <a href="/user/return?productName=<%= element.name %>&price=<%= element.price %>&quantity=<%= element.quantity %>&paymentmethod=<%=element.paymentmethod %>&cartid=<%= element._id %>">Return</a>
+                          <% } %>
+                        
                       </div>
                     </div>
                    
