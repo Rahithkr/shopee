@@ -36,7 +36,6 @@ const loginpost=(req,res)=> {
 
 
 
-
 const admindashboard=(req,res)=>{
     res.render('admin/admindashboard')
 }
@@ -284,11 +283,43 @@ const productedit=(req, res)=>{
 // updating the product
 const updateproduct= async (req, res) => {
     try{
+
         let id = req.params.id
+        if(req.files.length===0){
+          console.log("hereeee")
+          const oldProduct=await productCollection.findById(id);
+          // const image=oldProduct.image.map((image)=>{
+          //   return image;
+          // })
+
+
+          const existingImages = oldProduct.image || [];
+          console.log("image",existingImages)
+
+          const result = await productCollection.findByIdAndUpdate(id, {
+            name : req.body.name,
+            category : req.body.category,
+            image:existingImages,
+            price : req.body.price,
+            stock: req.body.stock,
+            description:req.body.description,
+        })
+        if(!result){
+          res.json({message : 'product not found', type : 'danger'})
+      } else { 
+          req.session.message ={
+              type : 'success',
+              message : 'product updated sucessfully'
+          }
+          res.redirect('/admin/productdetails')
+      }
+        }else{
+
+        
         const result = await productCollection.findByIdAndUpdate(id, {
             name : req.body.name,
             category : req.body.category,
-            image : req.body.image,
+            image:req.files.map(file =>file.filename),
             price : req.body.price,
             stock: req.body.stock,
             description:req.body.description,
@@ -302,6 +333,7 @@ const updateproduct= async (req, res) => {
             }
             res.redirect('/admin/productdetails')
         }
+      }
     }catch(err){
         console.log('Error updating the product : ',err);
         res.json({message : err.message, type :'danger'})

@@ -418,7 +418,7 @@
                                           <h3>Add Product</h3>
                                       </div>
                                       <div class="card-body">
-                                          <form action="/admin/updateproduct/<%= product._id %>" method="post">
+                                          <form action="/admin/updateproduct/<%= product._id %>" method="post"  enctype="multipart/form-data">
                                               <div class="form-group">
                                                   <label for="productname">Product Name:</label>
                                                   <input type="text" name="name" value="<%= product.name %>" class="form-control" id="productname"
@@ -458,7 +458,7 @@
                                               <p>Product Image:</p>
                                               <div class="custom-file">
       
-                                                  <input type="file" name="image" value="<%= product.image[0] %>" accept="image/*" class="custom-file-input" id="productimage" required>
+                                                  <input type="file" name="image" value="<%= product.image[0] %>" multiple accept="image/*" class="custom-file-input" id="productimage" >
                                                   <label class="custom-file-label" for="productimage">Choose
                                                       file...</label>
                                                   <div class="invalid-feedback">File Format Not Supported</div>

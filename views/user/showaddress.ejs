@@ -9,6 +9,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
@@ -85,72 +86,35 @@
 
 
                                         <div class="card-body">
-                                            <form action="/profile/showaddress/<%= userData._id %>" method="post">
-                                                <!-- 2 column grid layout with text inputs for the first and last names -->
-                                                <div class="row mb-4">
-                                                    <div class="col">
-                                                        <div class="form-outline">
-                                                            <input type="text" value="<%= userData.name %>" id="name" 
-                                                                name="name" class="form-control" />
-                                                            <label class="form-label" for="form7Example1">name</label>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                            <% userData.forEach((userd, index) => { %>
                                                 <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.email %> " id="form7Example4" name="email"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example4">email</label>
-                                                </div>
-
-                                                <!-- Text input -->
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.address[0].fulladdress %>" id="form7Example3" name="fulladdress"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example3">Full Address</label>
-                                                </div>
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.address[0].street %>"  id="form7Example5" name="street"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example5">Street</label>
-                                                </div>
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.address[0].city %>"  id="form7Example5" name="city"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example5">City</label>
-                                                </div>
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.address[0].state %>"  id="form7Example5" name="state"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example5">State</label>
-                                                </div>
-
-                                                <!-- Text input -->
-
-
-                                                <!-- Email input -->
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" value="<%= userData.mobile %>" id="form7Example5" name="mobile"
-                                                        class="form-control" />
-                                                    <label class="form-label" for="form7Example5">Mobile</label>
-                                                </div>
-
-                                                <div class="form-outline mb-4">
-                                                    <input type="text" id="form7Example6" value="<%= userData.address[0].pincode %>"  name="name" class="form-control" />
-                                                    <label class="form-label" for="form7Example6">Pin code</label>
+                      
+                                                    
+                                                 
+                                                  <b>Full Address:</b> <i><%= userd.fulladdress %></i><br>
+                                                  <i>Street:<%= userd.street %></i><br>
+                                                  <i>City:<%= userd.city %></i><br>
+                                                  <i>State:<%= userd.state %></i><br>
+                                                  <i>Mobile:<%= userd.mobile %></i><br>
+                                                  <i>Pincode:<%= userd.pincode %></i>
+                                              
+                      
+                                                  <!-- <button style="margin-bottom: 15px;" type="button " class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+                                                    <a href="/user/showaddress/editaddress"class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                                                  <!-- </button> -->
+                                                  
+                                                  <a href="/user/showaddress/delete/<%= userd._id %>" class="text-danger" >
+                                                    <i class="fas fa-trash fa-lg mx-1"></i>
+                                                  </a>
+                      
+                                                  <div class="form-check">
+                                                  
                                                   </div>
                                                   
-
-                                                <!-- Number input -->
-
-                                                <div style="text-align: center;">
-                                                    <button class="btn btn-primary" type="submit">add address</button>
+                                               
+                      
                                                 </div>
-
-
-
-                                            </form>
-
+                                              <% }) %>
                                            
 
 

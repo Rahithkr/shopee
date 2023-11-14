@@ -10,6 +10,7 @@ const couponCollection = require("../models/coupon")
 const Razorpay = require('razorpay');
 const { render } = require("ejs");
 const returnCollection = require("../models/returnstatus");
+const bannerCollection=require("../models/banner")
 const razorpay = new Razorpay({
   key_id: "rzp_test_s3i2foc9AExQlF",
   key_secret: "v1RU4mlsH0Nqv4ARqyAj78sL"
@@ -494,6 +495,8 @@ const home = async (req, res) => {
 
   const user1 = req.session.userId
   const product = await productCollection.find();
+  const banner = await bannerCollection.find();
+  
   
 
   // Set up pagination data
@@ -508,7 +511,8 @@ const home = async (req, res) => {
     product: paginatedProducts,
     totalPages,
     currentPage: page,
-    user1
+    user1,
+    banner
   });
 };
 
@@ -564,13 +568,14 @@ const profileaddaddresspost = async (req, res) => {
         street: req.body.street,
         city: req.body.city,
         state: req.body.state,
+        mobile:req.body.mobile,
         pincode: req.body.pincode,
       }]
     }
     const option = { upsert: true };
 
     await userCollection.updateOne(filter, addressData, option)
-    res.redirect("/user/profile");
+    res.redirect("/user/profile/showaddress");
 
   }
   catch (error) {
@@ -583,42 +588,44 @@ const profileshowaddress = async (req, res) => {
   const userId = req.session.userId;
   console.log("running one");
 
-  const userData = await userCollection.findOne({ _id: userId })
+  const useraddress = await userCollection.findOne({ _id: userId })
+  const userData =useraddress.address;
+ 
 
 
   res.render("user/showaddress", { userData })
 }
 
-const profileshowaddresspost = async (req, res) => {
+// const profileshowaddresspost = async (req, res) => {
 
 
-  try {
-    const filter = { email: req.body.email }
-    Newaddress = {
-      address: [{
+//   try {
+//     const filter = { email: req.body.email }
+//     Newaddress = {
+//       address: [{
 
-        fulladdress: req.body.fulladdress,
-        street: req.body.street,
-        city: req.body.city,
-        state: req.body.state,
-        pincode: req.body.pincode,
-      }]
-    }
-    const options = { upsert: true };
-    console.log(Newaddress)
-    await userCollection.updateOne(filter, Newaddress, options)
-
-
+//         fulladdress: req.body.fulladdress,
+//         street: req.body.street,
+//         city: req.body.city,
+//         state: req.body.state,
+//         pincode: req.body.pincode,
+//       }]
+//     }
+//     const options = { upsert: true };
+//     console.log(Newaddress)
+//     await userCollection.updateOne(filter, Newaddress, options)
 
 
-    res.redirect("/user/profile");
 
-  }
-  catch (error) {
-    console.log("address data eroor")
-  }
 
-}
+//     res.redirect("/user/profile");
+
+//   }
+//   catch (error) {
+//     console.log("address data eroor")
+//   }
+
+// }
 
 
 
@@ -695,8 +702,83 @@ const updateprofile = async (req, res) => {
 
 
 
+// const editaddress = async (req, res) => {
+
+//   const userId = req.session.userId;
+//   console.log("running one");
+
+//   const userDataa = await userCollection.findOne({ _id: userId })
+//   console.log("userData:", userDataa)
+
+//   res.render("user/edit_address", { userDataa })
+// }
 
 
+
+const profileaddresseditget = async (req, res) => {
+
+  const userId = req.session.userId;
+  console.log("running one");
+
+  const userDataa = await userCollection.findOne({ _id: userId })
+  console.log("userData:", userDataa)
+
+  res.render("user/profileeditaddress", { userDataa })
+}
+
+const profileaddressedit = async (req, res) => {
+
+
+  try {
+    const filterr = { email: req.body.email }
+    addressDetails = {
+      address: [{
+
+        fulladdress: req.body.fulladdress,
+        street: req.body.street,
+        city: req.body.city,
+        state: req.body.state,
+        mobile:req.body.mobile,
+        pincode: req.body.pincode,
+      }]
+    }
+    const options = { upsert: true };
+    console.log(addressDetails)
+    await userCollection.updateOne(filterr, addressDetails, options)
+    res.redirect("/user/profile/showaddress")
+
+  }
+  catch (error) {
+    console.log("address data eroor")
+  }
+
+}
+
+
+const profileaddressdeletepost = async (req, res) => {
+  try {
+    const userId = req.session.userId
+    const addressId = req.params.id;
+
+    const resultd = await userCollection.findOneAndUpdate(
+      { _id: userId },
+      { $pull: { address: { _id: addressId } } },
+      { new: true }
+    );
+
+    if (resultd) {
+
+
+      res.redirect('/user/profile/showaddress');
+    } else {
+      console.log("error")
+    }
+
+  } catch (err) {
+    console.error('Error deleting address: ', err);
+    res.json({ message: err.message });
+  }
+};
 
 
 
@@ -942,8 +1024,10 @@ const productedit = async (req, res) => {
 
 const cart = async (req, res) => {
   const userId = req.session.userId;
+  
 
   try {
+    
     const userData = await userCollection.findOne({ _id: userId }, { cart: 1, _id: 1 });
 
     if (userData) {
@@ -964,7 +1048,8 @@ const cart = async (req, res) => {
         }
 
       );
-      res.render("user/cart", { cartData, userId, totalPrice });
+      const errorMessage=""
+      res.render("user/cart", { cartData, userId, totalPrice,errorMessage });
     } else {
       // Handle the case where user data is not found.
       res.status(404).send("User not found.");
@@ -998,6 +1083,7 @@ const checkoutaddaddress = async (req, res) => {
       city: req.body.city,
       fulladdress: req.body.fulladdress,
       state: req.body.state,
+      mobile:req.body.mobile,
       pincode: req.body.pincode,
 
     };
@@ -1044,6 +1130,7 @@ const editaddresspost = async (req, res) => {
         street: req.body.street,
         city: req.body.city,
         state: req.body.state,
+        mobile:req.body.mobile,
         pincode: req.body.pincode,
       }]
     }
@@ -1063,20 +1150,6 @@ const editaddresspost = async (req, res) => {
 
 
 
-//     let id = req.params.id;
-//   await userCollection.findById(id)
-
-//     .then(user=>{
-//         if(!user){
-//             res.redirect('/user/checkout')
-//         } else {
-//             res.render('user/checkout/edit_address',{user })
-//         }
-//     })
-//     .catch(err =>{
-//         console.log("Error in finding the user : ", err);
-//         res.redirect('/user/checkout')
-//     })
 
 
 
@@ -1565,24 +1638,107 @@ const verifycoupen = async (req, res) => {
 
 const clearcoupen = async (req, res) => {
   req.session.coupen = ''
-  const coupenid = req.query.coupenid
+  const coupenId = req.query.coupenid
   const userId = req.session.userId
   await userCollection.updateOne(
       { _id: userId },
-      { $pull: { coupens: { coupenid: coupenid } } }
+      { $pull: { coupens: { coupenid: coupenId } } }
   );
   res.status(200).json({ message: 'removed' })
 }
+
+
+const wishlistget=async(req,res)=>{
+  const userId=req.session.userId;
+  try{
+    const wishdata=await userCollection.findOne({ _id: userId }, { wishlist: 1, _id: 1 });
+    const wishlistData = wishdata.wishlist;
+
+    console.log("wishdata:",wishlistData);
+    res.render("user/wishlist",{wishlistData})
+  }
+  catch(error){
+    console.log("wisherror")
+  }
+}
+
+
+const wishlist = async (req, res) => {
+
+  const id = req.params.id;
+  let userId = req.session.userId;
+  try {
+    const user = await userCollection.findOne({ _id: userId }, { 'wishlist.items': 1 })
+
+
+    let product = await productCollection.findOne({ _id: id });
+
+    const productData = {
+      name: product.name,
+      
+      image: product.image[0],
+      
+      productId: product._id,
+      price: product.price,
+     
+      userId: userId,
+
+
+    }
+    const existingCartItem = user.wishlist.items.find(item => item.productId.toString() === id);
+    if (!existingCartItem) {
+
+
+      const result = await userCollection.findOneAndUpdate({ _id: userId }, { $push: { "wishlist.items": [productData] } });
+      res.redirect(`/user/productpage/${id}`);
+    }
+    else {
+
+      res.redirect("/user/wishlist")
+
+
+    }
+  }
+  catch (error) {
+    console.error(error);
+    res.status(500).send('An error occurred');
+  }
+
+
+
+};
+
+const removewishlist = async (req, res) => {
+  const id = req.params.id;
+
+
+  console.log("id;", id)
+  const updateStatuss = await userCollection.findOneAndUpdate(
+    { "wishlist.items._id": id }, // Match the item within the cart with the specified _id
+    { $pull: { "wishlist.items": { _id: id } } }, // Remove the item from the cart.items array
+    { new: true }
+  );
+  if (updateStatuss) (
+
+    res.redirect("/user/wishlist")
+  )
+
+
+}
+
+
+
 
 
 
 
 const userRouter = {
   login, signup, signuppost, newotp, getotp, passotp, otppost, loginpost, forgotpass, forgotpasspost, newpassotp,
-  reotp, repassotp, repassotppost, renewpass, renewpasspost, productpage, productlist, home, logout, profile, profileaddaddress, profileaddaddresspost,
-  profileshowaddress, profileshowaddresspost, editprofile, editprofilepost, updateprofile, orderstatus, ordercancel, removeproduct, cartid, productedit,
+  reotp, repassotp, repassotppost, renewpass, renewpasspost, productpage, productlist, home, logout, profile, profileaddaddress, profileaddaddresspost,profileshowaddress,
+  editprofile, editprofilepost, updateprofile, orderstatus, ordercancel, removeproduct, cartid, productedit,
   cart, checkout, editaddress, editaddresspost, addressdeletepost, checkoutaddaddress, confirmorder, confirmorderget, razorpayOrder, paymentDone, wallet,
-  verifyCoupon, codThankyou,walletPayment,returnorder,verifycoupen,clearcoupen
+  verifyCoupon, codThankyou,walletPayment,returnorder,verifycoupen,clearcoupen,wishlist,wishlistget,removewishlist,profileaddressedit,
+  profileaddresseditget,profileaddressdeletepost
 }
 
 module.exports = userRouter;

@@ -258,19 +258,19 @@
       
                 <div class="input-group mt-3 mb-4">
                   <!-- <input type="text" class="form-control border" name="" placeholder="Promo code" /> -->
-                  <% coupons.forEach((coupon, index)=> { %>
+                  <% coupons.forEach((coup, index)=> { %>
                     <div class="card" style="margin-bottom: 30px;">
                       <div class="card-body">
                         <h5 class="card-title">
-                          <%= coupon.description %>
+                          <%= coup.description %>
                         </h5>
                         <p class="card-text">Get <span class="discount-amount">
-                            <%= coupon.discount %> % OFF
+                            <%= coup.discount %> % OFF
                           </span> on your purchase!</p>
                         <p class="card-text">Use code: <span class="coupon-code" id="coupen">
-                            <%= coupon.code %>
+                            <%= coup.code %>
                           </span></p>
-                      </div>
+                       </div>
                       
                     </div>
                   
@@ -531,16 +531,16 @@
 
 <script>
   document.getElementById('clear').addEventListener('click',()=>{
-      const coupenid = document.getElementById('coupenid').innerText
+      const coupenidd = document.getElementById('coupenid').innerText
       const Proceedchkout = document.getElementById('Proceedchkout')
 
-      const url = `http://localhost:3000/user/clearcoupen?coupenid=${coupenid}`
+      const url = `http://localhost:3000/user/clearcoupen?coupenid=${coupenidd}`
       fetch(url,{
           method: 'POST',
           headers: {
               'Content-Type' : 'application/json'
           },
-          body: JSON.stringify({coupenid})
+          body: JSON.stringify({coupenidd})
       })
       .then(response=> response.json())
       .then(data=>{

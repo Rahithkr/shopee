@@ -26,7 +26,7 @@
               <div class="order-lg-last col-lg-5 col-sm-8 col-8">
                 <div class="d-flex float-end">
               
-                  <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank">
+                  <a href="/user/wishlist" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center" target="_blank">
                     <i class="fas fa-heart m-1 me-md-2"></i>
                     <p class="d-none d-md-block mb-0">Wishlist</p>
                   </a>
@@ -153,7 +153,9 @@
                           />
 
                           <button
-                            class="btn btn-link px-2 increment-button"
+                            
+                            class="btn btn-link px-2 increment-button     plusbtn-<%= cart.productId %>"
+                            cart-qty="<%= cart.quantity %>"
                             data-product-id="<%= cart.productId %>"
                             cart-id = "<%= cart._id %>"
                             
@@ -163,8 +165,17 @@
  
 
 </div>
-
-
+<p><%= cart.quantity %></p>
+<% if (errorMessage) { %>
+  <div class="alert alert-danger" id="errorMessage">
+    <%= errorMessage %>
+  </div>
+<% } %>
+<% if (cart.quantity <= 0) { %>
+  <p class="text-danger">Out of Stock</p>
+<% } else { %>
+  <p class=" out-<%= cart.productId %>"  style="color: rgb(31, 231, 31);" >In Stock</p>
+<% } %>
 
 
 
@@ -181,89 +192,7 @@
               </div>
             </div>
             <% }) %>
-              <!-- Handle the case where the cart is empty or undefined -->
-
-                  
       
-                  <!-- <div class="row gy-3 mb-4">
-                    <div class="col-lg-5">
-                      <div class="me-lg-5">
-                        <div class="d-flex">
-                          <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/12.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
-                          <div class="">
-                            <a href="#" class="nav-link">Mens T-shirt Cotton Base</a>
-                            <p class="text-muted">Blue, Medium</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                      <div class="">
-                        <select style="width: 100px;" class="form-select me-4">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                        </select>
-                      </div>
-                      <div class="">
-                        <text class="h6">$44.80</text> <br />
-                        <small class="text-muted text-nowrap"> $12.20 / per item </small>
-                      </div>
-                    </div>
-                    <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-                      <div class="float-md-end">
-                        <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                        <a href="#" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="row gy-3">
-                    <div class="col-lg-5">
-                      <div class="me-lg-5">
-                        <div class="d-flex">
-                          <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/13.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
-                          <div class="">
-                            <a href="#" class="nav-link">Blazer Suit Dress Jacket for Men</a>
-                            <p class="text-muted">XL size, Jeans, Blue</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                      <div class="">
-                        <select style="width: 100px;" class="form-select me-4">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                        </select>
-                      </div>
-                      <div class="">
-                        <text class="h6">$1156.00</text> <br />
-                        <small class="text-muted text-nowrap"> $460.00 / per item </small>
-                      </div>
-                    </div>
-                    <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
-                      <div class="float-md-end">
-                        <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
-                        <a href="#" class="btn btn-light border text-danger icon-hover-danger"> Remove</a>
-                      </div>
-                    </div>
-                  </div> -->
-                <!-- </div> -->
-                
-                <!-- <div class="border-top pt-4 mx-4 mb-4">
-                  <p><i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks</p>
-                  <p class="text-muted">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                  </p>
-                </div> -->
-          
-          
-          
           
           
           
@@ -544,124 +473,78 @@
       </footer>
       <!-- Footer -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-      <!-- <script>
-      function incrementQuantity(productId) {
-        const inputField = document.getElementById(`quantity_${productId}`);
-    const currentQuantity = parseInt(inputField.value);
-    if (currentQuantity < 10) {
-        inputField.value = currentQuantity + 1;
-        // You can also update the quantity on the server if needed.
-    }
-}
 
-function decrementQuantity(productId) {
-    const inputField = document.getElementById(`quantity_${productId}`);
-    const currentQuantity = parseInt(inputField.value);
-    if (currentQuantity > 1) {
-        inputField.value = currentQuantity - 1;
-        // You can also update the quantity on the server if needed.
-    }
-}
+<!-- 
+<script>
+  // let stockcheck = function(x){}
+    plusbtn = document.querySelectorAll(".increment-button");
+  
 
-function removeProduct(productId) {
-    // Implement code to remove the product from the cart, both on the client side and on the server side if needed.
-}
-</script> -->
+    plusbtn.forEach((button) => {
+      console.log("the btn is valied");
+    const productId = button.getAttribute("data-product-id");
 
-  <!-- <script>
-      let plusCount;
-      let minusCount;
-
-      // fuction to increment the quantity
-      function incrementQuantity(productId,userId,cartId){
-        const quantityInput = document.getElementById(`quantityInput_${productId}`);
-        const currentQuantity=parseInt(quantityInput.value)
-        console.log(cartId);
-        
-        quantityInput.value = currentQuantity + 1
-        plusCount = quantityInput.value;
-        console.log(quantityInput.value);
-        // fetching the request to update the cart in the server
-        fetch(/product/cart/update/`${productId}`,{
-          method: "post",
-          headers: {"content-Type":'application/json'},
-          body: JSON.stringify({plusCount,minusCount,cartId})
-        })
-        .then((response)=>{
-          if(response.ok){
-            console.log("product quantity increased successfully");
-            
-            const initialQuantity = parseInt(document.getElementById(`quantityInput_${productId}`).value);
-          } else {
-            console.log("Response not ok:", response);
-          }
-        })
-        
-        .catch((error)=>{
-          console.error("error while increasing the product");
-        })
-        
-      }
-
-      // function to decrement the quantity
-      function decrementQuantity(productId,cartId){
-        const quantityInput = document.getElementById(`quantityInput_${productId}`);
-        const currentQuantity = parseInt(quantityInput.value);
-        if(currentQuantity>1){
-          
-          quantityInput.value = currentQuantity - 1;
-          minusCount = quantityInput.value;
-          console.log(quantityInput.value);
-          // fetching the request to update the cart in the server
-          fetch(/product/cart/update/`${productId}`,{
-            method: "post",
-            headers: {"content-Type":'application/json'},
-            body: JSON.stringify({plusCount,minusCount,cartId})
-          })
-          .then((response)=>{
-            if(response.ok){
-              console.log("product quantity decreased successfully");
-              
-              console.log("Response not ok:", response);
-            }
-          })
-          .catch((error)=>{
-            console.error("error while decreasing the quantity");
-          })
-        }
-        const initialQuantity = parseInt(document.getElementById(`quantityInput_${productId}`).value);
-      }
-
-      // adding event listners to all the buttons
-      const incrementButton = document.querySelectorAll(".increment-button");
-      const decrementButton = document.querySelectorAll(".decrement-button");
-
-      incrementButton.forEach((button) => {
-        const productId = button.getAttribute("data-product-id");
-        // const userId = button.getAttribute("data-user-id");
-        const cartId = button.getAttribute("cart-id");
-        console.log(cartId);
-        button.addEventListener("click", () => {
-          incrementQuantity(productId,cartId);
-        });
-      });
-
-      decrementButton.forEach((button) => {
-        const productId = button.getAttribute("data-product-id");
-        // const userId = button.getAttribute("data-user-id");
-        const cartId = button.getAttribute("cart-id");
-        button.addEventListener("click", () => {
-          decrementQuantity(productId,cartId)
-        })
-      })
-      
-
-       -->
+    const cartId = button.getAttribute("cart-id");
+    const cartqty = button.getAttribute("cart-qty");
+    let value = document.getElementById("quantityInput_"+productId)
     
-<!-- </script> -->
+   
+    button.addEventListener("click", () => {
+      console.log(`btn clicked ${productId}`);
+      console.log(`the qty ${cartqty}` );
+        if(value >= cartqty){
+          console.log("okay");
+          document.querySelector(".plusbtn-"+productId).style.display ="none"
+          document.querySelector(".out-"+productId).innerHTML="Out of Stock"
+          document.querySelector(".out-"+productId).style.color="rgb(231, 54, 31)"
+        }
+      
+      
+    });
+  });
+  
+  
+</script> -->
+ 
+<!-- <script>
+  // let stockcheck = function(x){}
+    plusbtn = document.querySelectorAll(".increment-button");
+  
 
+    plusbtn.forEach((button) => {
+      console.log("the btn is valied");
+    const productId = button.getAttribute("data-product-id");
 
+    const cartId = button.getAttribute("cart-id");
+    const cartqty = button.getAttribute("cart-qty");
+    let value = document.getElementById("quantityInput_"+productId)
+    let val = parseInt(value.value);
+    let qty = parseInt(cartqty)
+    
+   
+    button.addEventListener("click", () => {
+      
+      console.log(`the qty ${cartqty}` );
+      alert(`the value ${val} and qty ${qty}`)
+        if(val < qty){
+          console.log("okay");
+          document.querySelector(".plusbtn-"+productId).style.display ="none"
+          document.querySelector(".out-"+productId).innerHTML="Out of Stock"
+          document.querySelector(".out-"+productId).style.color="rgb(231, 54, 31)"
+        }else{
+          console.log("okay");
+          document.querySelector(".plusbtn-"+productId).style.display ="none"
+          document.querySelector(".out-"+productId).innerHTML="in stock"
+          document.querySelector(".out-"+productId).style.color="rgb(255, 255, 31)"
 
+        }
+      
+      
+    });
+  });
+  
+  
+</script> -->
 <script>
   let plusCount;
   // let minusCount;
@@ -690,6 +573,7 @@ function removeProduct(productId) {
         console.log("product quantity increased successfully");
         
         const initialQuantity = parseInt(document.getElementById(`quantityInput_${productId}`).value);
+        
         window.location.reload()
       } else {
         console.log("Response not ok:", response);

@@ -790,3 +790,20 @@ footer {
                 .order-tracking:first-child:before{display: none;}
                 .order-tracking.completed:before{background-color: #27aa80;}
                 
+
+
+
+
+
+
+                .out-of-stock {
+                    color: red; /* or any other style to indicate out of stock */
+                  }
+
+
+
+
+
+
+
+                

@@ -47,6 +47,9 @@ address: [
         type:String,
         required:true,
     },
+    mobile:{
+        type:Number,
+    },
     state: {
       type: String,
       required: true,
@@ -70,6 +73,7 @@ cart:{
         price:{
             type:Number,
         },
+     
         name:{
             type:String,
         },
@@ -186,6 +190,31 @@ orders:[{
             type: String
         }
     }],
+
+wishlist:{
+    items:[{
+        price:{
+            type:Number,
+        },
+        name:{
+            type:String,
+        },
+        productId:{
+            type:mongoose.Schema.Types.ObjectId,
+           
+        },
+        image:[{
+            type:String,
+            
+        }],
+  
+        
+        userId:{
+            type:mongoose.Schema.Types.ObjectId
+        }
+    }]
+}
+
 })
 
  
