@@ -37,7 +37,7 @@
             <!-- Breadcrumb -->
             <nav class="d-flex">
               <h6 class="mb-0">
-                <a href="" class="text-white-50">Home</a>
+                <a href="/" class="text-white-50">Home</a>
                 <span class="text-white-50 mx-2"> > </span>
                 <a href="" class="text-white-50">2. product detail</a>
                 <span class="text-white-50 mx-2"> > </span>
@@ -689,15 +689,16 @@ document.getElementById("btn1").addEventListener("click", (e) => {
     }
     else if (onlinePayment.checked) {
       console.log("online");
-        let selectedAddress = null;
+        const selectedAddress = document.querySelector('input[name="selectedAddress"]:checked');
+        const address = selectedAddress.value;
         const radioButtons = document.querySelectorAll('input[name="selectedAddress"]');
-        for (const radioButton of radioButtons) {
-          if (radioButton.checked) {
-            selectedAddress = radioButton.value;
-            break; 
-          }
-        }
-        if (selectedAddress) {
+        // for (const radioButton of radioButtons) {
+        //   if (radioButton.checked) {
+        //     selectedAddress = radioButton.value;
+        //     break; 
+        //   }
+        // }
+        // if (selectedAddress) {
 
           
           const productData = [];
@@ -742,7 +743,7 @@ document.getElementById("btn1").addEventListener("click", (e) => {
                   description: 'Test Transaction',
                   image: '',
                   order_id: order.order.id,
-                  callback_url: `http://localhost:3000/user/paymentdone?selectedAddress=${JSON.stringify(selectedAddress)}&grandtotal=${totalamount}`,
+                  callback_url: `http://localhost:3000/user/paymentdone?address=${address}&selectedAddress=${JSON.stringify(address)}&grandtotal=${totalamount}`,
                   prefill: {
                   },
                   notes: {
@@ -757,7 +758,7 @@ document.getElementById("btn1").addEventListener("click", (e) => {
                 rzp1.open();
               // }
             });
-        }
+        // }
     }
     else if (walletPayment.checked) {
       console.log("wallet");

@@ -7,6 +7,7 @@ const couponCollection=require("../models/coupon")
 const returnCollection=require("../models/returnstatus")
 const multer=require("multer");
 const bannerCollection = require("../models/banner");
+const excel = require('exceljs')
 
 let user;  
 
@@ -807,8 +808,153 @@ const bannerdelete= async (req, res) => {
 
 
 
+
+
+
+
+
+// ------------------------reports----------------------
+
+const reports = async (req, res) => {
+  res.render('admin/report')
+}
+
+
+
+// ------------------------sales month excell-------------------------
+
+
+const generateExcelReportMonth = async (req, res) => {
+console.log('month');
+const { selectedDate } = req.query;
+
+if (!selectedDate) {
+  return res.status(400).json({ error: 'Selected date is required.' });
+}
+
+const selectedMonth = new Date(selectedDate).getMonth() + 1; // Adjust month index
+
+const pipeline = [
+  {
+    $unwind: '$orders',
+  },
+  {
+    $addFields: {
+      orderMonth: { $month: '$orders.date' },
+    },
+  },
+  {
+    $match: { orderMonth: selectedMonth },
+  },
+];
+
+try {
+  const result = await userCollection.aggregate(pipeline);
+
+  if (result.length === 0) {
+    return res.status(404).json({ error: 'No data found for the selected month.' });
+  }
+
+  const workbook = new excel.Workbook();
+  const worksheet = workbook.addWorksheet('Sales Report');
+
+  worksheet.columns = [
+    { header: 'Product Name', key: 'productName', width: 30 },
+    { header: 'Quantity', key: 'quantity', width: 15 },
+    { header: 'Total Price', key: 'totalPrice', width: 20 },
+  ];
+
+  result.forEach(order => {
+    const productName = order.orders.name;
+    const quantity = order.orders.quantity;
+    const totalprice = order.orders.price;
+
+    worksheet.addRow({ productName, quantity, totalPrice: totalprice });
+  });
+
+  const fileName = `sales_report_${selectedDate}.xlsx`;
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+
+  await workbook.xlsx.write(res);
+  res.end();
+} catch (error) {
+  console.error('Error:', error);
+  res.status(500).json({ error: 'Internal server error' });
+}
+};
+
+
+
+// ---------------------------sales year excell---------------------------
+
+
+const yearaleexcellreport = async (req, res) => {
+  const { selectedDate } = req.query;
+  console.log('yrr');
+  console.log(selectedDate);
+  if (!selectedDate) {
+      return res.status(400).json({ error: 'Selected date is required.' });
+  }
+  const selectedYear = new Date(selectedDate).getFullYear(); 
+
+  const pipeline = [
+      {
+          $unwind: '$orders'
+      },
+      {
+          $addFields: {
+              orderYear: { $year: '$orders.date' }  
+          }
+      },
+      {
+          $match: { orderYear: selectedYear }  
+      }
+  ];
+
+  try {
+      const result = await userCollection.aggregate(pipeline);
+      console.log(result);
+      if (result == '') {
+          return;
+      }
+
+      const workbook = new excel.Workbook();
+      const worksheet = workbook.addWorksheet('Sales Report');
+
+      worksheet.columns = [
+          { header: 'Product Name', key: 'productName', width: 30 },
+          { header: 'Quantity', key: 'quantity', width: 15 },
+          { header: 'Total Price', key: 'totalPrice', width: 20 },
+      ];
+
+      result.forEach(order => {
+          const productName = order.orders.name;
+          const quantity = order.orders.quantity;
+          const totalprice = order.orders.price;
+
+          worksheet.addRow({ productName, quantity, totalPrice: totalprice });
+      });
+
+      const fileName = `sales_report_${selectedDate}.xlsx`;
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      res.setHeader('Content-Disposition', `attachment; filename=${fileName}`);
+
+      await workbook.xlsx.write(res);
+      res.end();
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
 const adminRouter={login,loginpost,admindashboard,usermanagement,edituser,updateuser,blockuser,usersearch,
 unblockuser,productmanagement,productadd,productlists,productedit,updateproduct,productdelete,addcategory,addcategorypost,
 categorylist,categoryedit,updatecategory,categorydelete,ordermanagement,orderstatus,addcouponget,addcouponpost,couponlist,
-couponedit,updatecoupon,deletecoupon,returnorders,returnapprove,returnreject,addbanner,addbannerpost,bannerlist,bannerdelete}
+couponedit,updatecoupon,deletecoupon,returnorders,returnapprove,returnreject,addbanner,addbannerpost,bannerlist,bannerdelete,
+reports,
+generateExcelReportMonth, yearaleexcellreport
+}
 module.exports=adminRouter

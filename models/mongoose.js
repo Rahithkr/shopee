@@ -55,7 +55,7 @@ address: [
       required: true,
     },
     pincode: {
-      type: String,
+      type: Number,
       required: true,
     },
     country: {
@@ -93,6 +93,11 @@ cart:{
             type:String,
 
         },
+        stock:{
+            type:Number,
+
+        },
+
         userId:{
             type:mongoose.Schema.Types.ObjectId
         }
@@ -102,6 +107,10 @@ cart:{
     },
 },
 orders:[{
+    date: {
+        type: Date,
+        default: Date.now
+    },
     userId:{
       type:mongoose.Schema.Types.ObjectId,
     },
@@ -135,7 +144,13 @@ orders:[{
        
     }, 
      address:[{
-        type:String,
+        street: { type: String },
+        city: { type: String },
+        fulladdress: { type: String },
+        mobile: { type: Number },
+        state: { type: String },
+        pincode: { type: Number },
+        _id: { type: String },
     }],
 }],
     wallet:{
@@ -161,7 +176,7 @@ orders:[{
         },
         coupenid:{
             type: String,
-            unique:true,
+            // unique:true, 
             
         },
         code: {

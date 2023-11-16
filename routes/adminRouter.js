@@ -3,6 +3,7 @@ const path = require ('path')
 const router = express.Router()
 
 const adminRouter = require('../controller/admincontroller')
+const chart = require('../models/chart')
 
 const multer=require("multer")
 
@@ -70,6 +71,18 @@ router.get('/bannermanagement',adminRouter.addbanner)
 router.post('/bannermanagement',uploads.array('image'),adminRouter.addbannerpost)
 router.get('/bannerlist',adminRouter.bannerlist)
 router.get('/bannerlist/delete/:id',adminRouter.bannerdelete)
+
+
+
+router.get('/sales-data',chart.sales)
+router.get('/revenue',chart.revenue)
+router.get('/saleyearly',chart.saleyearly)
+
+router.get('/report',adminRouter.reports)
+
+// ----------------------sale excel report---------------
+router.post('/generate-excel-report-month',adminRouter.generateExcelReportMonth)
+router.post('/generate-excel-report-year',adminRouter.yearaleexcellreport)
 
 
 

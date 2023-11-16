@@ -3,6 +3,7 @@ const path = require ('path')
 const router = express.Router()
 
 const userRouter = require('../controller/usercontroller')
+const isBlocked = require('../middleware/isBlocked')
 
 router.get('/login',userRouter.login)
 router.get('/signup',userRouter.signup)
@@ -24,7 +25,7 @@ router.get('/productpage/:id',userRouter.productpage)
 router.get('/productlists',userRouter.productlist)
 router.get('/',userRouter.home)
 router.get('/logout',userRouter.logout)
-router.get('/profile',userRouter.profile)
+router.get('/profile',isBlocked,userRouter.profile)
 router.get('/profile/addaddress',userRouter.profileaddaddress)
 router.post('/profile/addaddress',userRouter.profileaddaddresspost)
 router.get('/profile/showaddress',userRouter.profileshowaddress)
@@ -60,5 +61,6 @@ router.get('/removewishlist/:id',userRouter.removewishlist)
 router.get('/showaddress/editaddress',userRouter.profileaddresseditget)
 router.post('/showaddress/editaddress',userRouter.profileaddressedit)
 router.get('/showaddress/delete/:id',userRouter.profileaddressdeletepost)
+router.get('/invoice/:id',userRouter.invoice)
 
 module.exports= router
