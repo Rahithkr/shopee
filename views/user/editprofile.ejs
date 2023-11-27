@@ -145,8 +145,8 @@
                           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                             class="rounded-circle img-fluid" style="width: 150px;">
                           <h5 class="my-3"><%= user.name %></h5>
-                          <p class="text-muted mb-1">Full Stack Developer</p>
-                          <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                          <p class="text-muted mb-1"> <%= user.email %></p>
+                        
                           <div class="d-flex justify-content-center mb-2">
                             <a href="/"  >
                               <button type="button" class="btn btn-primary ms-1">HOME</button></a>
@@ -161,10 +161,7 @@
                               <a href="/profile/editprofile/<%= user._id %>" class="text text-decoration-none">Edit Details</a>
         
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                              <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                              <p class="mb-0">Orders</p>
-                            </li>
+                          
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                               <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
                               <a href="/profile/addaddress"  class="text text-decoration-none" >Add Address</a>
@@ -203,7 +200,7 @@
                             </div>
             
                             <div class="form-outline mb-4">
-                                <input type="email" name="email"  value="<%= user.email %>" id="form3Example3cg" class="form-control form-control-lg" />
+                                <input type="email" name="email"  value="<%= user.email %>" id="form3Example3cg" readonly class="form-control form-control-lg" />
                                 <label class="form-label" for="form3Example3cg">Your Email</label>
                             </div>
         

@@ -36,7 +36,7 @@ const uploads = multer({ storage: storages });
 
 
 router.get('/',adminRouter.login)
-router.post('/',adminRouter.loginpost)
+router.post('/',adminRouter.loginPost)
 router.get('/admindashboard',adminRouter.admindashboard)
 router.get('/usermanagement',adminRouter.usermanagement)
 router.get('/edit_user/edit/:id',adminRouter.edituser)
@@ -74,6 +74,7 @@ router.get('/bannerlist/delete/:id',adminRouter.bannerdelete)
 
 
 
+
 router.get('/sales-data',chart.sales)
 router.get('/revenue',chart.revenue)
 router.get('/saleyearly',chart.saleyearly)
@@ -81,11 +82,20 @@ router.get('/saleyearly',chart.saleyearly)
 router.get('/report',adminRouter.reports)
 
 // ----------------------sale excel report---------------
-router.post('/generate-excel-report-month',adminRouter.generateExcelReportMonth)
+router.get('/generate-excel-report-month',adminRouter.generateExcelReportMonth)
 router.post('/generate-excel-report-year',adminRouter.yearaleexcellreport)
 
 
-
+router.get("/addbrand",adminRouter.addbrandget)
+router.post("/addbrand",adminRouter.addbrandpost)
+router.get("/brandlist",adminRouter.brandlist)
+router.get('/brandlist/delete/:id',adminRouter.branddelete)
+// router.post('/deleteimage/:id/:filename',adminRouter.deleteimg)
+router.get('/edit_products/delete/:id/:productid',adminRouter.editimagedelete)
+router.get('/salereportweek',adminRouter.salereportweek)
+router.post('/generate-pdf-report-month',adminRouter.monthpdf)
+router.post('/generate-pdf-report-year',adminRouter.generatePDFReportYear)
+router.get('/generate-pdf-report-week',adminRouter.generatePDFReportDate)
 
 
 

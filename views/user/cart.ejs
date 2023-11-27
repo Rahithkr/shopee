@@ -8,6 +8,7 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js"> -->
 <!-- <link rel="stylesheet" href="/styles/style.css"> -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" />
 
 </head>
 <body>
@@ -38,13 +39,13 @@
               <!-- Right elements -->
               <div class="col-lg-5 col-md-12 col-12">
                 <div class="input-group float-center">
-                  <div class="form-outline">
+                  <!-- <div class="form-outline">
                     <input type="search" id="form1" class="form-control" />
                     <label class="form-label" for="form1">Search</label>
                   </div>
                   <button type="button" class="btn btn-primary shadow-0">
                     <i class="fas fa-search"></i>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <!-- Right elements -->
@@ -54,14 +55,16 @@
         <!-- Jumbotron -->
       
         <!-- Heading -->
-        <div class="bg-primary">
+        <div class="bg-black">
           <div class="container py-4">
             <!-- Breadcrumb -->
             <nav class="d-flex">
               <h6 class="mb-0">
                 <a href="/" class="text-white-50">Home</a>
                 <span class="text-white-50 mx-2"> > </span>
-                <a href="" class="text-white"><u>Shopping cart</u></a>
+                <a href="/user/productlists" class="text-white-50">product details</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="/user/cart" class="text-white"><u> cart</u></a>
               </h6>
             </nav>
             <!-- Breadcrumb -->
@@ -107,7 +110,7 @@
                     <div class="col-lg-5">
                       <div class="me-lg-5">
                         <div class="d-flex">
-                          <img src="/images/img/<%= cart.image %>" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                          <a href="/user/productpage/<%=cart.productId %>"><img src="/images/img/<%= cart.image %>" class="border rounded me-3" style="width: 96px; height: 96px;" /></a>
                           <div class="">
                             <h5><%= cart.name %></h5>
                             <p class="text-muted"><%= cart.category %></p>
@@ -155,6 +158,7 @@
                           <button
                             
                             class="btn btn-link px-2 increment-button     plusbtn-<%= cart.productId %>"
+                            
                             cart-qty="<%= cart.quantity %>"
                             data-product-id="<%= cart.productId %>"
                             cart-id = "<%= cart._id %>"
@@ -337,139 +341,67 @@
       <!-- Recommended -->
       
       <!-- Footer -->
-      <footer class="text-center text-lg-start text-muted bg-primary mt-3">
-        <!-- Section: Links  -->
-        <section class="">
-          <div class="container text-center text-md-start pt-4 pb-4">
-            <!-- Grid row -->
-            <div class="row mt-3">
-              <!-- Grid column -->
-              <div class="col-12 col-lg-3 col-sm-12 mb-2">
-                <!-- Content -->
-                <a href="https://mdbootstrap.com/" target="_blank" class="text-white h2">
-                  MDB
-                </a>
-                <p class="mt-1 text-white">
-                  © 2023 Copyright: MDBootstrap.com
-                </p>
-              </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Store
-                </h6>
-                <ul class="list-unstyled mb-4">
-                  <li><a class="text-white-50" href="#">About us</a></li>
-                  <li><a class="text-white-50" href="#">Find store</a></li>
-                  <li><a class="text-white-50" href="#">Categories</a></li>
-                  <li><a class="text-white-50" href="#">Blogs</a></li>
-                </ul>
-              </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Information
-                </h6>
-                <ul class="list-unstyled mb-4">
-                  <li><a class="text-white-50" href="#">Help center</a></li>
-                  <li><a class="text-white-50" href="#">Money refund</a></li>
-                  <li><a class="text-white-50" href="#">Shipping info</a></li>
-                  <li><a class="text-white-50" href="#">Refunds</a></li>
-                </ul>
-              </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">
-                  Support
-                </h6>
-                <ul class="list-unstyled mb-4">
-                  <li><a class="text-white-50" href="#">Help center</a></li>
-                  <li><a class="text-white-50" href="#">Documents</a></li>
-                  <li><a class="text-white-50" href="#">Account restore</a></li>
-                  <li><a class="text-white-50" href="#">My orders</a></li>
-                </ul>
-              </div>
-              <!-- Grid column -->
-      
-              <!-- Grid column -->
-              <div class="col-12 col-sm-12 col-lg-3">
-                <!-- Links -->
-                <h6 class="text-uppercase text-white fw-bold mb-2">Newsletter</h6>
-                <p class="text-white">Stay in touch with latest updates about our products and offers</p>
-                <div class="input-group mb-3">
-                  <input type="email" class="form-control border" placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
-                  <button class="btn btn-light border shadow-0" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                    Join
-                  </button>
-                </div>
-              </div>
-              <!-- Grid column -->
+      <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
+        
+
+
+        <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-12 col-lg-3 col-sm-12 mb-2">
+              <!-- Content -->
+              <a href="/" target="_blank" class="text-white h2">
+                <h3 class="text text-primary">e_Shopee</h3>
+              </a>
+              <p class="mt-1 text-white">
+                Experiance the feel of SHopping
+              </p>
             </div>
-            <!-- Grid row -->
-          </div>
-        </section>
-        <!-- Section: Links  -->
-      
-        <div class="">
-          <div class="container">
-            <div class="d-flex justify-content-between py-4 border-top">
-              <!--- payment --->
-              <div>
-                <i class="fab fa-lg fa-cc-visa text-white"></i>
-                <i class="fab fa-lg fa-cc-amex text-white"></i>
-                <i class="fab fa-lg fa-cc-mastercard text-white"></i>
-                <i class="fab fa-lg fa-cc-paypal text-white"></i>
-              </div>
-              <!--- payment --->
-      
-              <!--- language selector --->
-              <div class="dropdown dropup">
-                <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-united-kingdom flag m-0 me-1"></i>English </a>
-      
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
-                  </li>
-                </ul>
-              </div>
-              <!--- language selector --->
+            <!-- Grid column -->
+    
+            <!-- Grid column -->
+            <div class="col-6 col-sm-4 col-lg-2">
+              <!-- Links -->
+              <h6 class="text-uppercase text-white fw-bold mb-2 ">
+                Store
+              </h6>
+              <ul class="list-unstyled mb-4">
+                <li><a class="text-white-50" href="/">Home</a></li>
+                <li><a class="text-white-50" href="#">About us</a></li>
+                <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
+                <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
+              
+              </ul>
             </div>
-          </div>
+            <!-- Grid column -->
+    
+            <!-- Grid column -->
+            <div class="col-6 col-sm-4 col-lg-2">
+              <!-- Links -->
+              <h6 class="text-uppercase text-white fw-bold mb-2">
+                Information
+              </h6>
+              <ul class="list-unstyled mb-4">
+                <li><a class="text-white-50" href="#">Help center</a></li>
+                <li><a class="text-white-50" href="#">Money refund</a></li>
+                <li><a class="text-white-50" href="#">Shipping info</a></li>
+                <li><a class="text-white-50" href="#">Refunds</a></li>
+              </ul>
+            </div>
+
+        <!--Call to action-->
+         
+          <!--/.Call to action-->
+        
+      
+          </section>
+          <!-- Section: Social media -->
         </div>
+        <!-- Grid container -->
+      
+     
+      
       </footer>
       <!-- Footer -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
@@ -546,6 +478,18 @@
   
 </script> -->
 <script>
+
+//   // Create WebSocket connection.
+//   const socket = new WebSocket('ws://localhost:3000/websocket');
+
+// socket.addEventListener('open', function (event) {
+//    socket.send('Hello Server!');
+// });
+
+// socket.addEventListener('message', function (event) {
+//    console.log('Message from server: ', event.data);
+// });
+
   let plusCount;
   // let minusCount;
 
@@ -571,6 +515,13 @@
     .then((response)=>{
       if(response.ok){
         console.log("product quantity increased successfully");
+        // fetch('/broadcast', { method: 'POST' })
+        // .then((res)=>{
+        //   console.log(res);
+        // })
+        // .catch((error)=>{
+        //   console.log(error);
+        // })
         
         const initialQuantity = parseInt(document.getElementById(`quantityInput_${productId}`).value);
         
@@ -641,6 +592,10 @@
   })
   
 
+  
+</script>
+
+<script>
   
 </script>
 

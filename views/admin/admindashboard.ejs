@@ -29,8 +29,7 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.html"><h3 class="text text-primary">e_shopee</h3></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
+          <h3 class="text text-primary">e_Shopee</h3>
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -44,6 +43,7 @@
                   <h5 class="mb-0 font-weight-normal">Admin</h5>
                   
                 </div>
+                
               </div>
  
               <div>
@@ -52,9 +52,11 @@
               </div>
             </div>
           </li>
-          <li class="nav-item nav-category">
-            <span class="nav-link">Navigation</span>
+          
+          <li class="nav-item nav-category ">
+            <span class="nav-link ">Navigation</span>
           </li>
+        
           <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/admindashboard">
               <span class="menu-icon">
@@ -118,20 +120,37 @@
               <span class="menu-title">User Management</span>
             </a>
           </li>
-
-          <li class="nav-item menu-items dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/bannermanagement">
               <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
+                <i class="mdi mdi-table-large"></i>
               </span>
-              <span class="menu-title">Banner Management</span>
+              <span class="menu-title">ADD Banner</span>
             </a>
-            <div class="dropdown-menu" id="category-dropdown">
-              <!-- Dropdown items go here -->
-              <a class="dropdown-item" href="/admin/bannermanagement">Add Banner</a>
-              <a class="dropdown-item" href="/admin/bannerlist">BannerList</a>
-              <!-- Add more dropdown items as needed -->
-            </div>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/bannerlist">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">Banner List </span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/addbrand">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">ADD Brands </span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/admin/brandlist">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">Brands list </span>
+            </a>
           </li>
 
           <!-- <li class="nav-item menu-items">
@@ -448,7 +467,7 @@
                   </div> -->
               </div>
           
-              <div class="col-sm-12 col-xl-6">
+              <!-- <div class="col-sm-12 col-xl-6">
                   <div class="bg-light text-center rounded p-4">
                       <div class="d-flex align-items-center justify-content-between mb-4">
                           <h6 class="mb-0" style="color: black;">Monthly Sales</h6>
@@ -463,7 +482,61 @@
                       </div>
                       <canvas id="yearlyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
                   </div>
+              </div> -->
+              <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                  <div class="container">
+                    <div class="btn-group">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Chart
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="showChart('myChart1')">Monthly Sales</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showChart('yearlyChart')">Yearly Sales</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="showChart('weeklyChart')">Weekly Sales</a></li>
+                      </ul>
+                    </div>
+                  </div>
+              
+                  <div hidden id="chartContainer" class="col-sm-12 col-xl-12">
+                    <!-- Chart container -->
+                    <div class="bg-light text-center rounded p-4">
+                      <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 id="chartTitle" class="mb-0" style="color: black;">Monthly Sales</h6>
+                      </div>
+                      <canvas id="currentChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                    </div>
+                  </div>
+                </div>
               </div>
+              
+              <div class="col-sm-12 col-xl-6" id="myChart1Container" style="display: none;">
+                <div class="bg-light text-center rounded p-4">
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0" style="color: black;">Monthly Sales</h6>
+                  </div>
+                  <canvas id="myChart1" width="60" height="40" style="width: 60%;"></canvas> <br>
+                </div>
+              </div>
+              
+              <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="yearlyChartContainer" style="display: none;">
+                <div class="bg-light text-center rounded p-4">
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0" style="color: black;">Yearly Sales</h6>
+                  </div>
+                  <canvas id="yearlyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                </div>
+              </div>
+
+              <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="weeklyChartContainer" style="display: none;">
+                <div class="bg-light text-center rounded p-4">
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0" style="color: black;">Weekly Sales</h6>
+                  </div>
+                  <canvas id="weeklyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                </div>
+              </div>
+              
                   <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6">
                       <div class="bg-light text-center rounded p-4">
                           <div class="d-flex align-items-center justify-content-between mb-4">
@@ -506,7 +579,18 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>  -->
                <!-- <script src="/js/admin/main.js"></script> -->
 
+<script>
+  showChart('myChart1');
 
+function showChart(chartType) {
+  document.getElementById('chartTitle').innerText = chartType === 'myChart1' ? 'Monthly Sales' : 'Yearly Sales';
+
+  // Hide both charts initially
+  document.getElementById('myChart1Container').style.display = chartType === 'myChart1' ? 'block' : 'none';
+  document.getElementById('yearlyChartContainer').style.display = chartType === 'yearlyChart' ? 'block' : 'none';
+  document.getElementById('weeklyChartContainer').style.display = chartType === 'weeklyChart' ? 'block' : 'none';
+}
+</script>
 
                <script>
                 // Your Chart.js code for monthly sales chart
@@ -575,6 +659,52 @@ let stockChart = new Chart(ctx3, {
   }
 });
 
+
+
+async function graphSalesWeekly() {
+        try {
+            const response = await fetch('/admin/saleweekly', { method: 'POST' });
+
+            if (response.ok) {
+                console.log('Weekly data fetched successfully');
+                const data = await response.json();
+
+                // Update the weeklyChart data and labels
+                weeklyChart.data.labels = data.map(item => item.week);
+                weeklyChart.data.datasets[0].data = data.map(item => item.ordersCount);
+
+                // Update the chart
+                weeklyChart.update();
+            }
+        } catch (error) {
+            console.error('Error fetching weekly data:', error);
+        }
+    }
+
+    const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        window.weeklyChart = new Chart(weeklyCtx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Weekly Sales',
+                    data: [],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+
+
 // Function to fetch and update stock data
 async function graphStocks() {
   try {
@@ -595,6 +725,11 @@ async function graphStocks() {
     console.error('Error fetching stock data:', error);
   }
 }
+
+
+// Your Chart.js code for yearly sales chart
+
+
 
               
                 // Function to fetch and update monthly sales data
@@ -653,6 +788,7 @@ async function graphStocks() {
                   graphSales();
                   graphSalesYear();
                   graphStocks();
+                  graphSalesWeekly()
                 });
 
               </script>

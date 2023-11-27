@@ -1,7 +1,6 @@
-<!-- 
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +8,6 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
-
 </head>
 <body>
    
@@ -17,24 +15,22 @@
         <div class="container py-5">
           <div class="row">
             <div class="col">
-         
               <h2>My Account</h2>
             </div>
           </div>
       
           <div class="row">
-            
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
                   <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                     class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">name</h5>
-                  <p class="text-muted mb-1">Full Stack Developer</p>
-                  <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                  <h5 class="my-3"><%= users.name %></h5>
+                  <p class="text-muted mb-1"> <%= users.email %></p>
+                 
                   <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                    <a href="/"  >
+                      <button type="button" class="btn btn-primary ms-1">HOME</button></a>
                   </div>
                 </div>
               </div>
@@ -43,158 +39,9 @@
                   <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fas fa-globe fa-lg text-warning"></i>
-                      <a href="/profile/editprofile" class="text text-decoration-none">Edit Details</a>
-
+                      <a href="/profile/editprofile/<%= users._id %>" class="text text-decoration-none">Edit Details</a>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                      <p class="mb-0">Orders</p>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                      <a href="/profile/addaddress"  class="text text-decoration-none" >Add Address</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                      <a href="/profile/showaddress"  class="text text-decoration-none" >Show address</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                      <p class="mb-0">mdbootstrap</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          
-
-            <div class="col-lg-8">
-   
-   
-                <div class="card mb-4">
-                  <div class="card-body">
                    
-              <div class="row">
-                <div class="col-md-8 mb-4">
-                  <div class="card mb-4">
-                    <div class="card-header py-3">
-                      <h5 class="mb-0">Add Address</h5>
-                    </div>
-                    <div class="card-body">
-                      <form  action=""  method="post"  >
-                        
-                        <div class="row mb-4">
-                          <div class="col">
-                            <div class="form-outline">
-                              <input type="text" id="form7Example1" name="name" class="form-control" />
-                              <label class="form-label" for="form7Example1">name</label>
-                            </div>
-                          </div>
-                        
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form7Example4" name="email" class="form-control" />
-                            <label class="form-label" for="form7Example4">email</label>
-                          </div>
-             
-
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form7Example3" name="fulladdress" class="form-control" />
-                          <label class="form-label" for="form7Example3">Full Address</label>
-                        </div>
-                        <div class="form-outline mb-4">
-                            <input type="text" id="form7Example5" name="street" class="form-control" />
-                            <label class="form-label" for="form7Example5">Street</label>
-                          </div>
-                          <div class="form-outline mb-4">
-                            <input type="text" id="form7Example5" name="city" class="form-control" />
-                            <label class="form-label" for="form7Example5">City</label>
-                          </div>
-                          <div class="form-outline mb-4">
-                            <input type="text" id="form7Example5" name="state" class="form-control" />
-                            <label class="form-label" for="form7Example5">State</label>
-                          </div>
-              
-                      
-
-
-                        <div class="form-outline mb-4">
-                          <input type="text" id="form7Example5" name="mobile" class="form-control" />
-                          <label class="form-label" for="form7Example5">Mobile</label>
-                        </div>
-
-                        <div class="form-outline mb-4">
-                            <input type="number" id="form7Example6" name="pincode"  class="form-control" />
-                            <label class="form-label" for="form7Example6">Pin code</label>
-                          </div>
-              
-                       
-                       
-                        <div style="text-align: center;">
-                            <button class="btn btn-primary" type="submit">add address</button>
-
-
-                           
-                          </div>
-                    
-                          
-              
-                        </form> 
-                          
-
-          </div>
-        
-        </div>
-      </section>
-</body>
-</html> -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
-</head>
-<body>
-   
-    <section style="background-color: #eee;">
-        <div class="container py-5">
-          <div class="row">
-            <div class="col">
-              <h2>My Account</h2>
-            </div>
-          </div>
-      
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3">name</h5>
-                  <p class="text-muted mb-1">Full Stack Developer</p>
-                  <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                  <div class="d-flex justify-content-center mb-2">
-                    <button type="button" class="btn btn-primary">Follow</button>
-                    <button type="button" class="btn btn-outline-primary ms-1">Message</button>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-4 mb-lg-0">
-                <div class="card-body p-0">
-                  <ul class="list-group list-group-flush rounded-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fas fa-globe fa-lg text-warning"></i>
-                      <a href="/profile/editprofile" class="text text-decoration-none">Edit Details</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                      <p class="mb-0">Orders</p>
-                    </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
                       <a href="/profile/addaddress" class="text text-decoration-none">Add Address</a>
@@ -206,6 +53,10 @@
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
                       <a href="/profile/orderstatus" class="text text-decoration-none">Order Status</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                      <a href="/profile/wallet"  class="text text-decoration-none" >Wallet</a>
                     </li>
                   </ul>
                 </div>
@@ -221,7 +72,7 @@
                             <h5 class="mb-0">Add Address</h5>
                           </div>
                           <div class="card-body">
-                            <form action="" method="post" onsubmit="return validateForm()">
+                            <form action="/profile/addaddress" method="post" onsubmit="return validateForm()">
                               <div class="row mb-4">
                                 <div class="col">
                                   <div class="form-outline">
@@ -293,4 +144,240 @@
     }
 </script>
 </body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+    <style>
+      .error-messages {
+        color: red;
+      }
+    </style>
+</head>
+<body>
+   
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+          <div class="row">
+            <div class="col">
+              <h2>My Account</h2>
+            </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="card mb-4">
+                <div class="card-body text-center">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 150px;">
+                  <h5 class="my-3"><%= users.name %></h5>
+                  <p class="text-muted mb-1"> <%= users.email %></p>
+                 
+                  <div class="d-flex justify-content-center mb-2">
+                    <a href="/"  >
+                      <button type="button" class="btn btn-primary ms-1">HOME</button></a>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 mb-lg-0">
+                <div class="card-body p-0">
+                  <ul class="list-group list-group-flush rounded-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fas fa-globe fa-lg text-warning"></i>
+                      <a href="/profile/editprofile/<%= users._id %>" class="text text-decoration-none">Edit Details</a>
+                    </li>
+                   
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                      <a href="/profile/addaddress" class="text text-decoration-none">Add Address</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                      <a href="/profile/showaddress" class="text text-decoration-none">Show address</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                      <a href="/profile/orderstatus" class="text text-decoration-none">Order Status</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                      <a href="/profile/wallet"  class="text text-decoration-none" >Wallet</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-8 mb-4">
+                        <div class="card mb-4">
+                          <div class="card-header py-3">
+                            <h5 class="mb-0">Add Address</h5>
+                          </div>
+                          <div class="card-body">
+                            <form action="" method="post" onsubmit="return validateForm()">
+                              <div class="error-messages text-danger mb-4" id="allErrorMessages"></div>
+                              <div class="row mb-4">
+                                <div class="col">
+                                  <div class="form-outline">
+                                    <input type="text" id="form7Example1" name="name" class="form-control" />
+                                    <label class="form-label" for="form7Example1">Name</label>
+                                    <div class="error-messages" id="nameError"></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="email" id="form7Example4" name="email" class="form-control" />
+                                <label class="form-label" for="form7Example4">Email</label>
+                                <div class="error-messages" id="emailError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="text" id="form7Example3" name="fulladdress" class="form-control"  />
+                                <label class="form-label" for="form7Example3">Full Address</label>
+                                <div class="error-messages" id="fullAddressError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="text" id="form7Example5" name="street" class="form-control" />
+                                <label class="form-label" for="form7Example5">Street</label>
+                                <div class="error-messages" id="streetError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="text" id="form7Example6" name="city" class="form-control"  />
+                                <label class="form-label" for="form7Example6">City</label>
+                                <div class="error-messages" id="cityError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="text" id="form7Example7" name="state" class="form-control" />
+                                <label class="form-label" for="form7Example7">State</label>
+                                <div class="error-messages" id="stateError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="text" id="form7Example8" name="mobile" class="form-control"  />
+                                <label class="form-label" for="form7Example8">Mobile</label>
+                                <div class="error-messages" id="mobileError"></div>
+                              </div>
+                              <div class="form-outline mb-4">
+                                <input type="number" id="form7Example9" name="pincode" class="form-control" />
+                                <label class="form-label" for="form7Example9">Pin code</label>
+                                <div class="error-messages" id="pincodeError"></div>
+                              </div>
+                              <div style="text-align: center;">
+                                <button class="btn btn-primary" type="submit">Add Address</button>
+                              </div>
+                            </form>
+                           <script>
+    function validateForm() {
+        // Clear previous error messages
+        document.getElementById('allErrorMessages').innerHTML = '';
+        clearError('nameError');
+        clearError('emailError');
+        clearError('fullAddressError');
+        clearError('streetError');
+        clearError('cityError');
+        clearError('stateError');
+        clearError('mobileError');
+        clearError('pincodeError');
+
+        let isValid = true;
+        const mobilePattern = /^\d{10}$/;
+        const pincodePattern = /^\d{6}$/;
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Name validation
+        let name = document.getElementById('form7Example1').value;
+        if (name.trim() === '') {
+            displayError('nameError', 'Name is required');
+            isValid = false;
+        }
+
+        // Email validation
+        let email = document.getElementById('form7Example4').value;
+        if (email.trim() === '') {
+            displayError('emailError', 'Email is required');
+            isValid = false;
+        } else if (!emailPattern.test(email.trim())) {
+            displayError('emailError', 'Enter a valid email address');
+            isValid = false;
+        }
+
+        let fullAddress = document.getElementById('form7Example3').value;
+        if (fullAddress.trim() === '') {
+            displayError('fullAddressError', 'Full Address is required');
+            isValid = false;
+        }
+
+        // Street validation
+        let street = document.getElementById('form7Example5').value;
+        if (street.trim() === '') {
+            displayError('streetError', 'Street is required');
+            isValid = false;
+        }
+
+        // City validation
+        let city = document.getElementById('form7Example6').value;
+        if (city.trim() === '') {
+            displayError('cityError', 'City is required');
+            isValid = false;
+        }
+
+        // State validation
+        let state = document.getElementById('form7Example7').value;
+        if (state.trim() === '') {
+            displayError('stateError', 'State is required');
+            isValid = false;
+        }
+
+        // Mobile validation
+        let mobile = document.getElementById('form7Example8').value;
+        if (mobile.trim() === '') {
+            displayError('mobileError', 'Mobile is required');
+            isValid = false;
+        } else if (!mobilePattern.test(mobile.trim())) {
+            displayError('mobileError', 'Enter a valid 10-digit mobile number');
+            isValid = false;
+        }
+
+        // Pincode validation
+        let pincode = document.getElementById('form7Example9').value;
+        if (pincode.trim() === '') {
+            displayError('pincodeError', 'Pin code is required');
+            isValid = false;
+        } else if (!pincodePattern.test(pincode.trim())) {
+            displayError('pincodeError', 'Enter a valid 6-digit pin code');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function displayError(elementId, errorMessage) {
+        document.getElementById(elementId).innerHTML = errorMessage;
+    }
+
+    function clearError(elementId) {
+        document.getElementById(elementId).innerHTML = '';
+    }
+</script>
+</body>
 </html>
+

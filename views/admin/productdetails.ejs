@@ -23,10 +23,10 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.css" /> -->
 
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-
+   
 
   </head>
   <body>
@@ -34,8 +34,10 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.html"><img src="/assets/images/logo.svg" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
+          <!-- <a class="sidebar-brand brand-logo" href="index.html"><img src="/assets/images/logo.svg" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a> -->
+       
+          <h3 class="text text-primary">e_Shopee</h3>
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -114,6 +116,38 @@
             <i class="mdi mdi-table-large"></i>
           </span>
           <span class="menu-title">User Management</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/bannermanagement">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">ADD Banner</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/bannerlist">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">Banner List </span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/addbrand">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">ADD Brands </span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/brandlist">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">Brands list </span>
         </a>
       </li>
           <!-- <li class="nav-item menu-items">
@@ -236,13 +270,14 @@
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <!-- <input type="text" class="form-control" placeholder="Search products"> -->
+                <!-- <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  <input type="text" class="form-control" placeholder="Search products">
                   <div class="form-group">
                     <input type="text" id="product-search" class="form-control" placeholder="Search by product name">
+
                 </div>
                 
-                </form>
+                </form> -->
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
@@ -421,8 +456,17 @@
               <span class="mdi mdi-format-line-spacing"></span>
             </button>
           </div>
+          <input type="text" id="productSearch" onkeyup="searchTable()" placeholder="Search for products..">
+          <select id="categoryFilter" class="form-select " style="margin-right: 80px;">
+            <option value="all">All Category </option>
+            <% categories.forEach(elements => { %>
+              <option value="<%= elements.category %>"><%= elements.category %></option>
+            <% }); %>
+           </select>
         </nav>
+        
         <!-- partial -->
+        
         <div class="main-panel">
           <div class="content-wrapper">
             <table class="table" id="myTable">
@@ -431,6 +475,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">category</th>
                     <th scope="col">image</th>
+                    <th scope="col">Brand</th>
                     <th scope="col">products</th>
                     <th scope="col">price</th>
                     <th scope="col">Description</th>
@@ -439,13 +484,14 @@
                 </thead>
                 <tbody>
              
-                    <% product.forEach((row, ID) => { %>
+                    <% product.forEach((row, index) => { %>
                         <tr class='align-middle'>
-                          <td><%= ID %></td>
+                          <td><%= (currentPage - 1) * ITEMS_PER_PAGE + index + 1 %></td>
                           <td><%= row.category %></td>
                           <td>
                             <img src="/assets/images/img/<%= row.image[0] %>" alt="<%= row.name %>" width="100">
                           </td>
+                          <td><%= row.brand %></td>
                           <td><%= row.name %></td>
                           <td><%= row.price %></td>
                           <td><%= row.description %></td>
@@ -485,13 +531,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
   <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script>
-  <script>
+  <!-- <script>
     $(document).ready(function(){
       $("table").DataTable({
         order:[0,'desc']
       })
     })
-  </script>
+  </script> -->
   <!-- <script>
     $(document).ready(function () {
         // Initialize the DataTable
@@ -546,12 +592,78 @@
 
     <!-- End custom js for this page -->
 
-    <script>
-    $(document).ready( function () {
-      $('#myTable').DataTable();
-  } );
+    <!-- <script>
+      $(document).ready(function () {
+         $('#myTable').DataTable({
+            order: [0, 'desc'] // Set the default sorting order
+         });
+      });
+   </script>
+
+
+<script>
+  $(document).ready(function () {
+     var table = $('#myTable').DataTable({
+        order: [0, 'desc'] // Set the default sorting order
+     });
+
+     // Add an event listener to the search input
+     $('#product-search').on('keyup', function () {
+        table.search(this.value).draw();
+     });
+  });
+</script> -->
+
+
+<script>
+  function searchTable() {
+ // Declare variables
+ var input, filter, table, tr, td, i, txtValue;
+ input = document.getElementById("productSearch");
+ filter = input.value.toUpperCase();
+ table = document.getElementById("myTable");
+ tr = table.getElementsByTagName("tr");
+
+ // Loop through all table rows, and hide those who don't match the search query
+ for (i = 0; i < tr.length; i++) {
+   td = tr[i].getElementsByTagName("td")[3]; // Index 3 corresponds to the 'products' column
+
+   if (td) {
+     txtValue = td.textContent || td.innerText;
+     if (txtValue.toUpperCase().indexOf(filter) > -1) {
+       tr[i].style.display = "";
+     } else {
+       tr[i].style.display = "none";
+     }
+   }      
+ }
+}
+
+</script>
+<script src="search.js"></script>
+
+
+
+<script>
+  document.getElementById('categoryFilter').addEventListener('change', function() {
+ var selectedCategory = this.value;
+ var rows = document.getElementById('myTable').rows;
+
+ for (var i = 0; i < rows.length; i++) {
+   var categoryCell = rows[i].cells[1]; // Assuming the category is in the second column
+   var category = categoryCell.innerText;
+
+   if (selectedCategory === 'all' || category === selectedCategory) {
+     rows[i].style.display = '';
+   } else {
+     rows[i].style.display = 'none';
+   }
+ }
+});
+
 </script>
 
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+
+    <!-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script> -->
   </body>
 </html>

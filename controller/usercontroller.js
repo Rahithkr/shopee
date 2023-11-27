@@ -12,6 +12,10 @@ const Razorpay = require('razorpay');
 const { render } = require("ejs");
 const returnCollection = require("../models/returnstatus");
 const bannerCollection = require("../models/banner")
+const categoryCollection = require("../models/category");
+const brandCollection = require("../models/brand");
+const category = require("../models/category");
+
 
 const razorpay = new Razorpay({
   key_id: "rzp_test_s3i2foc9AExQlF",
@@ -24,6 +28,35 @@ let transporter;
 let newPassword;
 let email;
 
+
+function sentOtp (otp,email){
+
+  transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'testtdemoo11111@gmail.com',
+      pass: 'wikvaxsgqyebphvh',
+    },
+  });
+
+  const mailOptions = {
+    from: "rahithkr3@gmail.com",
+    to: "rahithkr3@gmail.com",
+    subject: "Your OTP code",
+    text: `Your OTP code is:${otp}`
+  };
+
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending OTP:', error);
+    } else {
+      console.log('OTP sent:', info.response);
+
+    }
+  });
+
+}
 
 
 
@@ -58,7 +91,7 @@ const signup = async (req, res) => {
   }
 }
 
-const signuppost = async (req, res) => {
+const signupPost = async (req, res) => {
   try {
     const check = await userCollection.findOne({ email: req.body.email })
     if (check) {
@@ -74,43 +107,41 @@ const signuppost = async (req, res) => {
         password: req.body.password,
         mobile: req.body.mobile,
       }
-      console.log(user)
-      // await userCollection.insertMany([user]);
-      console.log('hii');
+
 
       otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
 
-
-      transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'testtdemoo11111@gmail.com',
-          pass: 'wikvaxsgqyebphvh',
-        },
-      });
-      console.log("2")
-
-      const mailOptions = {
-        from: "rahithkr3@gmail.com",
-        to: "rahithkr3@gmail.com",
-        subject: "Your OTP code",
-        text: `Your OTP code is:${otp}`
-      };
-
-      console.log("3")
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending OTP:', error);
-        } else {
-          console.log('OTP sent:', info.response);
-          // Store the OTP and user's email in your database for verification
-        }
-      });
+      sentOtp (otp,user.email)
 
 
+      // transporter = nodemailer.createTransport({
+      //   service: 'gmail',
+      //   auth: {
+      //     user: 'testtdemoo11111@gmail.com',
+      //     pass: 'wikvaxsgqyebphvh',
+      //   },
+      // });
 
-      console.log(mailOptions)
-      console.log("successfully send")
+      // const mailOptions = {
+      //   from: "rahithkr3@gmail.com",
+      //   to: "rahithkr3@gmail.com",
+      //   subject: "Your OTP code",
+      //   text: `Your OTP code is:${otp}`
+      // };
+
+
+      // transporter.sendMail(mailOptions, (error, info) => {
+      //   if (error) {
+      //     console.error('Error sending OTP:', error);
+      //   } else {
+      //     console.log('OTP sent:', info.response);
+
+      //   }
+      // });
+
+
+
+
 
 
 
@@ -122,29 +153,32 @@ const signuppost = async (req, res) => {
   }
 }
 
-const newotp = async (req, res) => {
+const newOtp = async (req, res) => {
   try {
-    console.log("running5")
+
 
     otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
 
-    console.log(otp)
 
-    const mailOptions = {
-      from: "rahithkr3@gmail.com",
-      to: "rahithkr3@gmail.com",
-      subject: "Your OTP code",
-      text: `Your OTP code is:${otp}`
-    };
+    sentOtp (otp)
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending OTP:', error);
-      } else {
-        console.log('OTP sent:', info.response);
-        // Store the OTP and user's email in your database for verification
-      }
-    });
+    // console.log(otp)
+
+    // const mailOptions = {
+    //   from: "rahithkr3@gmail.com",
+    //   to: "rahithkr3@gmail.com",
+    //   subject: "Your OTP code",
+    //   text: `Your OTP code is:${otp}`
+    // };
+
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     console.error('Error sending OTP:', error);
+    //   } else {
+    //     console.log('OTP sent:', info.response);
+    //     // Store the OTP and user's email in your database for verification
+    //   }
+    // });
 
 
     res.redirect("/user/otp")
@@ -163,7 +197,7 @@ const newotp = async (req, res) => {
 
 
 
-const getotp = async (req, res) => {
+const getOtp = async (req, res) => {
   try {
 
     res.render("user/otp");
@@ -177,14 +211,14 @@ const getotp = async (req, res) => {
 
 
 
-const passotp = (req, res) => {
+const passOtp = (req, res) => {
   const check = req.session.check
   console.log(check);
   res.render("user/passotp");
 }
 
 
-const otppost = async (req, res) => {
+const otpPost = async (req, res) => {
   try {
 
     const enteredOtp = req.body.otp;
@@ -215,55 +249,27 @@ const otppost = async (req, res) => {
 
 
 
-// const loginpost=async (req, res) => {
-//     try {
-//         const check = await userCollection.findOne({ email: req.body.email, password: req.body.password });
-//         // console.log(check);
-
-//         if ( check && check.password === req.body.password) {
-//             // email=req.body.email
-
-//         //    const email= check.email
-//         user=true
-//             req.session.userId = check._id.toString();
-//             const user123=req.session.userId
-//             console.log('hiiiiiiiiiiiiiiiiiiiii',user123);
-//             console.log("login:",req.session.userId);
-
-//             res.redirect("/");
-//         } else {
-//             // Handle login failure, e.g., show an error message
-//             res.send("Invalid email or password");
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         // Handle any errors that occurred during the database query
-//         res.status(500).send("Internal server error");
-//     }
-// };
-
-
-const loginpost = async (req, res) => {
+const loginPost = async (req, res) => {
   try {
     const check = await userCollection.findOne({ email: req.body.email, password: req.body.password });
     if (check) {
       if (check && check.password === req.body.password) {
         req.session.userId = check._id.toString();
         console.log("Login successful. User ID:", req.session.userId);
-        const isUserBlocked1 = await userCollection.findOne({_id:req.session.userId},{blocked:1})
+        const isUserBlocked1 = await userCollection.findOne({ _id: req.session.userId }, { blocked: 1 })
         const isUserBlocked = isUserBlocked1.blocked
 
-        if(isUserBlocked == false){
+        if (isUserBlocked == false) {
           console.log("Login successful. User ID:", req.session.userId);
           res.redirect("/");
         }
-        else{
+        else {
           res.render('user/login')
         }
 
-        // res.redirect("/");
+
       } else {
-        // Prepare specific error messages for email and password
+        // Prepare  error messages for email and password
         res.render("user/login", { error: "Invalid Password" })
       }
     } else {
@@ -279,11 +285,11 @@ const loginpost = async (req, res) => {
 
 
 
-const forgotpass = (req, res) => {
+const forgotPass = (req, res) => {
   res.render("user/forgotpass")
 }
 
-const forgotpasspost = async (req, res) => {
+const forgotPassPost = async (req, res) => {
   try {
     email = req.body.email
 
@@ -295,29 +301,29 @@ const forgotpasspost = async (req, res) => {
 
       otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
 
+      sentOtp (otp)
+      // transporter = nodemailer.createTransport({
+      //   service: 'gmail',
+      //   auth: {
+      //     user: 'testtdemoo11111@gmail.com',
+      //     pass: 'wikvaxsgqyebphvh',
+      //   },
+      // }); const mailOptions = {
+      //   from: "rahithkr3@gmail.com",
+      //   to: "rahithkr3@gmail.com",
+      //   subject: "Your OTP code",
+      //   text: `Your OTP code is:${otp}`
+      // };
 
-      transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'testtdemoo11111@gmail.com',
-          pass: 'wikvaxsgqyebphvh',
-        },
-      }); const mailOptions = {
-        from: "rahithkr3@gmail.com",
-        to: "rahithkr3@gmail.com",
-        subject: "Your OTP code",
-        text: `Your OTP code is:${otp}`
-      };
 
-      console.log("3")
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending OTP:', error);
-        } else {
-          console.log('OTP sent:', info.response);
-          // Store the OTP and user's email in your database for verification
-        }
-      });
+      // transporter.sendMail(mailOptions, (error, info) => {
+      //   if (error) {
+      //     console.error('Error sending OTP:', error);
+      //   } else {
+      //     console.log('OTP sent:', info.response);
+      //     // Store the OTP and user's email in your database for verification
+      //   }
+      // });
       res.redirect("/user/passotp")
 
 
@@ -331,45 +337,47 @@ const forgotpasspost = async (req, res) => {
     console.error(error);
     // Handle any errors that occurred during the database query
     res.status(500).send("Internal server error");
-    console.log("nooop")
+
   }
 
 }
 
 
 
-const newpassotp = (req, res) => {
+const newPassOtp = (req, res) => {
   try {
-    console.log("running5")
-    otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
-    console.log(otp)
-    const mailOptions = {
-      from: "rahithkr3@gmail.com",
-      to: "rahithkr3@gmail.com",
-      subject: "Your OTP code",
-      text: `Your OTP code is:${otp}`
-    };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error('Error sending OTP:', error);
-      } else {
-        console.log('OTP sent:', info.response);
-        // Store the OTP and user's email in your database for verification
-      }
-    });
+    otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
+    sentOtp (otp)
+
+    // const mailOptions = {
+    //   from: "rahithkr3@gmail.com",
+    //   to: "rahithkr3@gmail.com",
+    //   subject: "Your OTP code",
+    //   text: `Your OTP code is:${otp}`
+    // };
+
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     console.error('Error sending OTP:', error);
+    //   } else {
+    //     console.log('OTP sent:', info.response);
+    //     // Store the OTP and user's email in your database for verification
+    //   }
+    // });
 
 
     res.redirect("/user/passotp")
 
   } catch (error) {
     console.error(error)
+    res.status(500).send("Internal server error");
   }
 }
 
 
 
-const reotp = (req, res) => {
+const reOtp = (req, res) => {
   res.render("user/otp");
 }
 
@@ -403,7 +411,7 @@ const repassotppost = async (req, res) => {
   catch (error) {
     console.error(error);
     // Handle any errors that occurred during the database query
-    console.log("thissss")
+
 
     res.status(500).send("Internal server error");
   }
@@ -430,12 +438,12 @@ const renewpasspost = async (req, res) => {
 
 
 const productpage = async (req, res) => {
-  console.log("runnig")
+
   const id = req.params.id;
-  console.log(id);
+
   const product = await productCollection.findOne({ _id: id });
   if (req.session.userId) {
-    console.log("jodi");
+
     res.render("user/productpage", { user, product })
   } else {
 
@@ -446,18 +454,10 @@ const productpage = async (req, res) => {
 
 
 
-// const productlist=async(req,res)=>{
-
-//     const product= await productCollection.find()
-
-//     res.render("user/productlist",{user,product})
-// }
-
-
-// productlistt with pagination
-
 const productlist = async (req, res) => {
 
+  const category = await categoryCollection.find();
+  const brand = await brandCollection.find();
 
   const productsPerPage = 4;
   const currentPage = parseInt(req.query.page) || 1;
@@ -474,7 +474,9 @@ const productlist = async (req, res) => {
   res.render('user/productlists', {
     product: paginatedProducts,
     currentPage: currentPage,
-    totalPages: totalPages
+    totalPages: totalPages,
+    category,
+    brand,
   });
 };
 
@@ -482,24 +484,6 @@ const productlist = async (req, res) => {
 
 
 
-//HOME
-// const home=async(req,res)=>{
-//     console.log("home: ", req.session.userId);
-
-// const user1 =req.session.userId
-//    const product = await productCollection.find()
-
-
-//        res.render('user/index',{user1,product})  
-
-
-
-// }
-
-
-
-
-// home with pagination
 
 
 const home = async (req, res) => {
@@ -507,7 +491,8 @@ const home = async (req, res) => {
   const user1 = req.session.userId
   const product = await productCollection.find();
   const banner = await bannerCollection.find();
-
+  const categorydata = await category.find()
+  const brand=await brandCollection.find()
 
 
   // Set up pagination data
@@ -523,7 +508,7 @@ const home = async (req, res) => {
     totalPages,
     currentPage: page,
     user1,
-    banner
+    banner, categorydata,brand
   });
 };
 
@@ -560,11 +545,14 @@ const profile = async (req, res) => {
     res.status(500).send("Internal Server Error"); // Handle the error appropriately
   }
 };
- 
+
 
 let addressData;
-const profileaddaddress = (req, res) => {
-  res.render("user/addaddress")
+const profileaddaddress = async (req, res) => {
+  const userId = req.session.userId;
+  const users = await userCollection.findOne({ _id: userId })
+
+  res.render("user/addaddress", { users })
 }
 
 const profileaddaddresspost = async (req, res) => {
@@ -590,53 +578,24 @@ const profileaddaddresspost = async (req, res) => {
 
   }
   catch (error) {
-    console.log("address data eroor")
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error"); // Handle the error appropriately
   }
 
 }
 
 const profileshowaddress = async (req, res) => {
   const userId = req.session.userId;
-  console.log("running one");
+
 
   const useraddress = await userCollection.findOne({ _id: userId })
   const userData = useraddress.address;
 
 
 
-  res.render("user/showaddress", { userData })
+
+  res.render("user/showaddress", { userData, useraddress })
 }
-
-// const profileshowaddresspost = async (req, res) => {
-
-
-//   try {
-//     const filter = { email: req.body.email }
-//     Newaddress = {
-//       address: [{
-
-//         fulladdress: req.body.fulladdress,
-//         street: req.body.street,
-//         city: req.body.city,
-//         state: req.body.state,
-//         pincode: req.body.pincode,
-//       }]
-//     }
-//     const options = { upsert: true };
-//     console.log(Newaddress)
-//     await userCollection.updateOne(filter, Newaddress, options)
-
-
-
-
-//     res.redirect("/user/profile");
-
-//   }
-//   catch (error) {
-//     console.log("address data eroor")
-//   }
-
-// }
 
 
 
@@ -713,26 +672,15 @@ const updateprofile = async (req, res) => {
 
 
 
-// const editaddress = async (req, res) => {
-
-//   const userId = req.session.userId;
-//   console.log("running one");
-
-//   const userDataa = await userCollection.findOne({ _id: userId })
-//   console.log("userData:", userDataa)
-
-//   res.render("user/edit_address", { userDataa })
-// }
-
 
 
 const profileaddresseditget = async (req, res) => {
 
   const userId = req.session.userId;
-  console.log("running one");
+
 
   const userDataa = await userCollection.findOne({ _id: userId })
-  console.log("userData:", userDataa)
+
 
   res.render("user/profileeditaddress", { userDataa })
 }
@@ -754,13 +702,14 @@ const profileaddressedit = async (req, res) => {
       }]
     }
     const options = { upsert: true };
-    console.log(addressDetails)
+
     await userCollection.updateOne(filterr, addressDetails, options)
     res.redirect("/user/profile/showaddress")
 
   }
   catch (error) {
-    console.log("address data eroor")
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error"); // Handle the error appropriately
   }
 
 }
@@ -800,40 +749,36 @@ const profileaddressdeletepost = async (req, res) => {
 
 
 
+
+
+
 const orderstatus = async (req, res) => {
-  console.log("========================================================");
-  // const address = req.session.address 
-  const userId = req.session.userId
-  const user = await userCollection.findOne({ _id: userId })
-  // let useraddress = user.address
-  // console.log(`this is the ad of user ${useraddress}`);
-  // console.log("user",user);
- 
+  try {
+    const userId = req.session.userId;
+    const user = await userCollection.findOne({ _id: userId });
 
-  // const orders = await userCollection.aggregate([{ $unwind: "$orders" }, {
-  //   $project: {
-  //     productName: "$orders.name",
-  //     category: "$orders.category",
-  //     quantity: "$orders.quantity",
-  //     price: "$orders.price",
-  //     image: "$orders.image",
-  //     address: "$orders.address"
-  //   }
+    const ITEM_PER_PAGE = 3;
+    const page = +req.query.page || 1;
 
-  // }])
-  // console.log('orderscsdfce',orders)
+    // Sort orders by date in descending order
+    user.orders.sort((a, b) => b.date - a.date);
 
-    
-   
+    const totalOrders = user.orders.length;
+    const totalPages = Math.ceil(totalOrders / ITEM_PER_PAGE);
+
+    // Use slice to get the orders for the current page
+    const orders = user.orders.slice((page - 1) * ITEM_PER_PAGE, page * ITEM_PER_PAGE);
+
+    res.render("user/orderstatus", { user, orders, currentPage: page, totalPages });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
 
 
-  // const order = user.orders;
-  // console.log("ordersssssssssssssssssss",order);
-  // console.log("eeeeeeeeeeeeeeeee",address);
-  res.render("user/orderstatus", { user }) 
 
 
-}
 
 
 const ordercancel = async (req, res) => {
@@ -847,18 +792,18 @@ const ordercancel = async (req, res) => {
   const price = canceledOrder.price
   const pname = canceledOrder.name
 
-  const wallettotal1=await userCollection.findOne({_id:userId},{wallet:1})
+  const wallettotal1 = await userCollection.findOne({ _id: userId }, { wallet: 1 })
   const wallettotal = wallettotal1.wallet.total
 
   const returnamount1 = price * canceledQuantities
-  const returnamount = wallettotal+returnamount1
+  const returnamount = wallettotal + returnamount1
 
   const status1 = 'refund'
 
   wallethistory = {
     productName: pname,
     amount: returnamount1,
-    status : status1
+    status: status1
   }
 
   await userCollection.findOneAndUpdate(
@@ -867,7 +812,7 @@ const ordercancel = async (req, res) => {
     { new: true }
   );
 
-  await userCollection.updateOne({_id:userId},{$set:{'wallet.total':returnamount}})
+  await userCollection.updateOne({ _id: userId }, { $set: { 'wallet.total': returnamount } })
 
 
 
@@ -875,26 +820,15 @@ const ordercancel = async (req, res) => {
 
 
 
-  console.log("dajyryukuiktuikiaaaaaaaa", canceledQuantities);
 
-  console.log("dajyryukuiktuikiaaaaaaaa", canceledProductIds);
-  console.log("id;", id)
+
+
   // const existingqty = user.orders.find((item) => item.orders._id ===id);
 
   const updatestatus = await userCollection.findOneAndUpdate({ "orders._id": id },
     { $set: { "orders.$.status": "cancelled" } },
     { new: true })
 
-  // const orderIdFind=await userCollection.findOne({"orders_.id":1})
-  //   console.log("orderiddddddddd");
-  // const orderqty=updatestatus.orders.map((order)=>{
-  //   return order.quantity
-  // })
-  // const productd=updatestatus.orders.map((order)=>{
-  //   return order.productId
-  // })
-  // const resultqty = parseInt(orderqty.join(''));
-  //   console.log("updatesttsus",orderqty,productd);
 
   if (canceledProductIds) {
     const product = await productCollection.findOne({ _id: canceledProductIds });
@@ -917,7 +851,7 @@ const removeproduct = async (req, res) => {
   const id = req.params.id;
 
 
-  console.log("id;", id)
+
   const updateStatus = await userCollection.findOneAndUpdate(
     { "cart.items._id": id }, // Match the item within the cart with the specified _id
     { $pull: { "cart.items": { _id: id } } }, // Remove the item from the cart.items array
@@ -931,40 +865,6 @@ const removeproduct = async (req, res) => {
 
 }
 
-// router.get("/cart/:id/:image",async(req,res)=> {
-//     try{
-
-
-//             const image = req.params.image
-//             const id=req.params.id;
-
-//             const product =await productCollection.findById(id)
-
-//             console.log(image);
-//             const productData={
-//                 name:product.name,
-//                 description:product.description,
-//                 image:image,
-//                 category:product.category,
-
-//                 productId:product._id,
-//                 price:product.price,
-//             }
-//             await userCollection.findOneAndUpdate({email:email},{$push:{"cart.items":productData}},{new:true})
-
-//             const user=await userCollection.find({email:email},{'cart.items':1})
-//             console.log(user);
-
-//             const cartItem=user.cart.items
-//             console.log(cartItem);
-
-//             res.render('user/cart',{cartItem})
-//     }catch(error){
-//         console.error(error.message)
-//         res.send('hii')
-//     }
-
-// })
 
 const cartid = async (req, res) => {
 
@@ -988,7 +888,7 @@ const cartid = async (req, res) => {
 
 
     }
-    console.log("productadata", productData);
+
     const existingCartItem = user.cart.items.find(item => item.productId.toString() === id);
     if (!existingCartItem) {
 
@@ -1011,30 +911,6 @@ const cartid = async (req, res) => {
 
 
 };
-// router.post("/productlist/search",async(req,res)=>{
-
-
-
-
-//     try {
-
-//         const search = req.body.search;
-
-//         if(search){
-//         }
-
-//         const product = await productCollection.find({name:search})
-
-
-//         res.redirect('/user/productlist', {product:product });
-
-
-//     } catch (error) {
-//         console.log(error.message);
-//     }
-// })
-
-
 
 
 
@@ -1058,21 +934,11 @@ const productedit = async (req, res) => {
   const resultqty = parseInt(cartQuantity.join(''));
 
 
-  console.log("cartqty", cartQuantity, resultqty);
-
-
-
-  console.log(cartid)
-  console.log(newQuantity)
-  console.log(productId)
-  console.log(userId)
-
-
   try {
     const stockqty = await productCollection.findOne({ _id: productId })
-    console.log(stockqty)
+
     let stockUpdate = stockqty.stock
-    console.log(stockUpdate);
+
     if (resultqty > newQuantity) {
       stockqty.stock += 1;
       await stockqty.save();
@@ -1163,7 +1029,7 @@ const cart = async (req, res) => {
 const checkout = async (req, res) => {
   const userId = req.session.userId;
   const coupons = await couponCollection.find()
-  console.log((coupons));
+
   const userData1 = await userCollection.findOne({ _id: userId })
 
   const userData = userData1.address
@@ -1207,10 +1073,10 @@ const checkoutaddaddress = async (req, res) => {
 const editaddress = async (req, res) => {
 
   const userId = req.session.userId;
-  console.log("running one");
+
 
   const userDataa = await userCollection.findOne({ _id: userId })
-  console.log("userData:", userDataa)
+
 
   res.render("user/edit_address", { userDataa })
 }
@@ -1233,14 +1099,16 @@ const editaddresspost = async (req, res) => {
       }]
     }
     const options = { upsert: true };
-    console.log(addressDataa)
+
     await userCollection.updateOne(filterr, addressDataa, options)
     res.redirect("/user/checkout")
 
   }
   catch (error) {
-    console.log("address data eroor")
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error"); // Handle the error appropriately
   }
+
 
 }
 
@@ -1279,28 +1147,20 @@ const addressdeletepost = async (req, res) => {
 // ---------------------------cod--------------------
 
 const confirmorder = async (req, res) => {
-  console.log("123");
+
+
+  const data = req.query.data
+
+  const parsedData = JSON.parse(data);
 
   const userId = req.session.userId;
   const address = req.query.address
   req.session.address = address ? address : null
   const addressObj = JSON.parse(address);
-  console.log('addres is', addressObj);
-  // console.log('id is:', item._id);
 
-
-  // Convert the object into an array of key-value pairs
-  // const keyValueArray = Object.entries(item);
-  // // Log each key-value pair
-  // keyValueArray.forEach(([key, value]) => {
-  //   console.log(_id,'id is');
-  //   console.log(`${key}: ${value}`);
-  // });
-  // console.log(address, 'addiebiwbwc');
   const payment = "cod"
 
-  console.log('Payment Method:', payment);
-  console.log('Address:', addressObj);
+
 
   try {
     // Fetch user data and cart dat
@@ -1314,35 +1174,42 @@ const confirmorder = async (req, res) => {
     const user = await userCollection.findOne({ _id: userId });
 
     if (user) {
-      // Update each cart item with the payment method
-      const updatedCartItems = user.cart.items.map(item => ({
-        ...item.toObject(), // ToObject() converts Mongoose Document to plain JS object
-        paymentmethod: paymentmethod,
-        address: [{
-          street: addressObj.street,
-          city: addressObj.city,
-          fulladdress: addressObj.fulladdress,
-          mobile: addressObj.mobile,
-          state: addressObj.state,
-          pincode: addressObj.pincode,
-          _id: addressObj._id
-        }]
-      }));
+
+      let orders = [];
+
+      for (const item of parsedData.cartItems) {
+        const orderItem = {
+          userId: userId,
+          quantity: item.quantity,
+          paymentmethod: paymentmethod,
+          price: item.price,
+          name: item.name,
+          image: item.image,
+          category: item.category,
+          address: [{
+            street: addressObj.street,
+            city: addressObj.city,
+            fulladdress: addressObj.fulladdress,
+            mobile: addressObj.mobile,
+            state: addressObj.state,
+            pincode: addressObj.pincode,
+            _id: addressObj._id
+          }]
+        };
+
+        orders.push(orderItem);
+      }
+
+
 
       // Update the user's cart items with the modified item data in the orders field
       await userCollection.updateOne(
         { _id: userId },
-        { $push: { orders: { $each: updatedCartItems } } }
+        { $push: { orders: { $each: orders } } }
       );
     } else {
       console.log('User not found');
     }
-
-    // Push cart data to the 'orders' array
-    // await userCollection.updateOne(
-    //   { _id: userId },
-    //   { $push: { orders: userData2.cart.items, userData3 } }
-    // );
 
     await userCollection.updateOne(
       { _id: userId },
@@ -1353,7 +1220,7 @@ const confirmorder = async (req, res) => {
 
   } catch (error) {
     console.error('Error updating user data:', error);
-    // Handle the error
+
   }
 
 };
@@ -1367,7 +1234,12 @@ const codThankyou = (req, res) => {
 // --------------------------wallet payment-----------------
 
 const walletPayment = async (req, res) => {
-  console.log("123");
+
+  const data = req.query.data
+
+
+  const parsedData = JSON.parse(data);
+
 
   const userId = req.session.userId;
   const address = req.query.address;
@@ -1400,35 +1272,43 @@ const walletPayment = async (req, res) => {
     const user = await userCollection.findOne({ _id: userId });
 
     if (user) {
-      // Update each cart item with the payment method
-      const updatedCartItems = user.cart.items.map(item => ({
-        ...item.toObject(), // ToObject() converts Mongoose Document to plain JS object
-        paymentmethod: paymentmethod,
-        address: [{
-          street: addressObj.street,
-          city: addressObj.city,
-          fulladdress: addressObj.fulladdress,
-          mobile: addressObj.mobile,
-          state: addressObj.state,
-          pincode: addressObj.pincode,
-          _id: addressObj._id
-        }]
-      }));
+      let orders = [];
+
+      for (const item of parsedData.cartItems) {
+        const orderItem = {
+          userId: userId,
+          quantity: item.quantity,
+          paymentmethod: paymentmethod,
+          price: item.price,
+          name: item.name,
+          image: item.image,
+          category: item.category,
+          address: [{
+            street: addressObj.street,
+            city: addressObj.city,
+            fulladdress: addressObj.fulladdress,
+            mobile: addressObj.mobile,
+            state: addressObj.state,
+            pincode: addressObj.pincode,
+            _id: addressObj._id
+          }]
+        };
+
+        orders.push(orderItem);
+      }
+
+
 
       // Update the user's cart items with the modified item data in the orders field
       await userCollection.updateOne(
         { _id: userId },
-        { $push: { orders: { $each: updatedCartItems } } }
+        { $push: { orders: { $each: orders } } }
       );
     } else {
       console.log('User not found');
     }
 
 
-    // await userCollection.updateOne(
-    //   { _id: userId },
-    //   { $push: { orders: userData2.cart.items, userData3 } }
-    // );
 
     await userCollection.updateOne(
       { _id: userId },
@@ -1441,7 +1321,7 @@ const walletPayment = async (req, res) => {
       return { productName, amount, status: status1 };
     });
 
-    console.log(wallethistory);
+
     // Update the user's wallethistory with the modified data
     await userCollection.updateOne(
       { _id: userId },
@@ -1449,21 +1329,6 @@ const walletPayment = async (req, res) => {
     );
 
 
-
-
-
-
-    // wallethistory = {
-    //   productName: pname,
-    //   amount: returnamount1,
-    //   status : status1
-    // }
-
-    // await userCollection.findOneAndUpdate(
-    //   { _id: user },
-    //   { $push: { 'wallet.wallethistory': wallethistory } },
-    //   { new: true }
-    // );
 
     const newwallettotal = wallettotal - cartTotal
 
@@ -1473,7 +1338,7 @@ const walletPayment = async (req, res) => {
 
   } catch (error) {
     console.error('Error updating user data:', error);
-    // Handle the error
+
   }
 }
 
@@ -1482,7 +1347,7 @@ const confirmorderget = async (req, res) => {
   const userId = req.session.userId;
   const address = req.body;
 
-  console.log('Address:', address);
+
   const userData3 = await userCollection.findOne({ _id: userId });
   const userData2 = await userCollection.findOne({ _id: userId }, { 'cart.items': 1, _id: 0 });
   res.render("user/confirmorder", { userData3, userData2 })
@@ -1493,13 +1358,14 @@ const confirmorderget = async (req, res) => {
 
 
 const razorpayOrder = async (req, res) => {
+
   try {
     const email = req.session.userId;
     const name = await userCollection.findOne({ email: email }, { _id: 0, name: 1 });
 
     const totalAmount1 = req.params.a;
     const totalAmount = totalAmount1.replace(/\s/g, '');
-    console.log(totalAmount);
+
 
     const options = {
       amount: totalAmount * 100,
@@ -1526,19 +1392,24 @@ const razorpayOrder = async (req, res) => {
 // payment done
 
 const paymentDone = async (req, res) => {
+  const data = req.query.data
+
+
+  const parsedData = JSON.parse(data);
+
   const { razorpay_payment_id } = req.body;
 
   const paymentDocument = await razorpay.payments.fetch(razorpay_payment_id);
 
   if (paymentDocument.status === 'captured') {
-    console.log("123");
+
 
     const userId = req.session.userId;
     const address = req.query.address;
 
     req.session.address = address ? address : null
     const addressObj = JSON.parse(address);
-    console.log('addres is1', addressObj);
+
 
     try {
       // Fetch user data and cart dat
@@ -1552,37 +1423,44 @@ const paymentDone = async (req, res) => {
       const user = await userCollection.findOne({ _id: userId });
 
       if (user) {
-        // Update each cart item with the payment method
-        const updatedCartItems = user.cart.items.map(item => ({
-          ...item.toObject(), // ToObject() converts Mongoose Document to plain JS object
-          paymentmethod: paymentmethod,
-          address: [{
-            street: addressObj.street,
-            city: addressObj.city,
-            fulladdress: addressObj.fulladdress,
-            mobile: addressObj.mobile,
-            state: addressObj.state,
-            pincode: addressObj.pincode,
-            _id: addressObj._id
-          }]
-        }));
 
-        console.log('qweerr',updatedCartItems.address);
+        let orders = [];
+
+        for (const item of parsedData.cartItems) {
+          const orderItem = {
+            userId: userId,
+            quantity: item.quantity,
+            paymentmethod: paymentmethod,
+            price: item.price,
+            name: item.name,
+            image: item.image,
+            category: item.category,
+            address: [{
+              street: addressObj.street,
+              city: addressObj.city,
+              fulladdress: addressObj.fulladdress,
+              mobile: addressObj.mobile,
+              state: addressObj.state,
+              pincode: addressObj.pincode,
+              _id: addressObj._id
+            }]
+          };
+
+          orders.push(orderItem);
+        }
+
+        console.log('bbbb', orders);
 
         // Update the user's cart items with the modified item data in the orders field
         await userCollection.updateOne(
           { _id: userId },
-          { $push: { orders: { $each: updatedCartItems } } }
+          { $push: { orders: { $each: orders } } }
         );
       } else {
         console.log('User not found');
       }
 
-      // Push cart data to the 'orders' array
-      // await userCollection.updateOne(
-      //   { _id: userId },
-      //   { $push: { orders: userData2.cart.items, userData3 } }
-      // );
+
 
       await userCollection.updateOne(
         { _id: userId },
@@ -1593,7 +1471,7 @@ const paymentDone = async (req, res) => {
 
     } catch (error) {
       console.error('Error updating user data:', error);
-      // Handle the error
+
     }
   } else {
     res.send('Payment failed');
@@ -1663,9 +1541,12 @@ const verifyCoupon = async (req, res) => {
 
 const wallet = async (req, res) => {
   const userId = req.session.userId
+  const user = await userCollection.findOne({ _id: userId }, { name: 1, email: 1 });
+  const userdata = user.name;
+
   const walletdata = await userCollection.findOne({ _id: userId }, { wallet: 1 })
-  console.log(walletdata);
-  res.render("user/wallet", { user, walletdata })
+
+  res.render("user/wallet", { user, walletdata, userdata })
 }
 
 const returnorder = async (req, res) => {
@@ -1673,7 +1554,7 @@ const returnorder = async (req, res) => {
   const user = req.session.userId
   const { productName, price, quantity, paymentmethod, cartid } = req.query;
   const data = { productName, price, quantity, paymentmethod, user, cartid }
-  console.log("fddsfdsfffdfdfdf:", data);
+
 
   const status = 'return status pending'
 
@@ -1691,13 +1572,12 @@ const returnorder = async (req, res) => {
 // ------------------------coupen-------------------
 
 const verifycoupen = async (req, res) => {
-  console.log('cppp');
+
   try {
     const coupenvalue = req.query.coupenvalue
     const grandtotal = req.query.grandtotal
     const userId = req.session.userId
 
-    console.log(coupenvalue, grandtotal);
 
     let newtotal1
     let newtotal
@@ -1709,7 +1589,7 @@ const verifycoupen = async (req, res) => {
 
     const coupendb = await couponCollection.findOne({ code: coupenvalue });
 
-    console.log('mmm', coupendb);
+
 
     if (coupendb != null) {
       discount = coupendb.discount;
@@ -1738,7 +1618,7 @@ const verifycoupen = async (req, res) => {
       expirydate: coupendb.expirydate,
       discription: coupendb.discription
     }
-    console.log("coupondata", data)
+
 
 
 
@@ -1748,9 +1628,9 @@ const verifycoupen = async (req, res) => {
       'usedcoupens.coupenid': coupenid
     });
 
-    console.log("existcoupen:", coupenExists);
+
     if (coupenExists) {
-      console.log(11111);
+
       req.session.coupen = ''
       res.status(400).json({ message: 'invalid coupon', discount, grandtotal });
       return
@@ -1758,7 +1638,7 @@ const verifycoupen = async (req, res) => {
     }
 
     else if (grandtotal < minvalue) {
-      console.log(2222);
+
       res.status(400).json({ message: 'minimum 2000', discount, minvalue });
       return
 
@@ -1770,7 +1650,7 @@ const verifycoupen = async (req, res) => {
         { new: true }
 
       );
-      console.log(3333);
+
       req.session.coupen == coupenvalue
 
 
@@ -1807,12 +1687,14 @@ const wishlistget = async (req, res) => {
     const wishdata = await userCollection.findOne({ _id: userId }, { wishlist: 1, _id: 1 });
     const wishlistData = wishdata.wishlist;
 
-    console.log("wishdata:", wishlistData);
+
     res.render("user/wishlist", { wishlistData })
   }
   catch (error) {
-    console.log("wisherror")
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error"); // Handle the error appropriately
   }
+
 }
 
 
@@ -1854,7 +1736,7 @@ const wishlist = async (req, res) => {
   }
   catch (error) {
     console.error(error);
-    res.status(500).send('An error occurred');
+    res.status(500).send('An error ooccurred');
   }
 
 
@@ -1865,7 +1747,7 @@ const removewishlist = async (req, res) => {
   const id = req.params.id;
 
 
-  console.log("id;", id)
+
   const updateStatuss = await userCollection.findOneAndUpdate(
     { "wishlist.items._id": id }, // Match the item within the cart with the specified _id
     { $pull: { "wishlist.items": { _id: id } } }, // Remove the item from the cart.items array
@@ -1880,51 +1762,16 @@ const removewishlist = async (req, res) => {
 }
 
 
-// const invoice = async (req, res) => {
-//   const { userId } = req.body;
-
-//   try {
-    
-
-//     // Additional data for the invoice
-//     const invoiceData = {
-//       name: 'jjj',
-//       street: 'hhhh',
-//       city: 'city',
-//       pincode: 'pincode',
-//       state: 'state',
-//       invoiceNumber: "2021.0001",
-//       date: "12-12-2021",
-//       dueDate: "31-12-2021",
-//       bottomNotice: "Kindly pay your invoice within 15 days.",
-//       currency: "INR",
-//       products: [
-//         // ... your product details
-//       ],
-//     };
-
-//     // Generate the invoice
-//     easyinvoice.createInvoice(invoiceData, function (result) {
-//       res.setHeader('Content-Type', 'application/pdf');
-//       res.setHeader('Content-Disposition', `attachment; filename=${invoiceData.invoiceNumber}.pdf`);
-//       res.send(result.pdf);
-//     });
-//   } catch (error) {
-//     console.error('Error fetching data from MongoDB:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// };
-
 
 
 const invoice = async (req, res) => {
   try {
-    console.log('ppppp');
+
     const orderId = req.params.id;
-    console.log('uuuu',orderId);
+
     const email = req.session.userId;
 
-    console.log('ddd',email);
+
 
     const userdata = await userCollection.findOne({ _id: email, });
 
@@ -1933,18 +1780,18 @@ const invoice = async (req, res) => {
     }
 
     const order = userdata.orders.find((order) => order._id == orderId);
-    console.log('ooo',order);
+
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
 
-    console.log('llll',order);
+
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
     const address2 = order.address[0]
 
-    console.log('aaaa',address2);
+
 
     const username = userdata.name;
     const address = address2.fulladdress;
@@ -1985,8 +1832,8 @@ const invoice = async (req, res) => {
       },
       "information": {
         "number": "2021.0001",
-        "date": "16-11-2023",
-        "due-date": "26-11-2023"
+        "date": "21-11-2023",
+        "due-date": "30-11-2023"
       },
       "products": [
         {
@@ -2002,7 +1849,7 @@ const invoice = async (req, res) => {
       "bottomNotice": "Your invoice for the product",
 
     };
-    console.log('ggg',data);
+    console.log('ggg', data);
     res.json(data)
 
   } catch (error) {
@@ -2012,16 +1859,80 @@ const invoice = async (req, res) => {
 }
 
 
+const categorypage = async (req, res) => {
 
+  const categoryname = req.params.id;
+
+
+  try {
+
+    const categories = await categoryCollection.findOne({ category: categoryname });
+
+    if (!categories) {
+      console.log("Category not found");
+      return res.redirect("back");
+    }
+
+    let categoryProducts;
+
+    if (categories.list) {
+      categoryProducts = null;
+    } else {
+      // Find products in the specified category
+      categoryProducts = await productCollection.find({ category: categories });
+    }
+
+    // Render the productlists view and pass category and products as variables
+    res.render("user/productlists", { product: categories, products: categoryProducts });
+  } catch (error) {
+    console.error("Error in categorypage:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const brandpage = async (req, res) => {
+  const brandName = req.params.id;
+
+  try {
+    // Correct the variable name from brands to brand
+    const category = await categoryCollection.find();
+  const brand = await brandCollection.find();
+
+  const productsPerPage = 4;
+  const currentPage = parseInt(req.query.page) || 1;
+
+  const product = await productCollection.find();
+
+  const totalProducts = product.length;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+
+  const start = (currentPage - 1) * productsPerPage;
+  const end = start + productsPerPage;
+  const paginatedProducts = product.slice(start, end);
+
+    if (!brand || brand.length === 0) {
+      console.log("Brand not found");
+      return res.redirect("back");
+    }
+
+    // Render the productlists view and pass brand and products as variables
+    res.render("user/productlists", { product: paginatedProducts,
+      currentPage: currentPage,
+      totalPages: totalPages,category,brand});
+  } catch (error) {
+    console.error("Error in brandpage:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 
 const userRouter = {
-  login, signup, signuppost, newotp, getotp, passotp, otppost, loginpost, forgotpass, forgotpasspost, newpassotp,
-  reotp, repassotp, repassotppost, renewpass, renewpasspost, productpage, productlist, home, logout, profile, profileaddaddress, profileaddaddresspost, profileshowaddress,
+  login, signup, signupPost, newOtp, getOtp, passOtp, otpPost, loginPost, forgotPass, forgotPassPost, newPassOtp,
+  reOtp, repassotp, repassotppost, renewpass, renewpasspost, productpage, productlist, home, logout, profile, profileaddaddress, profileaddaddresspost, profileshowaddress,
   editprofile, editprofilepost, updateprofile, orderstatus, ordercancel, removeproduct, cartid, productedit,
   cart, checkout, editaddress, editaddresspost, addressdeletepost, checkoutaddaddress, confirmorder, confirmorderget, razorpayOrder, paymentDone, wallet,
   verifyCoupon, codThankyou, walletPayment, returnorder, verifycoupen, clearcoupen, wishlist, wishlistget, removewishlist, profileaddressedit,
-  profileaddresseditget, profileaddressdeletepost,invoice
+  profileaddresseditget, profileaddressdeletepost, invoice, categorypage,brandpage
 }
 
 module.exports = userRouter;

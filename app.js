@@ -15,6 +15,7 @@ const categoryCollection = require('./models/category')
 
 
 
+
 app.use((req,res,next)=>{
     res.header("cache-control","private,no-cache,no-store,must-revalidate");
     next();
@@ -52,22 +53,6 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 
 
-// app.get("/",(req,res)=>{
-//     // if(req,session,user){
-//     //     user=req.session.user
-//     // }
-//     const user=req.session.user
-//     if(user){
-//         console.log('user');
-//         console.log(user);
-//         // const user=req.session.user
-//         res.render("user/index",{user})
-//     }else{
-//         console.log("nouser");
-//         const user=false
-//        res.render('user/index',{user})
-//     }  
-// })
 
 app.post('/admin/sales-data', async (req, res) => {
     try {
@@ -146,6 +131,64 @@ app.post('/admin/sales-data', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
+
+
+
+
+
+  app.post('/admin/saleweekly', async (req, res) => {
+    try {
+        const pipeline = [
+            {
+                $unwind: '$orders',
+            },
+            {
+                $project: {
+                    week: { $isoWeek: '$orders.date' },
+                    year: { $isoWeekYear: '$orders.date' },
+                },
+            },
+            {
+                $group: {
+                    _id: { week: '$week', year: '$year' },
+                    ordersCount: { $sum: 1 },
+                },
+            },
+        ];
+
+        const result = await userCollection.aggregate(pipeline);
+
+        // Ensure data for all weeks from the start week to the current week
+        const currentYear = new Date().getFullYear();
+        const startYear = 2023; // Change this to the desired start year
+
+        const finalResult = Array.from(
+            { length: (currentYear - startYear + 1) * 52 }, // Assuming 52 weeks in a year
+            (_, i) => {
+                const weekData = result.find(
+                    (item) => item._id.week === (i % 52) + 1 && item._id.year === startYear + Math.floor(i / 52)
+                );
+                return {
+                    week: (i % 52) + 1,
+                    year: startYear + Math.floor(i / 52),
+                    ordersCount: weekData ? weekData.ordersCount : 0,
+                };
+            }
+        );
+
+        res.json(finalResult);
+    } catch (error) {
+        console.error('Error fetching weekly data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
+
+
+
 
 
 

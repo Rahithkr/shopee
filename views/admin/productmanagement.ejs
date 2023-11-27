@@ -21,14 +21,44 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="/assets/images/favicon.png" />
+
+
+
+
+<!-- Include jQuery (required for Cropper.js) -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Cropper.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.js"></script>
+
+
+
+
+<!-- <style>
+  #image-preview-container {
+      width: 300px; /* Set the width of the container */
+      height: 300px; /* Set the height of the container */
+      overflow: hidden; /* Ensure that the container doesn't overflow */
+      margin-top: 10px; /* Optional margin for spacing */
+  }
+
+  #image-preview {
+      width: 100%; /* Make the image fill the container width */
+      height: auto; /* Maintain the aspect ratio of the image */
+      display: block; /* Remove extra space below the image */
+  }
+</style> -->
+
+
   </head>
   <body>
     <div class="container-scroller">
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <a class="sidebar-brand brand-logo" href="index.html"><img src="/assets/images/logo.svg" alt="logo" /></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
+          
+          <h3 class="text text-primary">e_Shopee</h3>
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -107,6 +137,38 @@
             <i class="mdi mdi-table-large"></i>
           </span>
           <span class="menu-title">User Management</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/bannermanagement">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">ADD Banner</span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/bannerlist">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">Banner List </span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/addbrand">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">ADD Brands </span>
+        </a>
+      </li>
+      <li class="nav-item menu-items">
+        <a class="nav-link" href="/admin/brandlist">
+          <span class="menu-icon">
+            <i class="mdi mdi-table-large"></i>
+          </span>
+          <span class="menu-title">Brands list </span>
         </a>
       </li>
           <!-- <li class="nav-item menu-items">
@@ -450,7 +512,7 @@
                                               <div class="form-group">
                                                 <label for="productname">Product Description:</label>
                                                 <textarea type="text" name="description"  class="form-control" id="productname"
-                                                    placeholder="Enter Product Name"></textarea>
+                                                    placeholder="Enter Product Name" row ="3"></textarea>
                                                 <div class="invalid-feedback">Product Name Can't Be Empty</div>
                                             </div>
 
@@ -460,6 +522,12 @@
                                                   placeholder="Enter Product Name">
                                               <div class="invalid-feedback">Product Name Can't Be Empty</div>
                                           </div>
+                                          <div class="form-group">
+                                            <label for="pname">Product Brand:</label>
+                                            <input type="text" name="brand" class="form-control" id="ptname"
+                                                placeholder="Enter Product Name">
+                                            <div class="invalid-feedback">Product Name Can't Be Empty</div>
+                                        </div>
                                           
                                           <div class="form-group">
                                             <label for="productname">Product stocks:</label>
@@ -471,12 +539,23 @@
                                               
                                               <p>Product Image:</p>
                                               <div class="custom-file">
-      
+
+                                              
+                                                <!-- <input type="file" name="image[]" multiple accept="image/*" class="custom-file-input" id="productimage" required> -->
+
                                                   <input type="file" name="image" multiple accept="image/*" class="custom-file-input" id="productimage" required>
                                                   <label class="custom-file-label" for="productimage">Choose
                                                       file...</label>
+                                                 
                                                   <!-- <div class="invalid-feedback">File Format Not Supported</div> -->
                                               </div>
+                                              <div id="image-preview-container">
+                                                <!-- <img id="image-preview" class="img-preview" alt="Preview"> -->
+                                                <div id="image-preview-container" class="image-preview-container">
+                                                  <!-- Image previews will be dynamically added here -->
+                                              </div>
+                                              
+                                            </div>
                                               <button class="btn btn-dark mt-5 mx-auto d-block" type="submit">Add
                                                   Product</button>
                                           </form>
@@ -489,8 +568,283 @@
               </div>
           </section>
        
+          <script>
+            $(document).ready(function () {
+                // Initialize Cropper for each image input
+                $('input[name="image"]').change(function (event) {
+                    var files = event.target.files;
+        
+                    if (files && files.length > 0) {
+                        var container = $('#image-preview-container');
+        
+                        for (var i = 0; i < files.length; i++) {
+                            var reader = new FileReader();
+                            var image = new Image();
+                            var cropper;
+        
+                            reader.onload = (function (img) {
+                                return function (e) {
+                                    img.src = e.target.result;
+        
+                                    // Create a new image preview container
+                                    var previewContainer = $('<div class="image-preview"></div>');
+                                    previewContainer.append(img);
+        
+                                    // Add a delete button to the preview container
+                                    var deleteButton = $('<button class="btn btn-danger delete-image-btn">Delete</button>');
+                                    previewContainer.append(deleteButton);
+        
+                                    // Append the new container to the main container
+                                    container.append(previewContainer);
+        
+                                    // Initialize Cropper
+                                    cropper = new Cropper(img, {
+                                        aspectRatio: 1, // Adjust the aspect ratio as needed
+                                        viewMode: 2,
+                                        background: false,
+                                        ready: function () {
+                                            // Do something when ready
+                                        },
+                                    });
+        
+                                    // Handle delete button click
+                                    deleteButton.on('click', function () {
+                                        // Remove the preview container
+                                        previewContainer.remove();
+                                    });
+        
+                                    // Handle crop button click
+                                    img.addEventListener('click', function () {
+                                        var croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
+        
+                                        // Create a hidden input for each cropped image data
+                                        var hiddenInput = $('<input>')
+                                            .attr('type', 'hidden')
+                                            .attr('name', 'croppedImageData[]')
+                                            .val(croppedDataUrl);
+        
+                                        // Append the hidden input to the form
+                                        $('form').append(hiddenInput);
+                                    });
+                                };
+                            })(image);
+        
+                            reader.readAsDataURL(files[i]);
+                        }
+                    }
+                });
+            });
+        </script>
+        
+        
+<!-- 
+          <script>
+            $(document).ready(function () {
+                // Initialize Cropper for each image input
+                $('input[name="image"]').change(function (event) {
+                    var files = event.target.files;
+        
+                    if (files && files.length > 0) {
+                        var container = $('#image-preview-container');
+        
+                        for (var i = 0; i < files.length; i++) {
+                            var reader = new FileReader();
+                            var image = new Image();
+                            var cropper;
+        
+                            reader.onload = (function (img) {
+                                return function (e) {
+                                    img.src = e.target.result;
+        
+                                    // Create a new image preview container
+                                    var previewContainer = $('<div class="image-preview"></div>');
+                                    previewContainer.append(img);
+        
+                                    // Append the new container to the main container
+                                    container.append(previewContainer);
+        
+                                    // Initialize Cropper
+                                    cropper = new Cropper(img, {
+                                        aspectRatio: 1, // Adjust the aspect ratio as needed
+                                        viewMode: 2,
+                                        background: false,
+                                        ready: function () {
+                                            // Do something when ready
+                                        },
+                                    });
+        
+                                    // Handle crop button click
+                                    img.addEventListener('click', function () {
+                                        var croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
+        
+                                        // Create a hidden input for each cropped image data
+                                        var hiddenInput = $('<input>')
+                                            .attr('type', 'hidden')
+                                            .attr('name', 'croppedImageData[]')
+                                            .val(croppedDataUrl);
+                                        
+                                        // Append the hidden input to the form
+                                        $('form').append(hiddenInput);
+                                    });
+                                };
+                            })(image);
+        
+                            reader.readAsDataURL(files[i]);
+                        }
+                    }
+                });
+            });
+        </script>
+         -->
+
+
+        
+          <!-- <script>
+            $(document).ready(function () {
+                // Initialize Cropper for each image input
+                $('input[name="image"]').change(function (event) {
+                    var files = event.target.files;
+        
+                    if (files && files.length > 0) {
+                        var container = $('#image-preview-container');
+        
+                        for (var i = 0; i < files.length; i++) {
+                            var reader = new FileReader();
+                            var image = new Image();
+                            var cropper;
+        
+                            reader.onload = (function (img) {
+                                return function (e) {
+                                    img.src = e.target.result;
+        
+                                    // Create a new image preview container
+                                    var previewContainer = $('<div class="image-preview"></div>');
+                                    previewContainer.append(img);
+        
+                                    // Append the new container to the main container
+                                    container.append(previewContainer);
+        
+                                    // Initialize Cropper
+                                    cropper = new Cropper(img, {
+                                        aspectRatio: 1, // Adjust the aspect ratio as needed
+                                        viewMode: 2,
+                                        background: false,
+                                        ready: function () {
+                                            // Do something when ready
+                                        },
+                                    });
+                                };
+                            })(image);
+        
+                            reader.readAsDataURL(files[i]);
+                        }
+                    }
+                });
+            });
+        </script> -->
         
       
+
+
+          <!-- <script>
+            $(document).ready(function () {
+                // Initialize Cropper for each image input
+                $('input[name="image"]').change(function (event) {
+                    var files = event.target.files;
+        
+                    if (files && files.length > 0) {
+                        var container = $('#image-preview-container');
+                        container.empty(); // Clear previous previews
+        
+                        for (var i = 0; i < files.length; i++) {
+                            var reader = new FileReader();
+                            var image = new Image();
+                            var cropper;
+        
+                            reader.onload = (function (img) {
+                                return function (e) {
+                                    img.src = e.target.result;
+        
+                                    // Append the image to the container
+                                    container.append(img);
+        
+                                    // Initialize Cropper
+                                    cropper = new Cropper(img, {
+                                        aspectRatio: 1, // Adjust the aspect ratio as needed
+                                        viewMode: 2,
+                                        background: false,
+                                        ready: function () {
+                                            // Do something when ready
+                                        },
+                                    });
+                                };
+                            })(image);
+        
+                            reader.readAsDataURL(files[i]);
+                        }
+                    }
+                });
+            });
+        </script> -->
+        
+
+<!-- 
+          <script>
+            $(document).ready(function () {
+                // Initialize Cropper for image input
+                var image = document.getElementById('image-preview');
+                var cropper;
+        
+                $('#productimage').change(function (event) {
+                    var files = event.target.files;
+        
+                    if (files && files.length > 0) {
+                        var reader = new FileReader();
+        
+                        reader.onload = function (e) {
+                            // Destroy previous cropper instance
+                            if (cropper) {
+                                cropper.destroy();
+                            }
+        
+                            image.src = e.target.result;
+        
+                            // Initialize Cropper
+                            cropper = new Cropper(image, {
+                                aspectRatio: 1, // Adjust the aspect ratio as needed
+                                viewMode: 2,
+                                background: false,
+                                ready: function () {
+                                    // Do something when ready
+                                },
+                            });
+                        };
+        
+                        reader.readAsDataURL(files[0]);
+                    }
+                });
+        
+                // Handle crop button click
+                $('#crop-btn').click(function () {
+                    if (cropper) {
+                        // Get cropped data
+                        var croppedDataUrl = cropper.getCroppedCanvas().toDataURL();
+        
+                        // Set the cropped data to the hidden input field
+                        $('#croppedImageData').val(croppedDataUrl);
+        
+                        // You can also send the cropped data to the server using AJAX if needed
+                        // $.post('/upload-cropped-image', { image: croppedDataUrl }, function(response) {
+                        //     console.log(response);
+                        // });
+                    }
+                });
+            });
+        </script>
+         -->
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+
           <!-- partial -->
         </div>
         <!-- main-panel ends -->
