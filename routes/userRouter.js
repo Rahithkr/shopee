@@ -3,7 +3,7 @@ const path = require('path')
 const router = express.Router()
 
 
-const userRouter = require('../controller/userController')
+const userRouter = require('../controller/usercontroller')
 const profileController = require("../controller/profileController")
 const cartController = require("../controller/cartController")
 const checkoutController = require("../controller/checkoutController")
