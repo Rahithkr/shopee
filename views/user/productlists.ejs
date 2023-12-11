@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e_Shopee</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
-<link rel="stylesheet" href="/styles/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" />
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e_Shopee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" />
+  <link href="path-to-bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    
-    <!--Main Navigation-->
-<header>
+
+  <!--Main Navigation-->
+  <header>
     <!-- Jumbotron -->
     <div class="p-3 text-center bg-white border-bottom">
       <div class="container">
         <div class="row gy-3">
           <!-- Left elements -->
           <div class="col-lg-2 col-sm-4 col-4">
-            
+
             <h3 class="text text-primary">e_Shopee</h3>
           </div>
           <!-- Left elements -->
-  
+
           <!-- Center elements -->
           <div class="order-lg-last col-lg-5 col-sm-8 col-8">
             <div class="d-flex float-end">
@@ -44,7 +50,7 @@
             </div>
           </div>
           <!-- Center elements -->
-  
+
           <!-- Right elements -->
           <div class="col-lg-5 col-md-12 col-12">
             <div class="input-group float-center">
@@ -53,10 +59,10 @@
                 <label class="form-label" for="form1">Search</label>
               </div>
               <form action="" method="post">
-              <button type="button" class="btn btn-primary shadow-0">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
+                <button type="button" class="btn btn-primary shadow-0">
+                  <i class="fas fa-search"></i>
+                </button>
+              </form>
             </div>
           </div>
           <!-- Right elements -->
@@ -64,7 +70,7 @@
       </div>
     </div>
     <!-- Jumbotron -->
-  
+
     <!-- Heading -->
     <div class="bg-black mb-4">
       <div class="container py-4">
@@ -84,7 +90,7 @@
     </div>
     <!-- Heading -->
   </header>
-  
+
   <!-- sidebar + content -->
   <section class="">
     <div class="container">
@@ -92,72 +98,70 @@
         <!-- sidebar -->
         <div class="col-lg-3">
           <!-- Toggle button -->
-          <button
-                  class="btn btn-outline-secondary mb-3 w-100 d-lg-none"
-                  type="button"
-                  data-mdb-toggle="collapse"
-                  data-mdb-target="#navbarSupportedContent"
-                  aria-controls="navbarSupportedContent"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                  >
+          <button class="btn btn-outline-secondary mb-3 w-100 d-lg-none" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
             <span>Show filter</span>
           </button>
+
           <!-- Collapsible wrapper -->
+
           <div class="collapse card d-lg-block mb-5" id="navbarSupportedContent">
+
             <div class="accordion" id="accordionPanelsStayOpenExample">
               <div class="accordion-item">
-          
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                <h6>Category Filter</h6>
+                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+                  aria-labelledby="headingOne">
                   <select id="categoryFilter" class="form-select">
-                    <option value="all">All </option>
-                    <% category.forEach(elements => { %>
-                      <option value="<%= elements.category %>"><%= elements.category %></option>
-                    <% }); %>
-                   </select>
-                   
-                   
+                    <option value="all">All Categories</option>
+                    <% category.forEach(elements=> { %>
+                      <option value="<%= elements.category %>">
+                        <%= elements.category %>
+                      </option>
+                      <% }); %>
+                  </select>
+
+
 
 
                 </div>
-
+                <h6>Brand Filter</h6>
                 <select id="brandFilter" class="form-select">
-                  <option value="all">All </option>
-                  <% brand.forEach(element => { %>
-                    <option value="<%= element.brand %>"><%= element.brand %></option>
-                  <% }); %>
+                  <option value="all">All Brands </option>
+                  <% brand.forEach(element=> { %>
+                    <option value="<%= element.brand %>">
+                      <%= element.brand %>
+                    </option>
+                    <% }); %>
                 </select>
-                
-                  
-            
-           
-                
+
+
+
+
+
               </div>
-           
-             
 
 
-              
+
+
+
               <div class="accordion-item">
                 <select id="sortFilter">
                   <option value="default">Default</option>
                   <option value="priceLowToHigh">Price: Low to High</option>
                   <option value="priceHighToLow">Price: High to Low</option>
                 </select>
-                
+
                 <h2 class="accordion-header" id="headingThree">
-                  <button
-                          class="accordion-button text-dark bg-light"
-                          type="button"
-                          data-mdb-toggle="collapse"
-                          data-mdb-target="#panelsStayOpen-collapseThree"
-                          aria-expanded="false"
-                          aria-controls="panelsStayOpen-collapseThree"
-                          >
+                  <button class="accordion-button text-dark bg-light" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+                    aria-controls="panelsStayOpen-collapseThree">
                     Price
                   </button>
                 </h2>
-                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree">
+                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
+                  aria-labelledby="headingThree">
                   <div class="accordion-body">
                     <!-- <div class="range">
                       <input type="range" class="form-range" id="customRange1" />
@@ -181,12 +185,12 @@
                           <label class="form-label" for="typeNumberMax">&#8377; 200000</label>
                         </div>
                       </div>
-                      
 
 
 
 
-                
+
+
 
 
 
@@ -196,106 +200,115 @@
                   </div>
                 </div>
               </div>
-  
-             
+
+
             </div>
           </div>
         </div>
         <!-- sidebar -->
         <!-- content -->
         <div class="col-lg-9">
-         
+
           <div class="text-center">
             <div class="row">
-              <% product.forEach(product => { %>
-                
-              <!-- <div class="col-lg-4 col-md-6 mb-4"> -->
-                <div class="col-lg-4 col-md-6 mb-4  <%= product.brand %>  <%= product.category %>"  id="<%= product._id %> " data-price="<%= product.price %>">
+              <% product.forEach(product=> { %>
 
-                <div class="card">
-                  <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                    data-mdb-ripple-color="light">
-                    <img src="/images/img/<%= product.image[0] %>"
-                      class="w-100" />
-                    <a href="#!">
-                      <div class="mask">
-                        <!-- <div class="d-flex justify-content-start align-items-end h-100">
+                <!-- <div class="col-lg-4 col-md-6 mb-4"> -->
+                <div class="col-lg-4 col-md-6 mb-4  <%= product.brand %>  <%= product.category %>"
+                  id="<%= product._id %> " data-price="<%= product.price %>">
+
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="/images/img/<%= product.image[0] %>" class="w-100" />
+                      <a href="/user/productpage/<%= product._id %>">
+                        <div class="mask">
+                          <!-- <div class="d-flex justify-content-start align-items-end h-100">
                           <h5><span class="badge bg-dark ms-2">NEW</span></h5>
                         </div> -->
-                      </div>
-                      <div class="hover-overlay">
-                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                      </div>
-                    </a>
-                  </div>
-                  <div class="card-body">
-                    <h6 class="card-title mb-2"><%= product.brand %></h6>
-                    <a href="/user/productpage/<%= product._id %>" class="text-reset">
-                      <h4 class="card-title mb-2"><%= product.name %></h4>
-                    </a>
-                   
-                    <h6 class="card-title mb-2"><%= product.category %></h6>
-                    <a href="" class="text-reset ">
-                      
-                      <!-- <p>Shirt</p> -->
-                    </a>
-                    <h3 class="mb-3 price">&#8377; <%= product.price %></h3>
-                    <a href="#!" class="btn btn-warning shadow-0 me-1">Buy Now</a>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <h6 class="card-title mb-2">
+                        <%= product.brand %>
+                      </h6>
+                      <a href="/user/productpage/<%= product._id %>" class="text-reset">
+                        <h4 class="card-title mb-2">
+                          <%= product.name %>
+                        </h4>
+                      </a>
+
+                      <h6 class="card-title mb-2">
+                        <%= product.category %>
+                      </h6>
+                      <a href="" class="text-reset ">
+
+                        <!-- <p>Shirt</p> -->
+                      </a>
+                      <h3 class="mb-3 price">&#8377; <%= product.price %>
+                      </h3>
+                      <a href="#!" class="btn btn-warning shadow-0 me-1">Buy Now</a>
                       <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
                       <!-- <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a> -->
-                    
+
+                    </div>
                   </div>
                 </div>
-              </div>
-  
-              <% }); %>
-  
-        
 
-  
+                <% }); %>
+
+
+
+
 
 
 
             </div>
-         
-         
-   
-           <hr />
-   
-          <!-- Pagination -->
-         
-          <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-            <ul class="pagination">
+
+
+
+            <hr />
+
+            <!-- Pagination -->
+
+            <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+              <ul class="pagination">
                 <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
-                    <a class="page-link" href="?page=1" aria-label="First">
-                        <span aria-hidden="true">&laquo;&laquo;</span>
-                    </a>
+                  <a class="page-link" href="?page=1" aria-label="First">
+                    <span aria-hidden="true">&laquo;&laquo;</span>
+                  </a>
                 </li>
-                <% for (let i = 1; i <= totalPages; i++) { %>
-                    <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-                        <a class="page-link" href="?page=<%= i %>"><%= i %></a>
-                    </li>
-                <% } %>
-                <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-                    <a class="page-link" href="?page=<%= totalPages %>" aria-label="Last">
+                <% for (let i=1; i <=totalPages; i++) { %>
+                  <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                    <a class="page-link" href="?page=<%= i %>">
+                      <%= i %>
+                    </a>
+                  </li>
+                  <% } %>
+                    <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                      <a class="page-link" href="?page=<%= totalPages %>" aria-label="Last">
                         <span aria-hidden="true">&raquo;&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        
+                      </a>
+                    </li>
+              </ul>
+            </nav>
 
 
-          <!-- Pagination -->
+
+            <!-- Pagination -->
+          </div>
         </div>
       </div>
-    </div>            
   </section>
   <!-- sidebar + content -->
-  
+
   <!-- Footer -->
   <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
-        
+
 
 
     <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
@@ -324,7 +337,7 @@
             <li><a class="text-white-50" href="#">About us</a></li>
             <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
             <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
-          
+
           </ul>
         </div>
         <!-- Grid column -->
@@ -343,210 +356,189 @@
           </ul>
         </div>
 
-    <!--Call to action-->
-     
-      <!--/.Call to action-->
-    
-  
-      </section>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-  
- 
-  
+        <!--Call to action-->
+
+        <!--/.Call to action-->
+
+
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+
+
   </footer>
   <!-- Footer -->
 
 
-<script>
-  function searchProducts() {
-   const searchBar = document.getElementById('form1');
-   const searchString = searchBar.value.toLowerCase();
-   const products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
-   Array.from(products).forEach(function(product) {
-       const productName = product.getElementsByClassName('card-title')[0].innerText.toLowerCase();
-       if (productName.includes(searchString)) {
-           product.style.display = '';
-       } else {
-           product.style.display = 'none';
-       }
-   });
-}
 
-</script>
-
-
-<!-- Add this script at the end of your HTML file, after including jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-  $(document).ready(function () {
-    // Get the range input and apply button
-    var rangeInput = $("#customRange1");
-    var applyButton = $(".btn-white");
-
-    // Add a click event listener to the apply button
-    applyButton.click(function () {
-      // Get the min and max values from the input fields
-      var minPrice = $("#typeNumberMin").val();
-      var maxPrice = $("#typeNumberMax").val();
-
-      // Filter the products based on the price range
-      $(".card").each(function () {
-        var productPrice = parseInt($(this).find(".price").text().replace("₹", "").trim());
-        if (productPrice >= minPrice && productPrice <= maxPrice) {
-          $(this).show();
+  <script>
+    function searchProducts() {
+      const searchBar = document.getElementById('form1');
+      const searchString = searchBar.value.toLowerCase();
+      const products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
+      Array.from(products).forEach(function (product) {
+        const productName = product.getElementsByClassName('card-title mb-2')[1].innerText.toLowerCase();
+        // Use 'card-title mb-2' instead of 'card-title' to get the product name
+        if (productName.includes(searchString)) {
+          product.style.display = '';
         } else {
-          $(this).hide();
-        }
-      });
-    });
-  });
-</script>
-
-
-
-
-
-<script>
-  document.getElementById('categoryFilter').addEventListener('change', function() {
- var selectedCategory = this.value;
- filterProducts(selectedCategory);
-});
-
-</script>
-
-
-<script>
-  function filterProducts(category) {
- // Hide all products
- var products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
- for (var i = 0; i < products.length; i++) {
-   products[i].style.display = 'none';
- }
-
- // If the category is "all", show all products
- if (category === 'all') {
-   for (var i = 0; i < products.length; i++) {
-     products[i].style.display = 'block';
-   }
- } else {
-   // Show only the products that belong to the selected category
-   var categoryProducts = document.getElementsByClassName(category);
-   for (var i = 0; i < categoryProducts.length; i++) {
-     categoryProducts[i].style.display = 'block';
-   }
- }
-}
-
-</script>
-
-
-
-
-<!-- <script>
-  $('#categoryFilter').on('change', function () {
-    var selectedCategory = $(this).val();
-
-    // Show all products if "All" is selected
-    if (selectedCategory === 'all') {
-      $('.col-lg-4').show();
-    } else {
-      // Hide all products
-      $('.col-lg-4').hide();
-
-      // Show only the products with the selected category
-      $('.col-lg-4').each(function () {
-        var productCategory = $(this).find('.card-title.mb-2:eq(1)').text(); // Adjust the selector based on your HTML structure
-        if (productCategory === selectedCategory) {
-          $(this).show();
+          product.style.display = 'none';
         }
       });
     }
-  });
-</script> -->
+  </script>
 
 
-<script>
-  $(document).ready(function () {
-    $('#sortFilter').on('change', function () {
-      var selectedSort = $(this).val();
+  <!-- Add this script at the end of your HTML file, after including jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Get the range input and apply button
+      var rangeInput = $("#customRange1");
+      var applyButton = $(".btn-white");
 
-      // Get all product cards
-      var products = $('.col-lg-4');
+      // Add a click event listener to the apply button
+      applyButton.click(function () {
+        // Get the min and max values from the input fields
+        var minPrice = $("#typeNumberMin").val();
+        var maxPrice = $("#typeNumberMax").val();
 
-      // Sort based on the selected option
-      if (selectedSort === 'priceLowToHigh') {
-        products.sort(function (a, b) {
-          var priceA = parseFloat($(a).data('price'));
-          var priceB = parseFloat($(b).data('price'));
-          return priceA - priceB;
+        // Filter the products based on the price range
+        $(".card").each(function () {
+          var productPrice = parseInt($(this).find(".price").text().replace("₹", "").trim());
+          if (productPrice >= minPrice && productPrice <= maxPrice) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
         });
-      } else if (selectedSort === 'priceHighToLow') {
-        products.sort(function (a, b) {
-          var priceA = parseFloat($(a).data('price'));
-          var priceB = parseFloat($(b).data('price'));
-          return priceB - priceA;
-        });
-      } else {
-        // Default sorting or other options
-        // You can modify this part based on your needs
-        // For now, let's assume it's sorting by product ID
-        products.sort(function (a, b) {
-          var idA = $(a).attr('id');
-          var idB = $(b).attr('id');
-          return idA.localeCompare(idB);
-        });
+      });
+    });
+  </script>
+
+
+
+
+
+  <script>
+    document.getElementById('categoryFilter').addEventListener('change', function () {
+      var selectedCategory = this.value;
+      filterProducts(selectedCategory);
+    });
+
+  </script>
+
+
+  <script>
+    function filterProducts(category) {
+      // Hide all products
+      var products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
+      for (var i = 0; i < products.length; i++) {
+        products[i].style.display = 'none';
       }
 
-      // Clear existing products from the container
-      $('.row').empty();
+      // If the category is "all", show all products
+      if (category === 'all') {
+        for (var i = 0; i < products.length; i++) {
+          products[i].style.display = 'block';
+        }
+      } else {
+        // Show only the products that belong to the selected category
+        var categoryProducts = document.getElementsByClassName(category);
+        for (var i = 0; i < categoryProducts.length; i++) {
+          categoryProducts[i].style.display = 'block';
+        }
+      }
+    }
 
-      // Append sorted products back to the container
-      products.appendTo('.row');
+  </script>
+
+
+
+
+
+  <script>
+    $(document).ready(function () {
+      $('#sortFilter').on('change', function () {
+        var selectedSort = $(this).val();
+
+        // Get all product cards
+        var products = $('.col-lg-4');
+
+        // Sort based on the selected option
+        if (selectedSort === 'priceLowToHigh') {
+          products.sort(function (a, b) {
+            var priceA = parseFloat($(a).data('price'));
+            var priceB = parseFloat($(b).data('price'));
+            return priceA - priceB;
+          });
+        } else if (selectedSort === 'priceHighToLow') {
+          products.sort(function (a, b) {
+            var priceA = parseFloat($(a).data('price'));
+            var priceB = parseFloat($(b).data('price'));
+            return priceB - priceA;
+          });
+        } else {
+          // Default sorting or other options
+          // You can modify this part based on your needs
+          // For now, let's assume it's sorting by product ID
+          products.sort(function (a, b) {
+            var idA = $(a).attr('id');
+            var idB = $(b).attr('id');
+            return idA.localeCompare(idB);
+          });
+        }
+
+        // Clear existing products from the container
+        $('.row').empty();
+
+        // Append sorted products back to the container
+        products.appendTo('.row');
+      });
     });
-  });
-</script>
+  </script>
 
 
 
-<script>
-document.getElementById('brandFilter').addEventListener('change', function() {
- var selectedBrand = this.value;
- filterProducts(selectedBrand);
-});
+  <script>
+    document.getElementById('brandFilter').addEventListener('change', function () {
+      var selectedBrand = this.value;
+      filterProducts(selectedBrand);
+    });
 
 
-</script>
+  </script>
 
 
-<script>
- function filterProducts(brand) {
- // Hide all products
- var products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
- for (var i = 0; i < products.length; i++) {
-  products[i].style.display = 'none';
- }
+  <script>
+    function filterProducts(brand) {
+      // Hide all products
+      var products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
+      for (var i = 0; i < products.length; i++) {
+        products[i].style.display = 'none';
+      }
 
- // If the brand is "all", show all products
- if (brand === 'all') {
-  for (var i = 0; i < products.length; i++) {
-    products[i].style.display = 'block';
-  }
- } else {
-  // Show only the products that belong to the selected brand
-  var brandProducts = document.getElementsByClassName(brand);
-  for (var i = 0; i < brandProducts.length; i++) {
-    brandProducts[i].style.display = 'block';
-  }
- }
-}
+      // If the brand is "all", show all products
+      if (brand === 'all') {
+        for (var i = 0; i < products.length; i++) {
+          products[i].style.display = 'block';
+        }
+      } else {
+        // Show only the products that belong to the selected brand
+        var brandProducts = document.getElementsByClassName(brand);
+        for (var i = 0; i < brandProducts.length; i++) {
+          brandProducts[i].style.display = 'block';
+        }
+      }
+    }
 
-</script>
+  </script>
 
 
 
-<!-- <script>
+  <!-- <script>
   function filterProductsByBrand() {
     const selectedBrand = document.getElementById('brandFilter').value;
     const products = document.getElementsByClassName('col-lg-4 col-md-6 mb-4');
@@ -581,7 +573,7 @@ document.getElementById('brandFilter').addEventListener('change', function() {
 
 
 
-<!-- <script>
+  <!-- <script>
   $(document).ready(function () {
     $('#sortFilter').on('change', function () {
       var selectedSort = $(this).val();
@@ -631,12 +623,15 @@ document.getElementById('brandFilter').addEventListener('change', function() {
 
 
 
+  <script src="path-to-bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
+  <script src="search.js"></script>
 
-<script src="search.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
 </body>
+
 </html>

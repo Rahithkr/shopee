@@ -1,82 +1,87 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e_Shoppee</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e_Shoppee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
 
 </head>
+
 <body>
-    <section style="background-color: #eee;">
-        <div class="container py-5">
-          <div class="row">
-            <div class="col">
-       
-              <h2>My Account</h2>
+  <section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+
+          <h2>My Account</h2>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">
+                <%= user.name %>
+              </h5>
+              <p class="text-muted mb-1">
+                <%= user.email %>
+              </p>
+
+              <div class="d-flex justify-content-center mb-2">
+
+                <a href="/">
+                  <button type="button" class="btn btn-primary ms-1">HOME</button></a>
+              </div>
             </div>
           </div>
-      
-          <div class="row">
-            
-            <div class="col-lg-4">
-              <div class="card mb-4">
-                <div class="card-body text-center">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                    class="rounded-circle img-fluid" style="width: 150px;">
-                  <h5 class="my-3"> <%= user.name %> </h5>
-                  <p class="text-muted mb-1"> <%= user.email %></p>
-                 
-                  <div class="d-flex justify-content-center mb-2">
-             
-                    <a href="/"  >
-                    <button type="button" class="btn btn-primary ms-1">HOME</button></a>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-4 mb-lg-0">
-                <div class="card-body p-0">
-                  <ul class="list-group list-group-flush rounded-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fas fa-globe fa-lg text-warning"></i>
-                      <a href="/profile/editprofile/<%= user._id %>" class="text text-decoration-none">Edit Details</a>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fas fa-globe fa-lg text-warning"></i>
+                  <a href="/profile/editprofile/<%= user._id %>" class="text text-decoration-none">Edit Details</a>
 
-                    </li>
-                   
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                      <a href="/profile/addaddress"  class="text text-decoration-none" >Add Address</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                      <a href="/profile/showaddress"  class="text text-decoration-none" >Show Address</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                      <a href="/profile/orderstatus"  class="text text-decoration-none" >Order Status</a>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                      <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                      <a href="/profile/wallet"  class="text text-decoration-none" >Wallet</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  <a href="/profile/addaddress" class="text text-decoration-none">Add Address</a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                  <a href="/profile/showaddress" class="text text-decoration-none">Show Address</a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  <a href="/profile/orderstatus" class="text text-decoration-none">Order Status</a>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                  <a href="/profile/wallet" class="text text-decoration-none">Wallet</a>
+                </li>
+              </ul>
             </div>
-           
-            <div class="col-lg-8">
-               
+          </div>
+        </div>
+
+        <div class="col-lg-8">
 
 
 
 
-   
-    
-       
+
+
+
+
           <div class="card" style="border-radius: 10px;">
             <div class="d-flex justify-content-center mb-2">
 
@@ -86,11 +91,11 @@
 
 
 
-              
-              </div>
-        
-        
-          
+
+            </div>
+
+
+
 
             <div class="card-header px-4 py-5">
               <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #a8729a;">
@@ -100,9 +105,9 @@
 
 
             <% orders.slice().reverse().forEach(element=> { %>
-          
+
               <div class="card-body p-4">
-      
+
 
                 <div class="card shadow-0 border mb-4">
 
@@ -159,21 +164,21 @@
                             </p>
                             <%# console.log(typeof item.street) %>
 
-                            <span id="cityspan">
-                              <%= item.city %>
-                            </span>
-                            <span id="fulladdressspan">
-                              <%= item.fulladdress %>
-                            </span>
-                            <span id="mobilespan">
-                              <%= item.mobile %>
-                            </span>
-                            <span id="statespan">
-                              <%= item.state %>
-                            </span>
-                            <span id="pincodespan">
-                              <%= item.pincode %>
-                            </span>
+                              <span id="cityspan">
+                                <%= item.city %>
+                              </span>
+                              <span id="fulladdressspan">
+                                <%= item.fulladdress %>
+                              </span>
+                              <span id="mobilespan">
+                                <%= item.mobile %>
+                              </span>
+                              <span id="statespan">
+                                <%= item.state %>
+                              </span>
+                              <span id="pincodespan">
+                                <%= item.pincode %>
+                              </span>
                       </i><br>
                       <% }) %>
                     </p>
@@ -210,14 +215,16 @@
                           </div>
                           <div class="col-md-2">
                             <% if( element.status=="Delivered" ){ %>
-                              <a
-                                href="/user/return?productName=<%= element.name %>&price=<%= element.price %>&quantity=<%= element.quantity %>&paymentmethod=<%=element.paymentmethod %>&cartid=<%= element._id %>">Return</a>
+                              <a href="/user/return?productName=<%= element.name %>&price=<%= element.price %>&quantity=<%= element.quantity %>&paymentmethod=<%=element.paymentmethod %>&cartid=<%= element._id %>"
+                                data-delivery-time="<%= element.deliveryTime %>">Return</a>
                               <% } %>
 
                           </div>
                           <div class="col-md-3">
-                            <button class="btn btn-primary" style="width:150px; color: #ffffff; height: 50px; margin-top: 25px; " onclick="invoice('<%= element._id %>')">INVOICE</button>
-                           
+                            <button class="btn btn-primary"
+                              style="width:150px; color: #ffffff; height: 50px; margin-top: 25px; "
+                              onclick="invoice('<%= element._id %>')">INVOICE</button>
+
                           </div>
 
                         </div>
@@ -242,79 +249,106 @@
 
 
 
-           
-           
- 
+
+
+
 
 
 
           </div>
-    
 
 
 
-       
-        
-                 
 
-            </div>
-  
 
-           
 
-       
-          </div>
-        
+
+
         </div>
-        <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-          <ul class="pagination">
-            <% for (let j = 1; j <= totalPages; j++) { %>
-              <li class="page-item <%= j === currentPage ? 'active' : '' %>">
-                <a class="page-link" href="/profile/orderstatus?page=<%= j %>"><%= j %></a>
-              </li>
-            <% } %>
-          </ul>
-        </nav>
-      </section>
-   
-<div class="d-flex justify-content-center">
- 
-</div>
-
-
-      
 
 
 
-      <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
 
-      <script>
-      
+
+      </div>
+
+    </div>
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
+      <ul class="pagination">
+        <% for (let j=1; j <=totalPages; j++) { %>
+          <li class="page-item <%= j === currentPage ? 'active' : '' %>">
+            <a class="page-link" href="/profile/orderstatus?page=<%= j %>">
+              <%= j %>
+            </a>
+          </li>
+          <% } %>
+      </ul>
+    </nav>
+  </section>
+
+  <div class="d-flex justify-content-center">
+
+  </div>
+
+
+
+
+
+
+  <script src="https://unpkg.com/easyinvoice/dist/easyinvoice.min.js"></script>
+
+  <script>
+
     async function invoice(id) {
-    try {
-      const response = await fetch(`/user/invoice/${id}`, { method: 'get' });
-    
-      if (!response.ok) {
-        throw new Error(`Fetch request failed with status: ${response.status}`);
-      }
-    
-      const data = await response.json();
-      console.log('Received data:', data);
-    
-      easyinvoice.createInvoice(data, function (result) {
-        console.log('Generated invoice:', result);
-        easyinvoice.download('myInvoice.pdf', result.pdf);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    }
-    
-      </script>
+      try {
+        const response = await fetch(`/user/invoice/${id}`, { method: 'get' });
 
+        if (!response.ok) {
+          throw new Error(`Fetch request failed with status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Received data:', data);
+
+        easyinvoice.createInvoice(data, function (result) {
+          console.log('Generated invoice:', result);
+          easyinvoice.download('myInvoice.pdf', result.pdf);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get all elements with the "Return" link
+      var returnLinks = document.querySelectorAll('[data-delivery-time]');
+
+      // Iterate through each link
+      returnLinks.forEach(function (link) {
+        // Get the delivery time from the data attribute
+        var deliveryTime = new Date(link.getAttribute('data-delivery-time'));
+
+        // Calculate the time difference in milliseconds
+        var currentTime = new Date();
+        var timeDifference = currentTime - deliveryTime;
+
+        // Convert the time difference to days
+        var daysDifference = timeDifference / (1000 * 60 * 60 * 24);
+
+        // If more than 7 days have passed, hide the link
+        if (daysDifference > 7) {
+          link.style.display = 'none';
+        }
+      });
+    });
+  </script>
 
 
 
 
 </body>
+
 </html>

@@ -106,44 +106,44 @@ const sales = async (req, res) => {
 
 
 const revenue = async (req, res) => {
-    try {
-      const aggregateResult = await productCollection.aggregate([
-        {
-          $group: {
-            _id: '$category',
-            totalStock: { $sum: '$stock' }
-          }
+  try {
+    const aggregateResult = await productCollection.aggregate([
+      {
+        $group: {
+          _id: '$category',
+          totalStock: { $sum: '$stock' }
         }
-      ]);
-  
-      const productsByCategory = await Promise.all(
-        aggregateResult.map(async (result) => {
-          const category = await categoryCollection.findOne({ category: result._id });
-          return { category: category, totalStock: result.totalStock };
-        })
-      );
-  
-      const categories = [];
-      const totalStocks = [];
-  
-      productsByCategory.forEach((categoryProducts) => {
-        categories.push(categoryProducts.category.category);
-        totalStocks.push(categoryProducts.totalStock);
-      });
-  
-      const data = {
-        categories: categories,
-        totalStocks: totalStocks,
-      };
-  
-      console.log(data);
-      res.json(data);
-    } catch (error) {
-      console.error('Error calculating total stock: ' + error.message);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
-  };
-  
+      }
+    ]);
+
+    const productsByCategory = await Promise.all(
+      aggregateResult.map(async (result) => {
+        const category = await categoryCollection.findOne({ category: result._id });
+        return { category: category, totalStock: result.totalStock };
+      })
+    );
+
+    const categories = [];
+    const totalStocks = [];
+
+    productsByCategory.forEach((categoryProducts) => {
+      categories.push(categoryProducts.category.category);
+      totalStocks.push(categoryProducts.totalStock);
+    });
+
+    const data = {
+      categories: categories,
+      totalStocks: totalStocks,
+    };
+
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.error('Error calculating total stock: ' + error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 
 
 const saleyearly = async (req, res) => {
@@ -162,7 +162,7 @@ const saleyearly = async (req, res) => {
     {
       $group: {
         _id: { year: '$year' },
-        ordersCount: { $sum: 1 } 
+        ordersCount: { $sum: 1 }
       }
     }
   ];
@@ -171,7 +171,7 @@ const saleyearly = async (req, res) => {
     const result = await userCollection.aggregate(pipeline);
 
     result.forEach(data => {
-      const yearIndex = data._id.year - 2023; 
+      const yearIndex = data._id.year - 2023;
       orderCountsArray[yearIndex] = data.ordersCount;
     });
 

@@ -1,4 +1,4 @@
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 
 
 
@@ -14,20 +14,20 @@ const couponDetail = new mongoose.Schema({
     },
     minValue: {
         type: Number,
-        required:true
+        required: true
     },
     description: {
         type: String,
         required: true
     },
-    availability:{
-        type:Boolean,
-        default:true
+    availability: {
+        type: Boolean,
+        default: true
     }
 })
 
 
-const couponCollection=new mongoose.model("coupon",couponDetail)
+const couponCollection = new mongoose.model("coupon", couponDetail)
 
 
-module.exports=couponCollection
+module.exports = couponCollection

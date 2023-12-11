@@ -1,110 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>e_Shopee</title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="/assets/vendors/jvectormap/jquery-jvectormap.css">
-    <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
-    <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.carousel.min.css">
-    <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <!-- End layout styles -->
-    <link rel="shortcut icon" href="/assets/images/favicon.png" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <div class="container-scroller">
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-          <h3 class="text text-primary">e_Shopee</h3>
-        </div>
-        <ul class="nav">
-          <li class="nav-item profile">
-            <div class="profile-desc">
-              <div class="profile-pic">
-                <div class="count-indicator">
-                  <img class="img-xs rounded-circle " src="/assets/images/faces/face15.jpg" alt="">
-                  <span class="count bg-success"></span>
-                </div>
-                <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Admin</h5>
-                  
-                </div>
-                
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>e_Shopee</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="/assets/vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <link rel="stylesheet" href="/assets/vendors/jvectormap/jquery-jvectormap.css">
+  <link rel="stylesheet" href="/assets/vendors/flag-icon-css/css/flag-icon.min.css">
+  <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.carousel.min.css">
+  <link rel="stylesheet" href="/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <!-- endinject -->
+  <!-- Layout styles -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="/assets/images/favicon.png" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        <h3 class="text text-primary">e_Shopee</h3>
+      </div>
+      <ul class="nav">
+        <li class="nav-item profile">
+          <div class="profile-desc">
+            <div class="profile-pic">
+              <div class="count-indicator">
+                <img class="img-xs rounded-circle " src="/assets/images/faces/face15.jpg" alt="">
+                <span class="count bg-success"></span>
               </div>
- 
-              <div>
-               
-                
+              <div class="profile-name">
+                <h5 class="mb-0 font-weight-normal">Admin</h5>
+
               </div>
+
             </div>
-          </li>
-          
-          <li class="nav-item nav-category ">
-            <span class="nav-link ">Navigation</span>
-          </li>
-        
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/admindashboard">
-              <span class="menu-icon">
-                <i class="mdi mdi-speedometer"></i>
-              </span>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <!-- <li class="nav-item menu-items">
+
+            <div>
+
+
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item nav-category ">
+          <span class="nav-link ">Navigation</span>
+        </li>
+
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/admindashboard">
+            <span class="menu-icon">
+              <i class="mdi mdi-speedometer"></i>
+            </span>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <!-- <li class="nav-item menu-items">
             <a class="nav-link" data-toggle="collapse" href="/admin/categorymanagement" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-icon">
                 <i class="mdi mdi-laptop"></i>
               </span>
               <span class="menu-title">Catogory Management</span> -->
-              <!-- <i class="menu-arrow"></i> -->
-              <li class="nav-item menu-items dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
-                  <span class="menu-icon">
-                    <i class="mdi mdi-laptop"></i>
-                  </span>
-                  <span class="menu-title">Category Management</span>
-                </a>
-                <div class="dropdown-menu" id="category-dropdown">
-                  <!-- Dropdown items go here -->
-                  <a class="dropdown-item" href="/admin/addcategory">Add New Category</a>
-                  <a class="dropdown-item" href="/admin/categorylist">Category List</a>
-                  <!-- Add more dropdown items as needed -->
-                </div>
-              </li>
-              
-           
-          
-            <li class="nav-item menu-items dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
-                <span class="menu-icon">
-                  <i class="mdi mdi-laptop"></i>
-                </span>
-                <span class="menu-title">Product Management</span>
-              </a>
-              <div class="dropdown-menu" id="category-dropdown">
-                <!-- Dropdown items go here -->
-                <a class="dropdown-item" href="/admin/productmanagement">Add New Products</a>
-                <a class="dropdown-item" href="/admin/productdetails">Product List</a>
-                <!-- Add more dropdown items as needed -->
-              </div>
-            </li>
-          </li>
-          <!-- <li class="nav-item menu-items">
+        <!-- <i class="menu-arrow"></i> -->
+        <li class="nav-item menu-items dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+            aria-controls="category-dropdown">
+            <span class="menu-icon">
+              <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Category Management</span>
+          </a>
+          <div class="dropdown-menu" id="category-dropdown">
+            <!-- Dropdown items go here -->
+            <a class="dropdown-item" href="/admin/addcategory">Add New Category</a>
+            <a class="dropdown-item" href="/admin/categorylist">Category List</a>
+            <!-- Add more dropdown items as needed -->
+          </div>
+        </li>
+
+
+
+        <li class="nav-item menu-items dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+            aria-controls="category-dropdown">
+            <span class="menu-icon">
+              <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Product Management</span>
+          </a>
+          <div class="dropdown-menu" id="category-dropdown">
+            <!-- Dropdown items go here -->
+            <a class="dropdown-item" href="/admin/productmanagement">Add New Products</a>
+            <a class="dropdown-item" href="/admin/productdetails">Product List</a>
+            <!-- Add more dropdown items as needed -->
+          </div>
+        </li>
+        </li>
+        <!-- <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/productmanagement">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
@@ -112,48 +117,48 @@
               <span class="menu-title">Product Management</span>
             </a>
           </li> -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/usermanagement">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">User Management</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/bannermanagement">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">ADD Banner</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/bannerlist">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">Banner List </span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/addbrand">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">ADD Brands </span>
-            </a>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/brandlist">
-              <span class="menu-icon">
-                <i class="mdi mdi-table-large"></i>
-              </span>
-              <span class="menu-title">Brands list </span>
-            </a>
-          </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/usermanagement">
+            <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">User Management</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/bannermanagement">
+            <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">ADD Banner</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/bannerlist">
+            <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">Banner List </span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/addbrand">
+            <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">ADD Brands </span>
+          </a>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/brandlist">
+            <span class="menu-icon">
+              <i class="mdi mdi-table-large"></i>
+            </span>
+            <span class="menu-title">Brands list </span>
+          </a>
+        </li>
 
-          <!-- <li class="nav-item menu-items">
+        <!-- <li class="nav-item menu-items">
             <a class="nav-link" href="/admin/productdetails">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
@@ -161,665 +166,472 @@
               <span class="menu-title">Products list</span>
             </a>
           </li> -->
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/ordermanagement">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">order Management</span>
-            </a>
-          </li>
-          <li class="nav-item menu-items dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" aria-controls="category-dropdown">
-              <span class="menu-icon">
-                <i class="mdi mdi-laptop"></i>
-              </span>
-              <span class="menu-title">Coupon Management</span>
-            </a>
-            <div class="dropdown-menu" id="category-dropdown">
-              <!-- Dropdown items go here -->
-              <a class="dropdown-item" href="/admin/couponmanagement">Add New Coupon</a>
-              <a class="dropdown-item" href="/admin/couponlist">Coupon List</a>
-              <!-- Add more dropdown items as needed -->
-            </div>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/returnorder">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">Return Management</span>
-            </a>
-          </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/ordermanagement">
+            <span class="menu-icon">
+              <i class="mdi mdi-contacts"></i>
+            </span>
+            <span class="menu-title">order Management</span>
+          </a>
+        </li>
+        <li class="nav-item menu-items dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
+            aria-controls="category-dropdown">
+            <span class="menu-icon">
+              <i class="mdi mdi-laptop"></i>
+            </span>
+            <span class="menu-title">Coupon Management</span>
+          </a>
+          <div class="dropdown-menu" id="category-dropdown">
+            <!-- Dropdown items go here -->
+            <a class="dropdown-item" href="/admin/couponmanagement">Add New Coupon</a>
+            <a class="dropdown-item" href="/admin/couponlist">Coupon List</a>
+            <!-- Add more dropdown items as needed -->
+          </div>
+        </li>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/returnorder">
+            <span class="menu-icon">
+              <i class="mdi mdi-contacts"></i>
+            </span>
+            <span class="menu-title">Return Management</span>
+          </a>
+        </li>
 
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="/admin/report">
-              <span class="menu-icon">
-                <i class="mdi mdi-contacts"></i>
-              </span>
-              <span class="menu-title">Report</span>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item menu-items">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-              <span class="menu-icon">
-                <i class="mdi mdi-security"></i>
-              </span>
-              <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-              </ul>
+        <li class="nav-item menu-items">
+          <a class="nav-link" href="/admin/report">
+            <span class="menu-icon">
+              <i class="mdi mdi-contacts"></i>
+            </span>
+            <span class="menu-title">Report</span>
+          </a>
+        </li>
+
+
+
+
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_navbar.html -->
+      <nav class="navbar p-0 fixed-top d-flex flex-row">
+        <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+
+          <h3 class="text text-primary">e_Shopee</h3>
+        </div>
+        <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+          <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+            <span class="mdi mdi-menu"></span>
+          </button>
+          <ul class="navbar-nav w-100">
+            <li class="nav-item w-100">
+
+            </li>
+          </ul>
+
+          <a class="nav-link" href="/admin/logout">
+            <div class="navbar-profile">
+
+              <button type="submit" class="btn btn-danger">logout</button>
+
             </div>
-          </li>
-          <li class="nav-item menu-items">
-            <a class="nav-link" href="http://www.bootstrapdash.com/demo/corona-free/jquery/documentation/documentation.html">
-              <span class="menu-icon">
-                <i class="mdi mdi-file-document-box"></i>
-              </span>
-              <span class="menu-title">Documentation</span>
-            </a>
-          </li>
-        </ul>
+          </a>
+
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-format-line-spacing"></span>
+          </button>
+        </div>
       </nav>
       <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_navbar.html -->
-        <nav class="navbar p-0 fixed-top d-flex flex-row">
-          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/assets/images/logo-mini.svg" alt="logo" /></a>
-          </div>
-          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
-            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-              <span class="mdi mdi-menu"></span>
-            </button>
-            <ul class="navbar-nav w-100">
-              <li class="nav-item w-100">
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input type="text" class="form-control" placeholder="Search products">
-                </form>
-              </li>
-            </ul>
-            <ul class="navbar-nav navbar-nav-right">
-              <li class="nav-item dropdown d-none d-lg-block">
-                <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ Create New Project</a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
-                  <h6 class="p-3 mb-0">Projects</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-file-outline text-primary"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Software Development</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-web text-info"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">UI Development</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-layers text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Software Testing</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all projects</p>
-                </div>
-              </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
-                <a class="nav-link" href="#">
-                  <i class="mdi mdi-view-grid"></i>
-                </a>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                  <i class="mdi mdi-email"></i>
-                  <span class="count bg-success"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-                  <h6 class="p-3 mb-0">Messages</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="/assets/images/faces/face4.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Mark send you a message</p>
-                      <p class="text-muted mb-0"> 1 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="/assets/images/faces/face2.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Cregh send you a message</p>
-                      <p class="text-muted mb-0"> 15 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <img src="/assets/images/faces/face3.jpg" alt="image" class="rounded-circle profile-pic">
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject ellipsis mb-1">Profile picture updated</p>
-                      <p class="text-muted mb-0"> 18 Minutes ago </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">4 new messages</p>
-                </div>
-              </li>
-              <li class="nav-item dropdown border-left">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
-                  <i class="mdi mdi-bell"></i>
-                  <span class="count bg-danger"></span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-                  <h6 class="p-3 mb-0">Notifications</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-calendar text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Event today</p>
-                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-link-variant text-warning"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Launch Admin</p>
-                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">See all notifications</p>
-                </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
-                  <div class="navbar-profile">
-                    <img class="img-xs rounded-circle" src="/assets/images/faces/face15.jpg" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Henry Klein</p>
-                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
-                  </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                  <h6 class="p-3 mb-0">Profile</h6>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-settings text-success"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Settings</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
-                    <div class="preview-thumbnail">
-                      <div class="preview-icon bg-dark rounded-circle">
-                        <i class="mdi mdi-logout text-danger"></i>
-                      </div>
-                    </div>
-                    <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Log out</p>
-                    </div>
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
-                </div>
-              </li>
-            </ul>
-            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-              <span class="mdi mdi-format-line-spacing"></span>
-            </button>
-          </div>
-        </nav>
-        <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="row">       
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
               <div class="row g-4">
+                <div class="col-sm-6 col-xl-3">
+                  <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+
+                    <div class="ms-3">
+                      <h2 style="color: rgb(14, 10, 250);">
+                        <%= totalOrders %>
+                      </h2>
+                      <p class="mb-2">Total Sales</p>
+                    </div>
+
+                  </div>
+
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                  <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+
+                    <div class="ms-3">
+                      <h2 style="color: rgb(250, 166, 10);">
+                        <%= userCount %>
+                      </h2>
+                      <p class="mb-2">Total users</p>
+                    </div>
+                  </div>
                   <div class="col-sm-6 col-xl-3">
-                      <!-- <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                          <i class="fa fa-chart-line fa-3x text-primary"></i>
-                          <div class="ms-3">
-                              <p class="mb-2">Total Sale</p>
+
+                  </div>
+
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                  <div class="bg-dark rounded d-flex align-items-center justify-content-between p-4">
+
+                    <div class="ms-3">
+                      <h2 style="color: rgb(10, 250, 10);">₹<%= totalAmount %>
+                      </h2>
+                      <p class="mb-2">Total Revenue</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- Sale & Revenue End -->
+
+
+                <!-- Sales Chart Start -->
+                <div class="container-fluid pt-4 px-4">
+                  <div class="row g-4">
+                    <div class="container">
+
+                    </div>
+
+
+                    <div class="container-fluid pt-4 px-4">
+                      <div class="row g-4">
+                        <div class="container">
+                          <div class="btn-group">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                              aria-expanded="false">
+                              Select Chart
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#" onclick="showChart('myChart1')">Monthly Sales</a>
+                              </li>
+                              <li><a class="dropdown-item" href="#" onclick="showChart('yearlyChart')">Yearly Sales</a>
+                              </li>
+                              <li><a class="dropdown-item" href="#" onclick="showChart('weeklyChart')">Weekly Sales</a>
+                              </li>
+                            </ul>
                           </div>
-                      </div> -->
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                  </div>
-                  <div class="col-sm-6 col-xl-3">
-                  </div>
-              </div>
-          </div>
-          <!-- Sale & Revenue End -->
+                        </div>
 
-
-          <!-- Sales Chart Start -->
-          <div class="container-fluid pt-4 px-4">
-              <div class="row g-4">
-                <div class="container">
-                  <!-- <div class="btn-group">
-                      <button class="btn btn-primary" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sort</button>
-                      <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="fa fa-sort"></i>
-                      </button>
-                      <ul class="dropdown-menu">
-                          <li><button class="dropdown-item" type="button" id="highbtn" onclick="graphSales()">Month</button></li>
-                          <li><button class="dropdown-item" type="button" id="mibtn" onclick="graphSalesYear()">Year</button></li>
-                      </ul>
-                  </div> -->
-              </div>
-          
-              <!-- <div class="col-sm-12 col-xl-6">
-                  <div class="bg-light text-center rounded p-4">
-                      <div class="d-flex align-items-center justify-content-between mb-4">
-                          <h6 class="mb-0" style="color: black;">Monthly Sales</h6>
+                        <div hidden id="chartContainer" class="col-sm-12 col-xl-12">
+                          <!-- Chart container -->
+                          <div class="bg-light text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                              <h6 id="chartTitle" class="mb-0" style="color: black;">Monthly Sales</h6>
+                            </div>
+                            <canvas id="currentChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                          </div>
+                        </div>
                       </div>
-                      <canvas id="myChart1" width="60" height="40" style="width: 60%;"></canvas> <br>
-                  </div>
-              </div>
-              <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6">
-                  <div class="bg-light text-center rounded p-4">
-                      <div class="d-flex align-items-center justify-content-between mb-4">
-                          <h6 class="mb-0" style="color: black;">Yearly Sales</h6>
-                      </div>
-                      <canvas id="yearlyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
-                  </div>
-              </div> -->
-              <div class="container-fluid pt-4 px-4">
-                <div class="row g-4">
-                  <div class="container">
-                    <div class="btn-group">
-                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Select Chart
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="showChart('myChart1')">Monthly Sales</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="showChart('yearlyChart')">Yearly Sales</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="showChart('weeklyChart')">Weekly Sales</a></li>
-                      </ul>
                     </div>
-                  </div>
-              
-                  <div hidden id="chartContainer" class="col-sm-12 col-xl-12">
-                    <!-- Chart container -->
-                    <div class="bg-light text-center rounded p-4">
-                      <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 id="chartTitle" class="mb-0" style="color: black;">Monthly Sales</h6>
-                      </div>
-                      <canvas id="currentChart" width="60" height="40" style="width: 60%;"></canvas> <br>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="col-sm-12 col-xl-6" id="myChart1Container" style="display: none;">
-                <div class="bg-light text-center rounded p-4">
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0" style="color: black;">Monthly Sales</h6>
-                  </div>
-                  <canvas id="myChart1" width="60" height="40" style="width: 60%;"></canvas> <br>
-                </div>
-              </div>
-              
-              <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="yearlyChartContainer" style="display: none;">
-                <div class="bg-light text-center rounded p-4">
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0" style="color: black;">Yearly Sales</h6>
-                  </div>
-                  <canvas id="yearlyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
-                </div>
-              </div>
 
-              <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="weeklyChartContainer" style="display: none;">
-                <div class="bg-light text-center rounded p-4">
-                  <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0" style="color: black;">Weekly Sales</h6>
-                  </div>
-                  <canvas id="weeklyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
-                </div>
-              </div>
-              
-                  <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6">
+                    <div class="col-sm-12 col-xl-6" id="myChart1Container" style="display: none;">
                       <div class="bg-light text-center rounded p-4">
-                          <div class="d-flex align-items-center justify-content-between mb-4">
-                              <h6 class="mb-0">Stock</h6>
-                          </div>
-                          <canvas id="myChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                          <h6 class="mb-0" style="color: black;">Monthly Sales</h6>
+                        </div>
+                        <canvas id="myChart1" width="60" height="40" style="width: 60%;"></canvas> <br>
                       </div>
-              </div>
-          </div>
-          <!-- Sales Chart End -->
+                    </div>
+
+                    <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="yearlyChartContainer"
+                      style="display: none;">
+                      <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                          <h6 class="mb-0" style="color: black;">Yearly Sales</h6>
+                        </div>
+                        <canvas id="yearlyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                      </div>
+                    </div>
+
+                    <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6" id="weeklyChartContainer"
+                      style="display: none;">
+                      <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                          <h6 class="mb-0" style="color: black;">Weekly Sales</h6>
+                        </div>
+                        <canvas id="weeklyChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                      </div>
+                    </div>
+
+                    <div style="margin-bottom: 50px;" class="col-sm-12 col-xl-6">
+                      <div class="bg-light text-center rounded p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                          <h6 class="mb-0">Stock</h6>
+                        </div>
+                        <canvas id="myChart" width="60" height="40" style="width: 60%;"></canvas> <br>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Sales Chart End -->
 
 
+                </div>
               </div>
+
             </div>
-           
+            <!-- content-wrapper ends -->
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"></span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> <a href=""
+                    target="_blank"></a> </span>
+              </div>
+            </footer>
+            <!-- partial -->
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-            </div>
-          </footer>
-          <!-- partial -->
+          <!-- main-panel ends -->
         </div>
-        <!-- main-panel ends -->
+        <!-- page-body-wrapper ends -->
       </div>
-      <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
+      <!-- container-scroller -->
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
-  
-    <!-- Include Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
 
-<!-- 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>  -->
-               <!-- <script src="/js/admin/main.js"></script> -->
-
-<script>
-  showChart('myChart1');
-
-function showChart(chartType) {
-  document.getElementById('chartTitle').innerText = chartType === 'myChart1' ? 'Monthly Sales' : 'Yearly Sales';
-
-  // Hide both charts initially
-  document.getElementById('myChart1Container').style.display = chartType === 'myChart1' ? 'block' : 'none';
-  document.getElementById('yearlyChartContainer').style.display = chartType === 'yearlyChart' ? 'block' : 'none';
-  document.getElementById('weeklyChartContainer').style.display = chartType === 'weeklyChart' ? 'block' : 'none';
-}
-</script>
-
-               <script>
-                // Your Chart.js code for monthly sales chart
-                var ctx1 = document.getElementById('myChart1').getContext('2d');
-                let monthlyChart = new Chart(ctx1, {
-                  type: 'bar',
-                  data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    datasets: [{
-                      label: 'Total Sales',
-                      data: [],
-                      backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
-                      ],
-                      borderWidth: 1
-                    }]
-                  }
-                });
-              
-                // Your Chart.js code for yearly sales chart
-                var ctx2 = document.getElementById('yearlyChart').getContext('2d');
-                let yearlyChart = new Chart(ctx2, {
-                  type: 'bar',
-                  data: {
-                    labels: [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030],
-                    datasets: [{
-                      label: 'Total Sales',
-                      data: [],
-                      backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)'
-                      ],
-                      borderWidth: 1
-                    }]
-                  }
-                });
-              
-                // Your Chart.js code for stock chart
-                var ctx3 = document.getElementById('myChart').getContext('2d');
-let stockChart = new Chart(ctx3, {
-  type: 'bar',
-  data: {
-    labels: [], // Empty array to be filled with backend data
-    datasets: [{
-      label: 'Total Stocks',
-      data: [],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)'
-      ],
-      borderWidth: 1
-    }]
-  }
-});
+      <!-- Include Axios -->
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 
-async function graphSalesWeekly() {
-        try {
-            const response = await fetch('/admin/saleweekly', { method: 'POST' });
+      <script>
+        showChart('myChart1');
 
-            if (response.ok) {
-                console.log('Weekly data fetched successfully');
-                const data = await response.json();
+        function showChart(chartType) {
+          document.getElementById('chartTitle').innerText = chartType === 'myChart1' ? 'Monthly Sales' : 'Yearly Sales';
 
-                // Update the weeklyChart data and labels
-                weeklyChart.data.labels = data.map(item => item.week);
-                weeklyChart.data.datasets[0].data = data.map(item => item.ordersCount);
-
-                // Update the chart
-                weeklyChart.update();
-            }
-        } catch (error) {
-            console.error('Error fetching weekly data:', error);
+          // Hide both charts initially
+          document.getElementById('myChart1Container').style.display = chartType === 'myChart1' ? 'block' : 'none';
+          document.getElementById('yearlyChartContainer').style.display = chartType === 'yearlyChart' ? 'block' : 'none';
+          document.getElementById('weeklyChartContainer').style.display = chartType === 'weeklyChart' ? 'block' : 'none';
         }
-    }
+      </script>
 
-    const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
-        window.weeklyChart = new Chart(weeklyCtx, {
-            type: 'bar',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Weekly Sales',
-                    data: [],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+      <script>
+        // Your Chart.js code for monthly sales chart
+        var ctx1 = document.getElementById('myChart1').getContext('2d');
+        let monthlyChart = new Chart(ctx1, {
+          type: 'bar',
+          data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+              label: 'Total Sales',
+              data: [],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              borderWidth: 1
+            }]
+          }
+        });
+
+        // Your Chart.js code for yearly sales chart
+        var ctx2 = document.getElementById('yearlyChart').getContext('2d');
+        let yearlyChart = new Chart(ctx2, {
+          type: 'bar',
+          data: {
+            labels: [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030],
+            datasets: [{
+              label: 'Total Sales',
+              data: [],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              borderWidth: 1
+            }]
+          }
+        });
+
+        // Your Chart.js code for stock chart
+        var ctx3 = document.getElementById('myChart').getContext('2d');
+        let stockChart = new Chart(ctx3, {
+          type: 'bar',
+          data: {
+            labels: [], // Empty array to be filled with backend data
+            datasets: [{
+              label: 'Total Stocks',
+              data: [],
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              borderWidth: 1
+            }]
+          }
         });
 
 
 
-// Function to fetch and update stock data
-async function graphStocks() {
-  try {
-    const URL = "/admin/revenue"; // Update with your actual endpoint
-    const response = await fetch(URL, { method: "POST" });
+        async function graphSalesWeekly() {
+          try {
+            const response = await fetch('/admin/saleweekly', { method: 'POST' });
 
-    if (response.ok) {
-      console.log('Stock data fetched successfully');
-      const data = await response.json();
-      const labels = data.products;
-      const values = data.totalStocks;
+            if (response.ok) {
+              console.log('Weekly data fetched successfully');
+              const data = await response.json();
 
-      stockChart.data.labels = labels;
-      stockChart.data.datasets[0].data = values;
-      stockChart.update();
-    }
-  } catch (error) {
-    console.error('Error fetching stock data:', error);
-  }
-}
+              // Update the weeklyChart data and labels
+              weeklyChart.data.labels = data.map(item => item.week);
+              weeklyChart.data.datasets[0].data = data.map(item => item.ordersCount);
 
+              // Update the chart
+              weeklyChart.update();
+            }
+          } catch (error) {
+            console.error('Error fetching weekly data:', error);
+          }
+        }
 
-// Your Chart.js code for yearly sales chart
-
-
-
-              
-                // Function to fetch and update monthly sales data
-                async function graphSales() {
-                  try {
-                    const URL = "/admin/sales-data"; // Update with your actual endpoint
-                    const response = await fetch(URL, { method: "POST" });
-              
-                    if (response.ok) {
-                      console.log('Monthly data fetched successfully');
-                      const data = await response.json();
-                      const values = data.map(item => item.ordersCount);
-              
-                      monthlyChart.data.datasets[0].data = values;
-                      monthlyChart.update();
-                    }
-                  } catch (error) {
-                    console.error('Error fetching monthly data:', error);
-                  }
-                }
-              
-                // Function to fetch and update yearly sales data
-                async function graphSalesYear() {
-                  try {
-                    const response = await fetch('/admin/saleyearly', { method: 'POST' });
-              
-                    if (response.ok) {
-                      console.log('Yearly data fetched successfully');
-                      const data = await response.json();
-                      const values = data.map(item => item.ordersCount);
-              
-                      yearlyChart.data.datasets[0].data = values;
-                      yearlyChart.update();
-                    }
-                  } catch (error) {
-                    console.error('Error fetching yearly data:', error);
-                  }
-                }
-              
-               
+        const weeklyCtx = document.getElementById('weeklyChart').getContext('2d');
+        window.weeklyChart = new Chart(weeklyCtx, {
+          type: 'bar',
+          data: {
+            labels: [],
+            datasets: [{
+              label: 'Weekly Sales',
+              data: [],
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
 
 
 
+        // Function to fetch and update stock data
+        async function graphStocks() {
+          try {
+            const URL = "/admin/revenue"; // Update with your actual endpoint
+            const response = await fetch(URL, { method: "POST" });
 
-                // // Event listeners for buttons
-                // const monthBtn = document.getElementById('highbtn');
-                // const yearBtn = document.getElementById('mibtn');
-              
-                // monthBtn.addEventListener('click', graphSales);
-                // yearBtn.addEventListener('click', graphSalesYear);
-              
-                // // Initial call to load default data
-                // graphSales();
+            if (response.ok) {
+              console.log('Stock data fetched successfully');
+              const data = await response.json();
+              const labels = data.products;
+              const values = data.totalStocks;
 
-                document.addEventListener('DOMContentLoaded', function () {
-                  graphSales();
-                  graphSalesYear();
-                  graphStocks();
-                  graphSalesWeekly()
-                });
+              stockChart.data.labels = labels;
+              stockChart.data.datasets[0].data = values;
+              stockChart.update();
+            }
+          } catch (error) {
+            console.error('Error fetching stock data:', error);
+          }
+        }
 
-              </script>
-              
-              
+
+        // Your Chart.js code for yearly sales chart
 
 
 
 
+        // Function to fetch and update monthly sales data
+        async function graphSales() {
+          try {
+            const URL = "/admin/sales-data"; // Update with your actual endpoint
+            const response = await fetch(URL, { method: "POST" });
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            if (response.ok) {
+              console.log('Monthly data fetched successfully');
+              const data = await response.json();
+              const values = data.map(item => item.ordersCount);
 
-    <!-- plugins:js -->
-    <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- Plugin js for this page -->
-    <script src="/assets/vendors/chart.js/Chart.min.js"></script>
-    <script src="/assets/vendors/progressbar.js/progressbar.min.js"></script>
-    <script src="/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
-    <script src="/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <script src="/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
-    <!-- End plugin js for this page -->
-    <!-- inject:js -->
-    <script src="/assets/js/off-canvas.js"></script>
-    <script src="/assets/js/hoverable-collapse.js"></script>
-    <script src="/assets/js/misc.js"></script>
-    <script src="/assets/js/settings.js"></script>
-    <script src="/assets/js/todolist.js"></script>
-    <!-- endinject -->
-    <!-- Custom js for this page -->
-    <script src="/assets/js/dashboard.js"></script>
-    <!-- End custom js for this page -->
-  </body>
+              monthlyChart.data.datasets[0].data = values;
+              monthlyChart.update();
+            }
+          } catch (error) {
+            console.error('Error fetching monthly data:', error);
+          }
+        }
+
+        // Function to fetch and update yearly sales data
+        async function graphSalesYear() {
+          try {
+            const response = await fetch('/admin/saleyearly', { method: 'POST' });
+
+            if (response.ok) {
+              console.log('Yearly data fetched successfully');
+              const data = await response.json();
+              const values = data.map(item => item.ordersCount);
+
+              yearlyChart.data.datasets[0].data = values;
+              yearlyChart.update();
+            }
+          } catch (error) {
+            console.error('Error fetching yearly data:', error);
+          }
+        }
+
+
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+          graphSales();
+          graphSalesYear();
+          graphStocks();
+          graphSalesWeekly()
+        });
+
+      </script>
+
+
+
+
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+      <!-- plugins:js -->
+      <script src="/assets/vendors/js/vendor.bundle.base.js"></script>
+      <!-- endinject -->
+      <!-- Plugin js for this page -->
+      <script src="/assets/vendors/chart.js/Chart.min.js"></script>
+      <script src="/assets/vendors/progressbar.js/progressbar.min.js"></script>
+      <script src="/assets/vendors/jvectormap/jquery-jvectormap.min.js"></script>
+      <script src="/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+      <script src="/assets/vendors/owl-carousel-2/owl.carousel.min.js"></script>
+      <!-- End plugin js for this page -->
+      <!-- inject:js -->
+      <script src="/assets/js/off-canvas.js"></script>
+      <script src="/assets/js/hoverable-collapse.js"></script>
+      <script src="/assets/js/misc.js"></script>
+      <script src="/assets/js/settings.js"></script>
+      <script src="/assets/js/todolist.js"></script>
+      <!-- endinject -->
+      <!-- Custom js for this page -->
+      <script src="/assets/js/dashboard.js"></script>
+      <!-- End custom js for this page -->
+</body>
+
 </html>

@@ -1,16 +1,11 @@
-const express = require("express");
-const router = express.Router();
+
 const userCollection = require("../models/mongoose");
 const productCollection = require("../models/product")
-const category = require("../models/category")
-const couponCollection = require("../models/coupon")
 const returnCollection = require("../models/returnstatus")
 const multer = require("multer");
-const bannerCollection = require("../models/banner");
 const excel = require('exceljs')
-const brandCollection = require("../models/brand")
 const pdfkit = require('pdfkit')
-const dotenv=require('dotenv').config();
+const dotenv = require('dotenv').config();
 
 let user;
 
@@ -33,125 +28,77 @@ const login = (req, res) => {
 
 
 
-const loginPost = (req, res) => {
+const loginPost = async (req, res) => {
 
 
-  if(req.body.email==process.env.ADEMAIL&&req.body.password==process.env.ADPASSWORD){
-   
-    res.render("admin/admindashboard")
-}
-else{
-  res.redirect("/admin/admin")
-  
-}
-}
+  if (req.body.email == process.env.ADEMAIL && req.body.password == process.env.ADPASSWORD) {
+    req.session.admin = req.body.email;
+    console.log("session", req.session.admin);
+    const orderCount = await userCollection.aggregate([
+      { $unwind: '$orders' },
+      { $group: { _id: null, totalOrders: { $sum: 1 } } },
+      { $project: { _id: 0, totalOrders: 1 } }
+    ]);
+    const userCount = await userCollection.countDocuments();
+    const [{ totalOrders }] = orderCount;
+    console.log(typeof (totalOrders));
 
+    const totalSales = await userCollection.aggregate([
+      {
+        $unwind: "$orders" // Unwind the orders array to work with individual orders
+      },
+      {
+        $group: {
+          _id: null,
+          totalAmount: { $sum: "$orders.price" } // Calculate the sum of the price field in orders
+        }
+      }
+    ]);
 
-const admindashboard = (req, res) => {
-  res.render('admin/admindashboard')
-}
+    const [{ totalAmount }] = totalSales;
 
+    console.log("Total Sales Amount:", totalAmount);
 
-const usermanagement = async (req, res) => {
-  try {
-
-    const user = await userCollection.find()
-    res.render("admin/usermanagement", { user })
-
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error"); // Handle the error appropriately
+    console.log("Total number of orders:", totalOrders);
+    res.render("admin/admindashboard", { totalOrders, userCount, totalAmount })
   }
+  else {
+    res.redirect("/admin/admin")
 
+  }
 }
 
 
+const adminDashboard = async (req, res) => {
+  const orderCount = await userCollection.aggregate([
+    { $unwind: '$orders' },
+    { $group: { _id: null, totalOrders: { $sum: 1 } } },
+    { $project: { _id: 0, totalOrders: 1 } }
+  ]);
+  const userCount = await userCollection.countDocuments();
+  const [{ totalOrders }] = orderCount;
+  console.log(typeof (totalOrders));
 
-
-
-// editing the user
-const edituser = (req, res) => {
-  let id = req.params.id;
-  userCollection.findById(id)
-    .then(user => {
-      if (!user) {
-        res.redirect('/admin/usermanagement')
-      } else {
-        res.render('admin/edit_user', { user: user })
+  const totalSales = await userCollection.aggregate([
+    {
+      $unwind: "$orders" // Unwind the orders array to work with individual orders
+    },
+    {
+      $group: {
+        _id: null,
+        totalAmount: { $sum: "$orders.price" } // Calculate the sum of the price field in orders
       }
-    })
-    .catch(err => {
-      console.log("Error in finding the user : ", err);
-      res.redirect('/admin')
-    })
-}
-
-
-
-// updating the user
-const updateuser = async (req, res) => {
-  try {
-    let id = req.params.id
-    const result = await userCollection.findByIdAndUpdate(id, {
-      name: req.body.name,
-      password: req.body.password,
-      email: req.body.email,
-      mobile: req.body.mobile,
-    })
-    if (!result) {
-      res.json({ message: 'User not found', type: 'danger' })
-    } else {
-      req.session.message = {
-        type: 'success',
-        message: 'User updated sucessfully'
-      }
-      res.redirect('/admin/usermanagement')
     }
-  } catch (err) {
-    console.log('Error updating the user : ', err);
-    res.json({ message: err.message, type: 'danger' })
-  }
+  ]);
+
+  const [{ totalAmount }] = totalSales;
+
+  console.log("Total Sales Amount:", totalAmount);
+
+  console.log("Total number of orders:", totalOrders);
+  res.render("admin/admindashboard", { totalOrders, userCount, totalAmount })
 }
 
-
-
-// delete user
-// router.get('/usermanagement/delete/:id', async (req, res) => {
-//     try {
-//       const id = req.params.id;
-//       const result = await userCollection.findByIdAndRemove({_id: id});
-
-//       if (result) {
-//         req.session.message1 = {
-//           type: 'success',
-//           message: 'User deleted successfully',
-
-//         }
-//         res.redirect('/admin/usermanagement');
-//       } else {
-//         res.json({ message: 'User not found' });
-//       }
-
-//     } catch (err) {
-//       console.error('Error deleting user: ', err);
-//       res.json({ message: err.message });
-//     }
-//   });
-
-
-
-
-const blockuser = async (req, res) => {
-  const id = req.params.id;
-  try {
-    await userCollection.findByIdAndUpdate({ _id: id }, { blocked: true });
-    res.redirect('/admin/usermanagement');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error blocking user');
-  }
-
-}
 
 
 const usersearch = async (req, res) => {
@@ -176,430 +123,53 @@ const usersearch = async (req, res) => {
 }
 
 
-
-const unblockuser = async (req, res) => {
-  const id = req.params.id;
-  try {
-    await userCollection.findByIdAndUpdate({ _id: id }, { blocked: false });
-    res.redirect('/admin/usermanagement');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error unblocking user');
-  }
-
-
-
-}
-
-
-const productmanagement = (req, res) => {
-  const errorMessage = req.query.error
-  res.render("admin/productmanagement", { errorMessage })
-}
-
-
-// const upload = multer({ dest: 'uploads/' });
-const upload = multer({ storage: storage });
-
-const productadd = async (req, res) => {
-  const productName = req.body.name
-
-  existProduct = await productCollection.findOne({ name: productName })
-
-  if (existProduct) {
-
-    const errorMessage = "product is already exist"
-
-
-    res.redirect(`/admin/productmanagement?error=${encodeURIComponent(errorMessage)}`)
-  }
-  else {
-    try {
-
-      const productData = {
-        name: req.body.name,
-        description: req.body.description,
-        // image: req.file.filename,
-        image: req.files.map(file => file.filename),
-        price: req.body.price,
-        brand: req.body.brand,
-        category: req.body.category,
-        stock: req.body.stock
-      };
-      console.log("req.file:", req.file);
-      //   const imagePath = req.file.path;
-      await productCollection.insertMany([productData])
-      res.redirect('/admin/productdetails')
-    } catch (error) {
-      console.error("Error:", error);
-      res.status(500).send("Internal Server Error"); // Handle the error appropriately
-    }
-
-  }
-
-}
-
-
-
-const ITEMS_PER_PAGE = 6; // Define the number of items to display per page
-
-const productlists = async (req, res) => {
-  const page = +req.query.page || 1; // Get the current page from the query parameter
-
-  const totalProducts = await productCollection.countDocuments();
-  const totalPages = Math.ceil(totalProducts / ITEMS_PER_PAGE);
-  const categories = await category.find();
-
-  const product = await productCollection
-    .find({})
-    .skip((page - 1) * ITEMS_PER_PAGE)
-    .limit(ITEMS_PER_PAGE)
-    .exec();
-
-  res.render('admin/productdetails', { product, categories, currentPage: page, totalPages, ITEMS_PER_PAGE });
-};
-
-
-
-
-
-
-// editing the product
-const productedit = (req, res) => {
-  let id = req.params.id;
-
-  productCollection.findById(id)
-    .then(product => {
-      if (!product) {
-        res.redirect('/admin/productdetails')
-      } else {
-        res.render('admin/edit_products', { product: product })
-      }
-    })
-    .catch(err => {
-      console.log("Error in finding the product : ", err);
-      res.redirect('/admin')
-    })
-}
-
-
-
-
-
-
-
-
-
-const deleteimg = async (req, res) => {
-
-
-  try {
-    const id = req.params.id;
-    const filename = req.params.filename;
-
-    // Find the product in the database
-    const product = await productCollection.findById(id);
-
-    // Check if the product exists
-    if (!product) {
-      return res.status(404).json({ message: 'Product not found' });
-    }
-
-    // Remove the image from the product's image array
-    const index = product.image.indexOf(filename);
-    if (index > -1) {
-      product.image.splice(index, 1);
-    }
-
-    // Save the updated product to the database
-    await product.save();
-
-    res.json({ message: 'Image deleted successfully' });
-  } catch (err) {
-    console.log('Error deleting the image: ', err);
-    res.status(500).json({ message: err.message });
-  }
-};
-
-
-
-
-
-
-
-
-// updating the product
-const updateproduct = async (req, res) => {
-  try {
-
-    let id = req.params.id
-    const deletedImages = req.body.deletedImages
-
-
-
-    if (req.files.length === 0) {
-
-      const oldProduct = await productCollection.findById(id);
-
-
-      const existingImages = oldProduct.image || [];
-
-
-      const result = await productCollection.findByIdAndUpdate(id, {
-        name: req.body.name,
-        category: req.body.category,
-        image: existingImages,
-        price: req.body.price,
-        brand: req.body.brand,
-        stock: req.body.stock,
-        description: req.body.description,
-      })
-      const updatedProduct = await productCollection.findByIdAndUpdate(
-        id,
-        { $pull: { image: req.body.deletedImage } },
-        { new: true } // Return the updated document
-      );
-      if (!result) {
-        res.json({ message: 'product not found', type: 'danger' })
-      } else {
-        req.session.message = {
-          type: 'success',
-          message: 'product updated sucessfully'
-        }
-        res.redirect('/admin/productdetails')
-      }
-
-
-    } else {
-
-
-      const result = await productCollection.findByIdAndUpdate(id, {
-        name: req.body.name,
-        category: req.body.category,
-        image: req.files.map(file => file.filename),
-        price: req.body.price,
-        stock: req.body.stock,
-        description: req.body.description,
-      })
-      if (!result) {
-        res.json({ message: 'product not found', type: 'danger' })
-      } else {
-        req.session.message = {
-          type: 'success',
-          message: 'product updated sucessfully'
-        }
-        res.redirect('/admin/productdetails')
-      }
-    }
-
-
-  } catch (err) {
-    console.log('Error updating the product : ', err);
-    res.json({ message: err.message, type: 'danger' })
-  }
-}
-
-
-// products delete
-const productdelete = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await productCollection.findByIdAndRemove({ _id: id });
-
-    if (result) {
-      req.session.message1 = {
-        type: 'success',
-        message: 'product deleted successfully',
-
-      }
-      res.redirect('/admin/productdetails');
-    } else {
-      res.json({ message: 'product not found' });
-    }
-
-  } catch (err) {
-    console.error('Error deleting product: ', err);
-    res.json({ message: err.message });
-  }
-};
-
-
-
-
-const addcategory = (req, res) => {
-  const errorMessage = req.query.error
-  res.render("admin/addcategory", { errorMessage })
-}
-
-
-
-
-
-const addcategorypost = async (req, res) => {
-  const categoryName = req.body.category.toLowerCase();
-  try {
-
-    const existCategory = await category.findOne({ category: { $regex: new RegExp('^' + categoryName + '$', 'i') } });
-
-    if (existCategory) {
-      const errorMessage = "Category already exists";
-      return res.redirect(`/admin/addcategory?error=${encodeURIComponent(errorMessage)}`);
-    } else {
-      const categoryData = {
-        category: req.body.category,
-        description: req.body.description,
-      };
-
-      await category.insertMany([categoryData]);
-      return res.redirect("/admin/addcategory");
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send("An error occurred");
-  }
-};
-
-
-const ITEM_PER_PAGE = 2;
-
-const categorylist = async (req, res) => {
-  try {
-    const page = +req.query.page || 1;
-
-    const totalProducts = await category.countDocuments();
-    const totalPages = Math.ceil(totalProducts / ITEM_PER_PAGE);
-
-    const categories = await category
-      .find({})
-      .skip((page - 1) * ITEM_PER_PAGE)
-      .limit(ITEM_PER_PAGE)
-      .exec();
-
-    res.render("admin/categorylist", { categories, currentPage: page, totalPages, ITEM_PER_PAGE });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Internal Server Error');
-  }
-};
-
-
-
-
-// const ITEM_PER_PAGE = 2;
-// const categorylist=async(req,res)=>{
-//   const page = +req.query.page || 1; // Get the current page from the query parameter
-
-
-//   const totalProducts = await category.countDocuments();
-
-//   const totalPages = Math.ceil(totalProducts / ITEM_PER_PAGE);
-
-
-//   const categories = await category
-//   .find({})
-//   .skip((page - 1) * ITEM_PER_PAGE)
-//   .limit(ITEM_PER_PAGE)
-//   .exec();
-
-
-//   // const categories = await category.find()
-//   res.render("admin/categorylist",{categories,currentPage: page, totalPages})
-// }
-
-
-
-// editing the product
-const categoryedit = (req, res) => {
-  let id = req.params.id;
-  category.findById(id)
-    .then(categories => {
-      if (!categories) {
-        res.redirect('/admin/categorylist')
-      } else {
-        res.render('admin/edit_category', { categories: categories })
-      }
-    })
-    .catch(err => {
-      console.log("Error in finding the product : ", err);
-      res.redirect('/admin')
-    })
-}
-
-
-
-// updating the product
-const updatecategory = async (req, res) => {
-  try {
-    let id = req.params.id
-    const result = await category.findByIdAndUpdate(id, {
-
-      category: req.body.category,
-      description: req.body.description,
-    })
-    if (!result) {
-      res.json({ message: 'category not found', type: 'danger' })
-    } else {
-      req.session.message = {
-        type: 'success',
-        message: 'category updated sucessfully'
-      }
-      res.redirect('/admin/categorylist')
-    }
-  } catch (err) {
-    console.log('Error updating the product : ', err);
-    res.json({ message: err.message, type: 'danger' })
-  }
-}
-
-
-
-
-// products delete
-const categorydelete = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await category.findByIdAndRemove({ _id: id });
-
-    if (result) {
-      req.session.message1 = {
-        type: 'success',
-        message: 'category deleted successfully',
-
-      }
-      res.redirect('/admin/categorylist');
-    } else {
-      res.json({ message: 'category not found' });
-    }
-
-  } catch (err) {
-    console.error('Error deleting category: ', err);
-    res.json({ message: err.message });
-  }
-};
-
+const ITEMSS_PER_PAGE = 10; // Set the number of items per page
 
 const ordermanagement = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1; // Get the page number from the query string or default to 1
 
-  const orders = await userCollection.aggregate([{ $unwind: "$orders" }, {
-    $project: {
-      productName: "$orders.name",
-      category: "$orders.category",
-      quantity: "$orders.quantity",
-      price: "$orders.price",
-      image: "$orders.image",
-      userId: "$orders.userId",
-      id: "$orders._id",
-      status: "$orders.status",
+    // Calculate the skip value based on the page number
+    const skip = (page - 1) * ITEMSS_PER_PAGE;
 
 
+    const orders = await userCollection.aggregate([
+      { $unwind: "$orders" },
+      {
+        $project: {
+          productName: "$orders.name",
+          category: "$orders.category",
+          quantity: "$orders.quantity",
+          price: "$orders.price",
+          image: "$orders.image",
+          userId: "$orders.userId",
+          id: "$orders._id",
+          status: "$orders.status",
+          createdAt: { $toDate: "$orders._id" },
+        },
+      },
+      { $sort: { createdAt: 1 } }, // Sort by createdAt in descending order
+      { $skip: skip }, // Skip documents based on the page number
+      { $limit: ITEMSS_PER_PAGE }, // Limit the number of documents per page
+    ]);
 
-    }
-  }])
+    // Count the total number of orders without pagination
+    const totalCount = await userCollection.countDocuments({});
+
+    res.render("admin/ordermanagement", {
+      orders,
+      currentPage: page,
+      totalPages: Math.ceil(totalCount / ITEMSS_PER_PAGE),
+      ITEMSS_PER_PAGE: ITEMSS_PER_PAGE,
+    });
+  } catch (error) {
+    console.error("Error in ordermanagement:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
 
 
-  res.render("admin/ordermanagement", { orders })
 
-}
 
 
 const orderstatus = async (req, res) => {
@@ -618,116 +188,19 @@ const orderstatus = async (req, res) => {
 
 
 }
-const addcouponget = (req, res) => {
-  res.render("admin/couponmanagement")
-}
 
 
-const addcouponpost = async (req, res) => {
-  try {
-    const couponData = {
-      code: req.body.code,
-      discount: req.body.discount,
-      minValue: req.body.minValue,
-      description: req.body.description,
-    };
 
-    const newCoupon = await couponCollection.create(couponData);
-
-    if (newCoupon) {
-      res.redirect("/admin/couponlist");
-      // Or send a success message or status if required
-    } else {
-      // Handle the case if the newCoupon is not created
-      res.redirect("/admin/couponmanagement");
-      // Or redirect to an error page
-    }
-  } catch (error) {
-    // Log the error for debugging purposes
-    console.error(error);
-    res.status(500).redirect('/500');
-  }
-};
-
-const couponlist = async (req, res) => {
-
-  const coupon = await couponCollection.find()
-  res.render("admin/couponlist", { coupon })
-}
-
-const couponedit = (req, res) => {
-  let id = req.params.id;
-  couponCollection.findById(id)
-    .then(coupon => {
-      if (!coupon) {
-        res.redirect('/admin/couponlist')
-      } else {
-        res.render('admin/edit_coupon', { coupon: coupon })
-      }
-    })
-    .catch(err => {
-      console.log("Error in finding the product : ", err);
-      res.redirect('/admin')
-    })
-}
-
-const updatecoupon = async (req, res) => {
-  try {
-    let id = req.params.id
-    const result = await couponCollection.findByIdAndUpdate(id, {
-
-      code: req.body.code,
-      discount: req.body.discount,
-      minValue: req.body.minValue,
-      description: req.body.description,
-    })
-    if (!result) {
-      res.json({ message: 'coupon not found', type: 'danger' })
-    } else {
-      req.session.message = {
-        type: 'success',
-        message: 'category updated sucessfully'
-      }
-      res.redirect('/admin/couponlist')
-    }
-  } catch (err) {
-    console.log('Error updating the product : ', err);
-    res.json({ message: err.message, type: 'danger' })
-  }
-}
-
-const deletecoupon = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await couponCollection.findByIdAndRemove({ _id: id });
-
-    if (result) {
-      req.session.message1 = {
-        type: 'success',
-        message: 'coupon deleted successfully',
-
-      }
-      res.redirect('/admin/couponlist');
-    } else {
-      res.json({ message: 'coupon not found' });
-    }
-
-  } catch (err) {
-    console.error('Error deleting coupon: ', err);
-    res.json({ message: err.message });
-  }
-};
-
-
-const returnorders = async (req, res) => {
+const returnOrders = async (req, res) => {
   const returndata = await returnCollection.find()
 
   res.render("admin/return", { returndata })
 
 }
 
-const returnapprove = async (req, res) => {
+const returnApprove = async (req, res) => {
   const { id, user, price, qty, pname, cartid } = req.query;
+
 
 
   const wallettotal1 = await userCollection.findOne({ _id: user }, { wallet: 1 })
@@ -760,13 +233,32 @@ const returnapprove = async (req, res) => {
     { $set: { "orders.$.status": status } },
     { new: true })
 
+
+
+  const product = await productCollection.findOne({ name: pname });
+
+
+
+  if (product) {
+    const returnedQuantity = Number(qty);
+
+    product.stock += returnedQuantity;
+
+    await product.save();
+
+  } else {
+    // Handle the case where the product with the given name is not found.
+    console.error('Product not found for name:', pname);
+  }
+
+
   await returnCollection.deleteOne({ cartid: cartid })
 
   res.redirect('/admin/returnorder')
 
 }
 
-const returnreject = async (req, res) => {
+const returnReject = async (req, res) => {
   const { id, user, price, qty, pname, cartid } = req.query;
   const status = 'return rejected'
 
@@ -781,80 +273,6 @@ const returnreject = async (req, res) => {
 
   res.redirect('/admin/returnorder')
 }
-
-const addbanner = (req, res) => {
-  res.render("admin/bannermanagement")
-}
-
-
-const storages = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(null, "./assets/images/img"); // Uploads will be stored in the 'uploads/' directory
-  },
-  filename: (req, file, callback) => {
-    callback(null, Date.now() + '-' + file.originalname); // Rename the uploaded file with a unique name
-  },
-});
-const uploads = multer({ storage: storages });
-
-const addbannerpost = async (req, res) => {
-  try {
-    bannerData = {
-      description: req.body.description,
-      image: req.files.map(file => file.filename),
-    }
-
-    await bannerCollection.insertMany([bannerData])
-    res.redirect("/admin/bannerlist")
-  }
-  catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error"); // Handle the error appropriately
-  }
-
-}
-
-const bannerlist = async (req, res) => {
-  try {
-
-    const banner = await bannerCollection.find()
-    res.render("admin/bannerlist", { banner })
-  }
-  catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error"); // Handle the error appropriately
-  }
-
-}
-
-
-// products delete
-const bannerdelete = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await bannerCollection.findByIdAndRemove({ _id: id });
-
-    if (result) {
-      req.session.message1 = {
-        type: 'success',
-        message: 'banner deleted successfully',
-
-      }
-      res.redirect('/admin/bannerlist');
-    } else {
-      res.json({ message: 'product not found' });
-    }
-
-  } catch (err) {
-    console.error('Error deleting product: ', err);
-    res.json({ message: err.message });
-  }
-};
-
-
-
-
-
 
 
 
@@ -996,69 +414,9 @@ const yearaleexcellreport = async (req, res) => {
 };
 
 
-const addbrandget = async (req, res) => {
-  res.render("admin/addbrand")
-}
-
-const addbrandpost = async (req, res) => {
-
-  const data = {
-    brand: req.body.brand,
-    description: req.body.description
-  }
-
-  await brandCollection.insertMany(data)
-
-  res.redirect("/admin/brandlist")
-}
 
 
-
-
-const brandlist = async (req, res) => {
-  try {
-
-    const brand = await brandCollection.find()
-    res.render("admin/brandlist", { brand })
-  }
-  catch (error) {
-    console.error("Error:", error);
-    res.status(500).send("Internal Server Error"); // Handle the error appropriately
-  }
-
-}
-
-
-
-
-
-
-const branddelete = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await brandCollection.findByIdAndRemove({ _id: id });
-
-    if (result) {
-      req.session.message1 = {
-        type: 'success',
-        message: 'brand deleted successfully',
-
-      }
-      res.redirect('/admin/brandlist');
-    } else {
-      res.json({ message: 'brand not found' });
-    }
-
-  } catch (err) {
-    console.error('Error deleting brand: ', err);
-    res.json({ message: err.message });
-  }
-};
-
-
-
-
-const editimagedelete = async (req, res) => {
+const editImageDelete = async (req, res) => {
   try {
     const id = req.params.id;
     const productid = req.params.productid;
@@ -1093,7 +451,7 @@ const editimagedelete = async (req, res) => {
   }
 };
 
-const salereportweek = async (req, res) => {
+const saleReportWeek = async (req, res) => {
   try {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
@@ -1171,8 +529,7 @@ const salereportweek = async (req, res) => {
 
 
 
-
-const monthpdf = async (req, res) => {
+const monthPdf = async (req, res) => {
 
   const { selectedDate } = req.query;
 
@@ -1556,15 +913,18 @@ const generatePDFReportDate = async (req, res) => {
 
 
 
+const logout = (req, res) => {
+  req.session.admin = null;
+  res.redirect("/admin")
+}
+
 
 
 
 const adminRouter = {
-  login, loginPost, admindashboard, usermanagement, edituser, updateuser, blockuser, usersearch,
-  unblockuser, productmanagement, productadd, productlists, productedit, updateproduct, productdelete, addcategory, addcategorypost,
-  categorylist, categoryedit, updatecategory, categorydelete, ordermanagement, orderstatus, addcouponget, addcouponpost, couponlist,
-  couponedit, updatecoupon, deletecoupon, returnorders, returnapprove, returnreject, addbanner, addbannerpost, bannerlist, bannerdelete,
-  reports, monthpdf, generatePDFReportYear, generatePDFReportDate,
-  generateExcelReportMonth, yearaleexcellreport, addbrandget, addbrandpost, brandlist, branddelete, editimagedelete, salereportweek
+  login, loginPost, adminDashboard, usersearch,
+  ordermanagement, orderstatus, returnOrders, returnApprove, returnReject,
+  reports, monthPdf, generatePDFReportYear, generatePDFReportDate,
+  generateExcelReportMonth, yearaleexcellreport, editImageDelete, saleReportWeek, logout
 }
 module.exports = adminRouter

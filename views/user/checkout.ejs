@@ -1,499 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>checkout</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>checkout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" /> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" /> -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-      .error-messages {
-        color: red;
-      }
-    </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .error-messages {
+      color: red;
+    }
+  </style>
 </head>
+
 <body>
-    <header>
-        <!-- Jumbotron -->
-        <div class="p-3 text-center bg-white border-bottom">
-          <div class="container">
-            <div class="d-flex justify-content-between">
-              <!-- Left elements -->
-              <div class="">
-                <h3 class="text text-primary">e_Shopee</h3>
-              </div>
-        
-      
-             
-              <!-- right elements -->
-            </div>
+  <header>
+    <!-- Jumbotron -->
+    <div class="p-3 text-center bg-white border-bottom">
+      <div class="container">
+        <div class="d-flex justify-content-between">
+          <!-- Left elements -->
+          <div class="">
+            <h3 class="text text-primary">e_Shopee</h3>
           </div>
+
+
+
+          <!-- right elements -->
         </div>
-        <!-- Jumbotron -->
-      
-        <!-- Heading -->
-        <div class="bg-black">
-          <div class="container py-4">
-            <!-- Breadcrumb -->
-            <nav class="d-flex">
-              <h6 class="mb-0">
-                <a href="/" class="text-white-50">Home</a>
-                <span class="text-white-50 mx-2"> > </span>
-                <a href="" class="text-white-50">2. product detail</a>
-                <span class="text-white-50 mx-2"> > </span>
-                <a href="/user/cart" class="text-white-50"><u>3. cart</u></a>
-                <span class="text-white-50 mx-2"> > </span>
-                <a href="" class="text-white">4. checkout</a>
-              </h6>
-            </nav>
-            <!-- Breadcrumb -->
-          </div>
-        </div>
-        <!-- Heading -->
-      </header>
-      
-      <section class="bg-light py-5">
-        <div class="container">
-         
-         <!-- Button trigger modal -->
-<button style="margin-bottom: 15px;" type="button " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add New Address
-</button>
-
-
-                  <h5 class="card-title mb-3">Shipping info</h5>
-                
-                   
-                 
-                  <div class="row mb-3">
-                    <div class="col-lg-8 mb-3">
-                      <div class="card-body">
-                        <% userData.forEach((userData, index) => { %>
-                          <div class="form-outline mb-4">
-
-                              
-                           
-                            <b>Full Address:</b> <i><%= userData.fulladdress %></i><br>
-                            <i>Street:<%= userData.street %></i><br>
-                            <i>City:<%= userData.city %></i><br>
-                            <i>State:<%= userData.state %></i><br>
-                            <i>Mobile:<%= userData.mobile %></i><br>
-                            <i>Pincode:<%= userData.pincode %></i>
-                        
-
-                            <!-- <button style="margin-bottom: 15px;" type="button " class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
-                              <a href="/user/checkout/edit_address"class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
-                            <!-- </button> -->
-                            
-                            <a href="/user/checkout/delete/<%= userData._id %>" class="text-danger" >
-                              <i class="fas fa-trash fa-lg mx-1"></i>
-                            </a>
-
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="selectedAddress" id="<%= 'address' + index %>" value="<%= JSON.stringify(userData) %>">
-                              <label class="form-check-label" for="<%= 'address' + index %>">
-                                Select
-                              </label>
-                            </div>
-                            
-                           
-                          
-
-                          </div>
-                        <% }) %>
-                        
-      
-
-
-
-<!-- Modal -->
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Address</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        
+    </div>
+    <!-- Jumbotron -->
+
+    <!-- Heading -->
+    <div class="bg-black">
+      <div class="container py-4">
+        <!-- Breadcrumb -->
+        <nav class="d-flex">
+          <h6 class="mb-0">
+            <a href="/" class="text-white-50">Home</a>
+            <span class="text-white-50 mx-2"> > </span>
+            <a href="" class="text-white-50">2. product detail</a>
+            <span class="text-white-50 mx-2"> > </span>
+            <a href="/user/cart" class="text-white-50"><u>3. cart</u></a>
+            <span class="text-white-50 mx-2"> > </span>
+            <a href="" class="text-white">4. checkout</a>
+          </h6>
+        </nav>
+        <!-- Breadcrumb -->
+      </div>
+    </div>
+    <!-- Heading -->
+  </header>
+
+  <section class="bg-light py-5">
+    <div class="container">
+
+      <!-- Button trigger modal -->
+      <button style="margin-bottom: 15px;" type="button " class="btn btn-primary" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Add New Address
+      </button>
 
 
-        <div class="card-body">
-          <!-- <form  action="/user/checkout/addaddress"  method="post"  >
-         
-            <div class="row mb-4">
-              <div class="col">
-                <div class="form-outline">
-                  <input type="text" id="form7Example1" name="name" class="form-control" />
-                  <label class="form-label" for="form7Example1">Name</label>
+      <h5 class="card-title mb-3">Shipping info</h5>
+
+
+
+      <div class="row mb-3">
+        <div class="col-lg-8 mb-3">
+          <div class="card-body">
+            <% userData.forEach((userData, index)=> { %>
+              <div class="form-outline mb-4">
+
+
+
+                <b>Full Address:</b> <i>
+                  <%= userData.fulladdress %>
+                </i><br>
+                <i>Street:<%= userData.street %></i><br>
+                <i>City:<%= userData.city %></i><br>
+                <i>State:<%= userData.state %></i><br>
+                <i>Mobile:<%= userData.mobile %></i><br>
+                <i>Pincode:<%= userData.pincode %></i>
+
+
+                <!-- <button style="margin-bottom: 15px;" type="button " class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+                <a href="/user/checkout/edit_address" class="text-success"><i class="fas fa-edit fa-lg mx-1"></i></a>
+                <!-- </button> -->
+
+                <a href="/user/checkout/delete/<%= userData._id %>" class="text-danger">
+                  <i class="fas fa-trash fa-lg mx-1"></i>
+                </a>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="selectedAddress" id="<%= 'address' + index %>"
+                    value="<%= JSON.stringify(userData) %>">
+                  <label class="form-check-label" for="<%= 'address' + index %>">
+                    Select
+                  </label>
                 </div>
-              </div>
-            
-            </div>
-            <div class="form-outline mb-4">
-                <input type="text" id="form7Example4" name="email" class="form-control" />
-                <label class="form-label" for="form7Example4">Email</label>
-              </div>
-  
-            <div class="form-outline mb-4">
-              <input type="text" id="form7Example3" name="fulladdress" class="form-control" />
-              <label class="form-label" for="form7Example3">Full Address</label>
-            </div>
-            <div class="form-outline mb-4">
-                <input type="text" id="form7Example5" name="street" class="form-control" />
-                <label class="form-label" for="form7Example5">Street</label>
-              </div>
-              <div class="form-outline mb-4">
-                <input type="text" id="form7Example5" name="city" class="form-control" />
-                <label class="form-label" for="form7Example5">City</label>
-              </div>
-              <div class="form-outline mb-4">
-                <input type="text" id="form7Example5" name="state" class="form-control" />
-                <label class="form-label" for="form7Example5">State</label>
-              </div>
-  
-            <div class="form-outline mb-4">
-              <input type="text" id="form7Example5" name="mobile" class="form-control" />
-              <label class="form-label" for="form7Example5">Mobile</label>
-            </div>
-
-            <div class="form-outline mb-4">
-                <input type="number" id="form7Example6" name="pincode"  class="form-control" />
-                <label class="form-label" for="form7Example6">Pin code</label>
-              </div>
-  
-         
-              <div class="modal-footer">
-                <button type="button "  class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button  type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-  
-            </form>  -->
 
 
 
 
-              <form action="/user/checkout/addaddress" method="post" onsubmit="return validateForm()">
-                              <div class="error-messages text-danger mb-4" id="allErrorMessages"></div>
-                              <div class="row mb-4">
-                                <div class="col">
-                                  <div class="form-outline">
-                                    <input type="text" id="form7Example1" name="name" class="form-control" />
-                                    <label class="form-label" for="form7Example1">Name</label>
-                                    <div class="error-messages" id="nameError"></div>
-                                  </div>
+              </div>
+              <% }) %>
+
+
+
+
+
+                <!-- Modal -->
+                <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Address</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+
+
+
+                        <div class="card-body">
+                        
+
+
+
+                          <form action="/user/checkout/addaddress" method="post" onsubmit="return validateForm()">
+                            <div class="error-messages text-danger mb-4" id="allErrorMessages"></div>
+                            <div class="row mb-4">
+                              <div class="col">
+                                <div class="form-outline">
+                                  <input type="text" id="form7Example1" name="name" class="form-control" />
+                                  <label class="form-label" for="form7Example1">Name</label>
+                                  <div class="error-messages" id="nameError"></div>
                                 </div>
                               </div>
-                              <div class="form-outline mb-4">
-                                <input type="email" id="form7Example4" name="email" class="form-control" />
-                                <label class="form-label" for="form7Example4">Email</label>
-                                <div class="error-messages" id="emailError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="text" id="form7Example3" name="fulladdress" class="form-control"  />
-                                <label class="form-label" for="form7Example3">Full Address</label>
-                                <div class="error-messages" id="fullAddressError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="text" id="form7Example5" name="street" class="form-control" />
-                                <label class="form-label" for="form7Example5">Street</label>
-                                <div class="error-messages" id="streetError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="text" id="form7Example6" name="city" class="form-control"  />
-                                <label class="form-label" for="form7Example6">City</label>
-                                <div class="error-messages" id="cityError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="text" id="form7Example7" name="state" class="form-control" />
-                                <label class="form-label" for="form7Example7">State</label>
-                                <div class="error-messages" id="stateError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="text" id="form7Example8" name="mobile" class="form-control"  />
-                                <label class="form-label" for="form7Example8">Mobile</label>
-                                <div class="error-messages" id="mobileError"></div>
-                              </div>
-                              <div class="form-outline mb-4">
-                                <input type="number" id="form7Example9" name="pincode" class="form-control" />
-                                <label class="form-label" for="form7Example9">Pin code</label>
-                                <div class="error-messages" id="pincodeError"></div>
-                              </div>
-                              <div style="text-align: center;">
-                                <button class="btn btn-primary" type="submit">Add Address</button>
-                              </div>
-                            </form>
-              </div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="email" id="form7Example4" name="email" class="form-control" />
+                              <label class="form-label" for="form7Example4">Email</label>
+                              <div class="error-messages" id="emailError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="text" id="form7Example3" name="fulladdress" class="form-control" />
+                              <label class="form-label" for="form7Example3">Full Address</label>
+                              <div class="error-messages" id="fullAddressError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="text" id="form7Example5" name="street" class="form-control" />
+                              <label class="form-label" for="form7Example5">Street</label>
+                              <div class="error-messages" id="streetError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="text" id="form7Example6" name="city" class="form-control" />
+                              <label class="form-label" for="form7Example6">City</label>
+                              <div class="error-messages" id="cityError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="text" id="form7Example7" name="state" class="form-control" />
+                              <label class="form-label" for="form7Example7">State</label>
+                              <div class="error-messages" id="stateError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="text" id="form7Example8" name="mobile" class="form-control" />
+                              <label class="form-label" for="form7Example8">Mobile</label>
+                              <div class="error-messages" id="mobileError"></div>
+                            </div>
+                            <div class="form-outline mb-4">
+                              <input type="number" id="form7Example9" name="pincode" class="form-control" />
+                              <label class="form-label" for="form7Example9">Pin code</label>
+                              <div class="error-messages" id="pincodeError"></div>
+                            </div>
+                            <div style="text-align: center;">
+                              <button class="btn btn-primary" type="submit">Add Address</button>
+                            </div>
+                          </form>
+                        </div>
 
 
 
-      </div>
-   
-    </div>
-  </div>
-</div>
+                      </div>
 
-
-
-                      </form>
-
-                            
-  
-            
-                  </div>
-              
-             
-              <!-- Checkout -->
-            </div>
-            <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
-              <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
-                <h6 class="mb-3">Summary</h6>
-                <div class="d-flex justify-content-between" >
-                  <p class="mb-2">Total price:</p>
-                  <li>Subtotal <span>&#x20B9;<i id="grandtotal"><%= totalPrice %></i></span></li>
-                  <!-- <p class="mb-2" id="grandtotal1">₹ </p> -->
-                </div>
-           
-                <div class="d-flex justify-content-between">
-                  <p class="mb-2">Total price:</p>
-                  <li>Total <span>&#x20B9; <i id="grandtotal1"><%= totalPrice %></i></span></li>
-                  <!-- <p class="mb-2 fw-bold">₹ </p> -->
-                </div>
-      
-                <div class="input-group mt-3 mb-4">
-                  <!-- <input type="text" class="form-control border" name="" placeholder="Promo code" /> -->
-                  <% coupons.forEach((coup, index)=> { %>
-                    <div class="card" style="margin-bottom: 30px;">
-                      <div class="card-body">
-                        <h5 class="card-title">
-                          <%= coup.description %>
-                        </h5>
-                        <p class="card-text">Get <span class="discount-amount">
-                            <%= coup.discount %> % OFF
-                          </span> on your purchase!</p>
-                        <p class="card-text">Use code: <span class="coupon-code" id="coupen">
-                            <%= coup.code %>
-                          </span></p>
-                       </div>
-                      
                     </div>
-                  
+                  </div>
+                </div>
 
-                    <% }) %>
-                   
+
+
+                </form>
+
+
+
+
+          </div>
+
+
+          <!-- Checkout -->
+        </div>
+        <div class="col-xl-4 col-lg-4 d-flex justify-content-center justify-content-lg-end">
+          <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+            <h6 class="mb-3">Summary</h6>
+            <div class="d-flex justify-content-between">
+              <p class="mb-2">Total price:</p>
+              <li>Subtotal <span>&#x20B9;<i id="grandtotal">
+                    <%= totalPrice %>
+                  </i></span></li>
+              <!-- <p class="mb-2" id="grandtotal1">₹ </p> -->
+            </div>
+
+            <div class="d-flex justify-content-between">
+              <p class="mb-2">Total price:</p>
+              <li>Total <span>&#x20B9; <i id="grandtotal1">
+                    <%= totalPrice %>
+                  </i></span></li>
+              <!-- <p class="mb-2 fw-bold">₹ </p> -->
+            </div>
+
+            <div class="input-group mt-3 mb-4">
+              <!-- <input type="text" class="form-control border" name="" placeholder="Promo code" /> -->
+              <% coupons.forEach((coup, index)=> { %>
+                <div class="card" style="margin-bottom: 30px;">
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= coup.description %>
+                    </h5>
+                    <p class="card-text">Get <span class="discount-amount">
+                        <%= coup.discount %> % OFF
+                      </span> on your purchase!</p>
+                    <p class="card-text">Use code: <span class="coupon-code" id="coupen">
+                        <%= coup.code %>
+                      </span></p>
+                  </div>
+
+                </div>
+
+
+                <% }) %>
+
                   <!-- <button class="btn btn-light text-primary border">Apply</button> -->
-                   <ul>
+                  <ul>
                     <div class="input-group">
                       <input id="coupenvalue" type="text" placeholder="Enter your coupon code" class="form-control">
                       <button class="btn-primary" id="buttonapply" type="button">Check</button>
 
-                  </div>
-                  <section style="color: red;" id="cpn"></section>
+                    </div>
+                    <section style="color: red;" id="cpn"></section>
 
-                  <li style="list-style-type: none;" id="coupenadded"><span> <i></i></span></li>
-                                <div id="clear" ></div>
-                                <section hidden id="discount1"></section>
-                                <section hidden id="coupenid"></section>
+                    <li style="list-style-type: none;" id="coupenadded"><span> <i></i></span></li>
+                    <div id="clear"></div>
+                    <section hidden id="discount1"></section>
+                    <section hidden id="coupenid"></section>
 
-                            <i id="clear"></i>
-                                
-                            </ul>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2">
-                  <label class="form-check-label" for="flexRadioDefault2">
-                    Cash on Delivery
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3">
-                  <label class="form-check-label" for="flexRadioDefault3">
-                 Wallet Payment
-                  </label>
-                  <div style="color: red;" id="nobalance"></div>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault4">
-                  <label class="form-check-label" for="flexRadioDefault4">
+                    <i id="clear"></i>
+
+                  </ul>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Cash on Delivery
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault3">
+              <label class="form-check-label" for="flexRadioDefault3">
+                Wallet Payment
+              </label>
+              <div style="color: red;" id="nobalance"></div>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault2" id="flexRadioDefault4">
+              <label class="form-check-label" for="flexRadioDefault4">
                 Online Payment
-                  </label>
+              </label>
+            </div>
+
+            <!-- <form id="addressForm" action="/user/confirmorder" method="post"> -->
+            <input name="address" hidden id="selectedAddressnew" type="text" name="selectedAddress">
+            <button id="btn1" type="submit">Place Order</button>
+            <!-- </form> -->
+
+
+            <hr />
+            <h6 class="text-dark my-4">Items in cart</h6>
+            <% userData2.cart.items.forEach(element=> { %>
+
+
+              <div class="d-flex align-items-center mb-4 product-row ">
+                <div class="me-3 position-relative">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
+                    1
+                  </span>
+                  <img src="/images/img/<%=element.image %>" style="height: 96px; width: 96x;"
+                    class="img-sm rounded border" />
                 </div>
-
-                <!-- <form id="addressForm" action="/user/confirmorder" method="post"> -->
-                  <input name="address" hidden id="selectedAddressnew" type="text" name="selectedAddress">
-                  <button id="btn1" type="submit">Place Order</button>
-              <!-- </form> -->
-              
-           
-                <hr />
-                <h6 class="text-dark my-4">Items in cart</h6>
-                <% userData2.cart.items.forEach(element => { %>
-               
-      
-                <div class="d-flex align-items-center mb-4 product-row ">
-                  <div class="me-3 position-relative">
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
-                      1
-                    </span>
-                    <img src="/images/img/<%=element.image %>" style="height: 96px; width: 96x;" class="img-sm rounded border" />
+                <div class="">
+                  <a href="#" class="nav-link product-name">
+                    <%= element.name %>
+                  </a>
+                  <div class="price text-muted product-price">
+                    <%= element.price %>
                   </div>
-                  <div class="">
-                    <a href="#" class="nav-link product-name">
-                     <%= element.name  %>
-                    </a>
-                    <div class="price text-muted product-price"><%= element.price %></div>
-                    <div class="price text-muted product-price"><%= element.quantity %></div>
+                  <div class="price text-muted product-price">
+                    <%= element.quantity %>
                   </div>
-                </div>
-        
-                <% }) %>
-
-                <%
-               
-                const cartItems = [];
-
-                userData2.cart.items.forEach(element => {
-                    cartItems.push({
-                        name: element.name,
-                        image: element.image,
-                        price: element.price * element.quantity,
-                        quantity : element.quantity,
-                        category : element.category
-                    });
-                });
-                %>
-                <input type="hidden" id="cartItemsData" value="<%= JSON.stringify(cartItems) %>">
-
-                
-    
                 </div>
               </div>
-            </div>
+
+              <% }) %>
+
+                <% const cartItems=[]; userData2.cart.items.forEach(element=> {
+                  cartItems.push({
+                  name: element.name,
+                  image: element.image,
+                  price: element.price * element.quantity,
+                  quantity : element.quantity,
+                  category : element.category,
+                  productId:element.productId
+                  });
+                  });
+                  %>
+                  <input type="hidden" id="cartItemsData" value="<%= JSON.stringify(cartItems) %>">
+
+
+
           </div>
         </div>
-      </section>
-      
-      <!-- Footer -->
-      <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
-        
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
 
 
-        <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-12 col-lg-3 col-sm-12 mb-2">
-              <!-- Content -->
-              <a href="/" target="_blank" class="text-white h2">
-                <h3 class="text text-primary">e_Shopee</h3>
-              </a>
-              <p class="mt-1 text-white">
-                Experiance the feel of SHopping
-              </p>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-6 col-sm-4 col-lg-2">
-              <!-- Links -->
-              <h6 class="text-uppercase text-white fw-bold mb-2 ">
-                Store
-              </h6>
-              <ul class="list-unstyled mb-4">
-                <li><a class="text-white-50" href="/">Home</a></li>
-                <li><a class="text-white-50" href="#">About us</a></li>
-                <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
-                <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
-              
-              </ul>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-6 col-sm-4 col-lg-2">
-              <!-- Links -->
-              <h6 class="text-uppercase text-white fw-bold mb-2">
-                Information
-              </h6>
-              <ul class="list-unstyled mb-4">
-                <li><a class="text-white-50" href="#">Help center</a></li>
-                <li><a class="text-white-50" href="#">Money refund</a></li>
-                <li><a class="text-white-50" href="#">Shipping info</a></li>
-                <li><a class="text-white-50" href="#">Refunds</a></li>
-              </ul>
-            </div>
+
+    <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-12 col-lg-3 col-sm-12 mb-2">
+          <!-- Content -->
+          <a href="/" target="_blank" class="text-white h2">
+            <h3 class="text text-primary">e_Shopee</h3>
+          </a>
+          <p class="mt-1 text-white">
+            Experiance the feel of SHopping
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-6 col-sm-4 col-lg-2">
+          <!-- Links -->
+          <h6 class="text-uppercase text-white fw-bold mb-2 ">
+            Store
+          </h6>
+          <ul class="list-unstyled mb-4">
+            <li><a class="text-white-50" href="/">Home</a></li>
+            <li><a class="text-white-50" href="#">About us</a></li>
+            <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
+            <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
+
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-6 col-sm-4 col-lg-2">
+          <!-- Links -->
+          <h6 class="text-uppercase text-white fw-bold mb-2">
+            Information
+          </h6>
+          <ul class="list-unstyled mb-4">
+            <li><a class="text-white-50" href="#">Help center</a></li>
+            <li><a class="text-white-50" href="#">Money refund</a></li>
+            <li><a class="text-white-50" href="#">Shipping info</a></li>
+            <li><a class="text-white-50" href="#">Refunds</a></li>
+          </ul>
+        </div>
 
         <!--Call to action-->
-         
-          <!--/.Call to action-->
-        
-      
-          </section>
-          <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-      
-     
-      
-      </footer>
-      <!-- Footer -->
+
+        <!--/.Call to action-->
+
+
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+
+
+  </footer>
+  <!-- Footer -->
 
 
 
 
-      
-
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
-      <!-- -------------------------clear coupen begin--------------------- -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
-<script>
 
-// const socket = new WebSocket('ws://localhost:3000/websocket');
+  <!-- -------------------------clear coupen begin--------------------- -->
 
-// socket.addEventListener('open', function (event) {
-//    socket.send('Hello Server!');
-// });
+  <script>
 
-// socket.addEventListener('message', function (event) {
-//    console.log('Message from server: ', event.data);
-// });
+    // const socket = new WebSocket('ws://localhost:3000/websocket');
 
-  document.getElementById('clear').addEventListener('click',()=>{
+    // socket.addEventListener('open', function (event) {
+    //    socket.send('Hello Server!');
+    // });
+
+    // socket.addEventListener('message', function (event) {
+    //    console.log('Message from server: ', event.data);
+    // });
+
+    document.getElementById('clear').addEventListener('click', () => {
       const coupenidd = document.getElementById('coupenid').innerText
       const Proceedchkout = document.getElementById('Proceedchkout')
 
-      const url = `http://localhost:3000/user/clearcoupen?coupenid=${coupenidd}`
-      fetch(url,{
-          method: 'POST',
-          headers: {
-              'Content-Type' : 'application/json'
-          },
-          body: JSON.stringify({coupenidd})
+      const url = `/user/clearcoupen?coupenid=${coupenidd}`
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ coupenidd })
       })
-      .then(response=> response.json())
-      .then(data=>{
-          if(data.message=='removed'){
-              window.location.reload()
+        .then(response => response.json())
+        .then(data => {
+          if (data.message == 'removed') {
+            window.location.reload()
           }
-      })
-  })
+        })
+    })
 
-</script>
+  </script>
 
-<!-- -------------------------clear coupen end--------------------- -->
+  <!-- -------------------------clear coupen end--------------------- -->
 
 
 
-      <!-- -------------------------apply coupen begin---------------------- -->
+  <!-- -------------------------apply coupen begin---------------------- -->
 
-<script>
+  <script>
 
-  document.getElementById('buttonapply').addEventListener('click', () => {
+    document.getElementById('buttonapply').addEventListener('click', () => {
 
       let newtotal
       let newtotal1
@@ -508,138 +474,138 @@
 
 
       const coupenvalue = document.getElementById('coupenvalue').value;
-      const grandtotal = document.getElementById('grandtotal').innerText; 
+      const grandtotal = document.getElementById('grandtotal').innerText;
 
-      console.log(coupenvalue,grandtotal);
-     
-      const url=`http://localhost:3000/user/verifycoupen?coupenvalue=${coupenvalue}&grandtotal=${grandtotal}` 
-  
-      fetch(url,{
-          method:'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body:JSON.stringify({coupenvalue,grandtotal})
+      console.log(coupenvalue, grandtotal);
+
+      const url = `/user/verifycoupen?coupenvalue=${coupenvalue}&grandtotal=${grandtotal}`
+
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ coupenvalue, grandtotal })
       })
-      .then(response => response.json())
-      .then(data =>{
-          if(data.message =="coupon matching"){
-              cpn.innerHTML='';
-              coupenadded.innerHTML=`<li id="coupenadded">Coupon Applied<span>-  ${data.discount}%<i></i></span></li>`
-              clear.innerHTML='<button id="clear" type="button" class="btn btn-danger">Clear Coupon</button>'
-              coupenid.innerHTML=data.coupenid
-              discount1.innerHTML = data.discount    
-              total1.innerHTML= data.newtotal;
-              coupen=''
-              couponProcessing = true;
+        .then(response => response.json())
+        .then(data => {
+          if (data.message == "coupon matching") {
+            cpn.innerHTML = '';
+            coupenadded.innerHTML = `<li id="coupenadded">Coupon Applied<span>-  ${data.discount}%<i></i></span></li>`
+            clear.innerHTML = '<button id="clear" type="button" class="btn btn-danger">Clear Coupon</button>'
+            coupenid.innerHTML = data.coupenid
+            discount1.innerHTML = data.discount
+            total1.innerHTML = data.newtotal;
+            coupen = ''
+            couponProcessing = true;
 
           }
-          else if(data.message=='minimum 2000'){
-              cpn.innerHTML=`Minimum Purchase Of ${data.minvalue}`
+          else if (data.message == 'minimum 2000') {
+            cpn.innerHTML = `Minimum Purchase Of ${data.minvalue}`
           }
-          else if(data.message =='invalid coupon'){
-              clear.innerHTML=''
-              coupenadded.innerHTML=''
-              total1.innerHTML= data.grandtotal;
-              cpn.innerHTML='Invalid Coupon'
+          else if (data.message == 'invalid coupon') {
+            clear.innerHTML = ''
+            coupenadded.innerHTML = ''
+            total1.innerHTML = data.grandtotal;
+            cpn.innerHTML = 'Invalid Coupon'
           }
-          else if (data.message=='invalid'){
-              clear.innerHTML=''
-              coupenadded.innerHTML=''
-              total1.innerHTML= data.grandtotal;
-              cpn.innerHTML='Invalid Coupon'
+          else if (data.message == 'invalid') {
+            clear.innerHTML = ''
+            coupenadded.innerHTML = ''
+            total1.innerHTML = data.grandtotal;
+            cpn.innerHTML = 'Invalid Coupon'
           }
-          else if(data.message=='alredy in input'){
-              coupenadded.innerHTML=`<li id="coupenadded">Coupon Applied<span>-  ${data.discount}%<i></i></span></li>`
-              clear.innerHTML='<button id="clear" type="button" class="btn btn-danger">Clear Coupon</button>'  
-              total1.innerHTML= data.newtotal; 
+          else if (data.message == 'alredy in input') {
+            coupenadded.innerHTML = `<li id="coupenadded">Coupon Applied<span>-  ${data.discount}%<i></i></span></li>`
+            clear.innerHTML = '<button id="clear" type="button" class="btn btn-danger">Clear Coupon</button>'
+            total1.innerHTML = data.newtotal;
           }
-          else{
-              clear.innerHTML=''
-              coupenadded.innerHTML=''
-              cpn.innerHTML='Invalid Coupon'
+          else {
+            clear.innerHTML = ''
+            coupenadded.innerHTML = ''
+            cpn.innerHTML = 'Invalid Coupon'
           }
-      })
-  });
+        })
+    });
 
 
-</script>
+  </script>
 
 
 
-      
-      <script>
 
-document.getElementById("btn1").addEventListener("click", (e) => {
-    const codPayment = document.getElementById('flexRadioDefault2');
-    const walletPayment = document.getElementById('flexRadioDefault3');
-    const onlinePayment = document.getElementById('flexRadioDefault4');
+  <script>
 
-    // let selectedPaymentMethod = null;
+    document.getElementById("btn1").addEventListener("click", (e) => {
+      const codPayment = document.getElementById('flexRadioDefault2');
+      const walletPayment = document.getElementById('flexRadioDefault3');
+      const onlinePayment = document.getElementById('flexRadioDefault4');
 
-    // if (onlinePayment.checked) {
-    //     selectedPaymentMethod = "Online Payment";
-    // } else if (walletPayment.checked) {
-    //     selectedPaymentMethod = "Wallet Payment";
-    // } else if (codPayment.checked) {
-    //     selectedPaymentMethod = "cod";
-    // }
+      // let selectedPaymentMethod = null;
 
-    const cartItemsData = document.getElementById('cartItemsData').value;
+      // if (onlinePayment.checked) {
+      //     selectedPaymentMethod = "Online Payment";
+      // } else if (walletPayment.checked) {
+      //     selectedPaymentMethod = "Wallet Payment";
+      // } else if (codPayment.checked) {
+      //     selectedPaymentMethod = "cod";
+      // }
 
-        // Parse the JSON string into an object
-        const data = {
-            cartItems: JSON.parse(cartItemsData),
-            // Add more properties as needed
-        };
+      const cartItemsData = document.getElementById('cartItemsData').value;
 
-        const dataString = JSON.stringify(data)
+      // Parse the JSON string into an object
+      const data = {
+        cartItems: JSON.parse(cartItemsData),
+        // Add more properties as needed
+      };
 
-      
+      const dataString = JSON.stringify(data)
 
 
-    if (codPayment.checked) {
-      console.log("cod");
+
+
+      if (codPayment.checked) {
+        console.log("cod");
         const selectedAddress = document.querySelector('input[name="selectedAddress"]:checked');
         const address = selectedAddress.value;
-        const payment="cod"
+        const payment = "cod"
 
-        console.log('dddd',data);
+        console.log('dddd', data);
 
 
         // Encode the values
         // const encodedPaymentMethod = encodeURIComponent(selectedPaymentMethod);
         const encodedAddress = encodeURIComponent(address);
-        console.log(payment,address)
+        console.log(payment, address)
 
         // Make a POST request with path parameters in the URL
-        fetch(`http://localhost:3000/user/confirmorder?address=${address}&data=${dataString}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                payment,
-                 address,
-                 data
-            }),
+        fetch(`/user/confirmorder?address=${address}&data=${dataString}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            payment,
+            address,
+            data
+          }),
         })
-            .then((response) => {
-                if (response.ok) {
-                    // Request was successful
-                    window.location.href = '/user/codconfirmorder'
-                } else {
-                    // Request failed, handle the error
-                    console.error('Request failed');
-                }
-            })
-            .catch((error) => {
-                // Handle network error
-                console.error('Network error:', error);
-            });
-    }
-    else if (onlinePayment.checked) {
-      console.log("online");
+          .then((response) => {
+            if (response.ok) {
+              // Request was successful
+              window.location.href = '/user/codconfirmorder'
+            } else {
+              // Request failed, handle the error
+              console.error('Request failed');
+            }
+          })
+          .catch((error) => {
+            // Handle network error
+            console.error('Network error:', error);
+          });
+      }
+      else if (onlinePayment.checked) {
+        console.log("online");
         const selectedAddress = document.querySelector('input[name="selectedAddress"]:checked');
         const address = selectedAddress.value;
         const radioButtons = document.querySelectorAll('input[name="selectedAddress"]');
@@ -651,113 +617,113 @@ document.getElementById("btn1").addEventListener("click", (e) => {
         // }
         // if (selectedAddress) {
 
-          
-          const productData = [];
-          const productRows = document.querySelectorAll('.product-row');
 
-          productRows.forEach((row) => {
-            const productName = row.querySelector('.product-name').textContent.trim();
-            const price = parseInt(row.querySelector('.product-price').textContent.trim())
-            // const productId=document.getElementById('productId').value.trim()
+        const productData = [];
+        const productRows = document.querySelectorAll('.product-row');
 
-            productData.push({ productName, price });
+        productRows.forEach((row) => {
+          const productName = row.querySelector('.product-name').textContent.trim();
+          const price = parseInt(row.querySelector('.product-price').textContent.trim())
+          // const productId=document.getElementById('productId').value.trim()
+
+          productData.push({ productName, price });
+        });
+        const totalamount = document.getElementById('grandtotal1').innerHTML.replace('₹', '')
+        const payment = 'ONLINE'
+        console.log(totalamount);
+        const url = `/user/payorder/${totalamount}`
+
+        fetch(url, {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ checkout: totalamount })
+        })
+          .then((response) => response.json())
+          .then((order) => {
+            console.log((order));
+            // if (order.message == 'Out Of Stock') {
+            //   const stockErrorMessage = document.getElementById('stockErrorMessage');
+            //   stockErrorMessage.innerHTML =
+            //     'The selected quantity exceeds the available stock ';
+            //   const cartLink = document.createElement('a');
+            //   cartLink.href = '/user/cart';
+            //   cartLink.textContent = 'Go to Cart';
+            //   stockErrorMessage.appendChild(cartLink);
+            // } else {
+            const options = {
+              key: "rzp_test_s3i2foc9AExQlF",
+              amount: order.order.amount,
+              currency: 'INR',
+              name: order.name,
+              description: 'Test Transaction',
+              image: '',
+              order_id: order.order.id,
+              callback_url: `/user/paymentdone?address=${address}&selectedAddress=${JSON.stringify(address)}&grandtotal=${totalamount}&data=${dataString}`,
+              prefill: {
+              },
+              notes: {
+                address: 'Razorpay Corporate Office',
+              },
+              theme: {
+                color: '#3399cc',
+              },
+            };
+
+            const rzp1 = new Razorpay(options);
+            rzp1.open();
+            // }
           });
-          const totalamount = document.getElementById('grandtotal1').innerHTML.replace('₹', '')
-          const payment = 'ONLINE'
-          console.log(totalamount);
-          const url = `/user/payorder/${totalamount}`
-
-          fetch(url, {
-            method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ checkout: totalamount})
-          })
-            .then((response) => response.json())
-            .then((order) => {
-              console.log((order));
-              // if (order.message == 'Out Of Stock') {
-              //   const stockErrorMessage = document.getElementById('stockErrorMessage');
-              //   stockErrorMessage.innerHTML =
-              //     'The selected quantity exceeds the available stock ';
-              //   const cartLink = document.createElement('a');
-              //   cartLink.href = '/user/cart';
-              //   cartLink.textContent = 'Go to Cart';
-              //   stockErrorMessage.appendChild(cartLink);
-              // } else {
-                const options = {
-                  key: "rzp_test_s3i2foc9AExQlF",
-                  amount: order.order.amount, 
-                  currency: 'INR',
-                  name: order.name,
-                  description: 'Test Transaction',
-                  image: '',
-                  order_id: order.order.id,
-                  callback_url: `http://localhost:3000/user/paymentdone?address=${address}&selectedAddress=${JSON.stringify(address)}&grandtotal=${totalamount}&data=${dataString}`,
-                  prefill: {
-                  },
-                  notes: {
-                    address: 'Razorpay Corporate Office',
-                  },
-                  theme: {
-                    color: '#3399cc',
-                  },
-                };
-              
-                const rzp1 = new Razorpay(options);
-                rzp1.open();
-              // }
-            });
         // }
-    }
-    else if (walletPayment.checked) {
-      console.log("wallet");
+      }
+      else if (walletPayment.checked) {
+        console.log("wallet");
         const selectedAddress = document.querySelector('input[name="selectedAddress"]:checked');
         const address = selectedAddress.value;
-        const payment="wallet"
+        const payment = "wallet"
 
         // Encode the values
         // const encodedPaymentMethod = encodeURIComponent(selectedPaymentMethod);
         const encodedAddress = encodeURIComponent(address);
-        console.log(payment,address)
+        console.log(payment, address)
 
         // Make a POST request with path parameters in the URL
-        fetch(`http://localhost:3000/user/walletconfirmorder?address=${address}&data=${dataString}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                payment,
-                 address
-            }),
+        fetch(`/user/walletconfirmorder?address=${address}&data=${dataString}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            payment,
+            address
+          }),
         })
-            .then((response) => {
-                if (response.ok) {
-                    // Request was successful
-                    window.location.href = '/user/codconfirmorder'
-                } else {
-                    // Request failed, handle the error
-                    document.getElementById('nobalance').innerHTML = 'No Balance'
-                    console.error('Request failed');
-                }
-            })
-            .catch((error) => {
-                // Handle network error
-                console.error('Network error:', error);
-            });
-    }
-});
+          .then((response) => {
+            if (response.ok) {
+              // Request was successful
+              window.location.href = '/user/codconfirmorder'
+            } else {
+              // Request failed, handle the error
+              document.getElementById('nobalance').innerHTML = 'No Balance'
+              console.error('Request failed');
+            }
+          })
+          .catch((error) => {
+            // Handle network error
+            console.error('Network error:', error);
+          });
+      }
+    });
 
 
-      </script>
+  </script>
 
 
 
 
-<script>
-  function validateForm() {
+  <script>
+    function validateForm() {
       // Clear previous error messages
       document.getElementById('allErrorMessages').innerHTML = '';
       clearError('nameError');
@@ -777,80 +743,83 @@ document.getElementById("btn1").addEventListener("click", (e) => {
       // Name validation
       let name = document.getElementById('form7Example1').value;
       if (name.trim() === '') {
-          displayError('nameError', 'Name is required');
-          isValid = false;
+        displayError('nameError', 'Name is required');
+        isValid = false;
       }
 
       // Email validation
       let email = document.getElementById('form7Example4').value;
       if (email.trim() === '') {
-          displayError('emailError', 'Email is required');
-          isValid = false;
+        displayError('emailError', 'Email is required');
+        isValid = false;
       } else if (!emailPattern.test(email.trim())) {
-          displayError('emailError', 'Enter a valid email address');
-          isValid = false;
+        displayError('emailError', 'Enter a valid email address');
+        isValid = false;
       }
 
       let fullAddress = document.getElementById('form7Example3').value;
       if (fullAddress.trim() === '') {
-          displayError('fullAddressError', 'Full Address is required');
-          isValid = false;
+        displayError('fullAddressError', 'Full Address is required');
+        isValid = false;
       }
 
       // Street validation
       let street = document.getElementById('form7Example5').value;
       if (street.trim() === '') {
-          displayError('streetError', 'Street is required');
-          isValid = false;
+        displayError('streetError', 'Street is required');
+        isValid = false;
       }
 
       // City validation
       let city = document.getElementById('form7Example6').value;
       if (city.trim() === '') {
-          displayError('cityError', 'City is required');
-          isValid = false;
+        displayError('cityError', 'City is required');
+        isValid = false;
       }
 
       // State validation
       let state = document.getElementById('form7Example7').value;
       if (state.trim() === '') {
-          displayError('stateError', 'State is required');
-          isValid = false;
+        displayError('stateError', 'State is required');
+        isValid = false;
       }
 
       // Mobile validation
       let mobile = document.getElementById('form7Example8').value;
       if (mobile.trim() === '') {
-          displayError('mobileError', 'Mobile is required');
-          isValid = false;
+        displayError('mobileError', 'Mobile is required');
+        isValid = false;
       } else if (!mobilePattern.test(mobile.trim())) {
-          displayError('mobileError', 'Enter a valid 10-digit mobile number');
-          isValid = false;
+        displayError('mobileError', 'Enter a valid 10-digit mobile number');
+        isValid = false;
       }
 
       // Pincode validation
       let pincode = document.getElementById('form7Example9').value;
       if (pincode.trim() === '') {
-          displayError('pincodeError', 'Pin code is required');
-          isValid = false;
+        displayError('pincodeError', 'Pin code is required');
+        isValid = false;
       } else if (!pincodePattern.test(pincode.trim())) {
-          displayError('pincodeError', 'Enter a valid 6-digit pin code');
-          isValid = false;
+        displayError('pincodeError', 'Enter a valid 6-digit pin code');
+        isValid = false;
       }
 
       return isValid;
-  }
+    }
 
-  function displayError(elementId, errorMessage) {
+    function displayError(elementId, errorMessage) {
       document.getElementById(elementId).innerHTML = errorMessage;
-  }
+    }
 
-  function clearError(elementId) {
+    function clearError(elementId) {
       document.getElementById(elementId).innerHTML = '';
-  }
-</script>
-      
-      
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    }
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -1,418 +1,416 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e_Shoppee</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
-<link rel="stylesheet" href="/styles/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>e_Shoppee</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/fontawesome-iconpicker/3.2.0/js/fontawesome-iconpicker.min.js">
+  <link rel="stylesheet" href="/styles/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css" />
 </head>
+
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg  navbar-light bg-black">
-        <!-- Container wrapper -->
-        <div class="container">    
-          <!-- Toggle button -->
-          <button
-            class="navbar-toggler"
-            type="button"
-            style="color: rgb(0, 110, 255)"
-            data-mdb-toggle="collapse"
-            data-mdb-target="#navbarSupportedContent1"
-            aria-controls="navbarSupportedContent1"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <i class="fas fa-bars"></i>
-          </button>
-      
-          <!-- Collapsible wrapper -->
-          <div class="collapse navbar-collapse" id="navbarSupportedContent1">      
-            <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-sm-0" href="/">
-              <!-- <img
+  <nav class="navbar fixed-top navbar-expand-lg  navbar-light bg-black">
+    <!-- Container wrapper -->
+    <div class="container">
+      <!-- Toggle button -->
+      <button class="navbar-toggler" type="button" style="color: rgb(0, 110, 255)" data-mdb-toggle="collapse"
+        data-mdb-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <!-- Navbar brand -->
+        <a class="navbar-brand mt-2 mt-sm-0" href="/">
+          <!-- <img
                 src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
                 height="20"
                 alt="MDB Logo"
                 loading="lazy"
                 
               /> -->
-              <h3 class="text text-primary">e_Shopee</h3>
-            </a>
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item active">
-                <a class="nav-link text-white " href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-white  " href="/user/productlists">Products</a>
-              </li>
-              <!-- <li class="nav-item">
+          <h3 class="text text-primary">e_Shopee</h3>
+        </a>
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link text-white " href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white  " href="/user/productlists">Products</a>
+          </li>
+          <!-- <li class="nav-item">
                 <a class="nav-link text-white  " href="/user/category">Categories</a>
               </li> -->
 
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Categories
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                    <!-- Add your dropdown items dynamically -->
-                    <% categorydata.forEach(item => { %>
-                      <% if (!item.list){ %>
-                        <li><a class="dropdown-item" href="/user/category/<%=item.category %>"><%= item.category %></a></li>
-                    <% }; %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="categoriesDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <!-- Add your dropdown items dynamically -->
+              <% categorydata.forEach(item=> { %>
+                <% if (!item.list){ %>
+                  <li><a class="dropdown-item" href="/user/category/<%=item.category %>">
+                      <%= item.category %>
+                    </a></li>
+                  <% }; %>
                     <% }); %>
-                    <!-- Add more items as needed -->
-                </ul>
-            </li>
-           
-              <!-- <li class="nav-item">
+                      <!-- Add more items as needed -->
+            </ul>
+          </li>
+
+          <!-- <li class="nav-item">
                 <a class="nav-link text-white  " href="https://mdbootstrap.com/education/bootstrap/">Brands</a>
               </li> -->
 
-              
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   brand
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                    <!-- Add your dropdown items dynamically -->
-                    <% brand.forEach(item => { %>
-                      <% if (!item.list){ %>
-                        <li><a class="dropdown-item" href="/user/brand/<%=item.brand %>"><%= item.brand %></a></li>
-                    <% }; %>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="categoriesDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              brand
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <!-- Add your dropdown items dynamically -->
+              <% brand.forEach(item=> { %>
+                <% if (!item.list){ %>
+                  <li><a class="dropdown-item" href="/user/brand/<%=item.brand %>">
+                      <%= item.brand %>
+                    </a></li>
+                  <% }; %>
                     <% }); %>
-                    <!-- Add more items as needed -->
-                </ul>
-            </li>
+                      <!-- Add more items as needed -->
             </ul>
-            <!-- Left links -->      
-          </div>
-          <!-- Collapsible wrapper -->
-          <% if(user1){ %>
-          <!-- Right elements -->
-          <div class="d-flex align-items-center">
-            <!-- Icon -->
-            <a class="nav-link me-3" href="/user/cart">
-              <i class="fas fa-shopping-cart"></i>
-       
-            </a>
-            <a class="nav-link me-3" href="/user/wishlist">
-                <i id="icon" class=" fa-regular fa-heart"></i>
-         
-              </a>
-      
-            </a>
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+      <% if(user1){ %>
+        <!-- Right elements -->
+        <div class="d-flex align-items-center">
+          <!-- Icon -->
+          <a class="nav-link me-3" href="/user/cart">
+            <i class="fas fa-shopping-cart"></i>
+
+          </a>
+          <a class="nav-link me-3" href="/user/wishlist">
+            <i id="icon" class=" fa-regular fa-heart"></i>
+
+          </a>
+
+          </a>
         </div>
-      
-          <div class="dropdown ">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa-regular fa-user"></i>
+
+        <div class="dropdown ">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-regular fa-user"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+
+          </ul>
+        </div>
+        <% }else{ %>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="fa-regular fa-user"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
-              <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
-             
+              <li><a class="dropdown-item" href="/user/login">LOGIN</a></li>
+              <li><a class="dropdown-item" href="/user/signup">SIGNUP</a></li>
+
             </ul>
           </div>
-          <% }else{ %>
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-regular fa-user"></i>
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="/user/login">LOGIN</a></li>
-                  <li><a class="dropdown-item" href="/user/signup">SIGNUP</a></li>
-                 
-                </ul>
-              </div>
 
-              <% } %>
-          
-          
-    
-           
-        
-          <!-- Right elements -->
-          
+          <% } %>
+
+
+
+
+
+            <!-- Right elements -->
+
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+  <!-- Navbar -->
+
+  <!-- carousel -->
+
+  <!-- <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel"> -->
+  <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-indicators">
+
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="2"
+        aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <% banner.forEach(row=> { %>
+        <div class="carousel-item <%= banner.indexOf(row) === 0 ? 'active' : '' %>">
+
+
+
+          <img src="/assets/images/img/<%= row.image %>" class="d-block w-100" alt="Wild Landscape" />
+          <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
+          <div class="carousel-caption d-none d-sm-block mb-5">
+            <h2 class="mb-4">
+              <strong>Feel the best Experiance on SHopping</strong>
+            </h2>
+
+            <h3>
+              <strong class="text text-warning">e_Shopee</strong>
+            </h3>
+
+            <a href="/user/productlists" class="btn btn-outline-primary btn-lg shadow-0 border green-link">BUY NOW</a>
+
+
+            <a target="_blank" href="/user/productlists" class="btn btn-outline-white btn-lg">
+              <%= row.description %>
+
+            </a>
+
+          </div>
+
         </div>
-        <!-- Container wrapper -->
-      </nav>
+
+
+        <% }); %>
+    </div>
+
+
+    <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions"
+      data-mdb-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions"
+      data-mdb-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+
+
+  <!--Main layout-->
+  <main>
+    <div class="container">
       <!-- Navbar -->
-      
-      <!-- carousel -->
-      
-      <!-- <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel"> -->
-        <div id="carouselExampleCaptions" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-
-          <!-- Carousel Indicators -->
-          <div class="carousel-indicators">
-            <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-      
-        <div class="carousel-indicators">
-          
-          <button
-            type="button"
-            data-mdb-target="#carouselExampleCaptions"
-            data-mdb-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-          <button
-            type="button"
-            data-mdb-target="#carouselExampleCaptions"
-            data-mdb-slide-to="1"
-            aria-label="Slide 2"
-          ></button>
-          <button
-            type="button"
-            data-mdb-target="#carouselExampleCaptions"
-            data-mdb-slide-to="2"
-            aria-label="Slide 3"
-          ></button>
-        </div>
-        
-        <div class="carousel-inner">
-          <% banner.forEach(row => { %>
-            <div class="carousel-item <%= banner.indexOf(row) === 0 ? 'active' : '' %>">
-
-            
-          
-            <img src="/assets/images/img/<%= row.image %>" class="d-block w-100" alt="Wild Landscape"/>
-            <div class="mask" style="background-color: rgba(0, 0, 0, 0.4)"></div>
-            <div class="carousel-caption d-none d-sm-block mb-5">
-              <h2 class="mb-4">
-                      <strong>Feel the best Experiance on SHopping</strong>
-                    </h2>
-      
-                <h3>
-                      <strong class="text text-warning">e_Shopee</strong>
-                    </h3>
-
-                    <a href="/user/productlists" class="btn btn-outline-primary btn-lg shadow-0 border green-link">BUY NOW</a>
-
-        
-                    <a target="_blank" href="/user/productlists" class="btn btn-outline-white btn-lg"><%= row.description %> 
-                     
-                    </a>
-                   
-            </div>
-            
-          </div>
-         
-     
-          <% }); %>
-        </div>
-       
-        
-        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-        
-      </div>
-      
-      
-       <!--Main layout-->
-      <main>
-      <div class="container">
-        <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #607D8B">
         <!-- Container wrapper -->
         <div class="container-fluid">
-      
+
           <!-- Navbar brand -->
           <a class="navbar-brand" href="#">Go Shopee</a>
-      
+
           <!-- Toggle button -->
-          <button 
-             class="navbar-toggler" 
-             type="button" 
-             data-mdb-toggle="collapse" 
-             data-mdb-target="#navbarSupportedContent2" 
-             aria-controls="navbarSupportedContent2" 
-             aria-expanded="false" 
-             aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false"
+            aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
           </button>
-      
+
           <!-- Collapsible wrapper -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-   
+
             <!-- Search -->
-           
-      
+
+
           </div>
         </div>
         <!-- Container wrapper -->
       </nav>
       <!-- Navbar -->
-        
+
       <!-- Products -->
-        <section>
+      <section>
         <div class="text-center">
           <div class="row">
-            <% product.forEach(product => { %>
-              
-            <div class="col-lg-3 col-md-6 mb-4">
-              <div class="card">
-                <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-                  data-mdb-ripple-color="light">
-                  <img  src="/images/img/<%= product.image[0] %> "
-                    class="w-100" />
-                  <a href="#!">
-                    <div class="mask">
-                      <!-- <div class="d-flex justify-content-start align-items-end h-100">
+            <% product.forEach(product=> { %>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card">
+                  <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                    data-mdb-ripple-color="light">
+                    <img src="/images/img/<%= product.image[0] %> " class="w-100" />
+                    <a href="/user/productpage/<%= product._id %>">
+                      <div class="mask">
+                        <!-- <div class="d-flex justify-content-start align-items-end h-100">
                         <h5><span class="badge bg-dark ms-2">NEW</span></h5>
                       </div> -->
-                    </div>
-                    <div class="hover-overlay">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                    </div>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <a href="/user/productpage/<%= product._id %>" class="text-reset">
-                    <h4 class="card-title mb-2"><%= product.name %></h4>
-                  </a>
-                  <a href="" class="text-reset ">
-                    
-                    <!-- <p>Shirt</p> -->
-                  </a>
-                  <h3 class="mb-3 price">&#8377; <%= product.price %></h3>
-                  <a href="/user/productpage/<%= product._id %>" class="btn btn-warning shadow-0 me-1">Buy Now</a>
+                      </div>
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <a href="/user/productpage/<%= product._id %>" class="text-reset">
+                      <h4 class="card-title mb-2">
+                        <%= product.name %>
+                      </h4>
+                    </a>
+                    <a href="" class="text-reset ">
+
+                      <!-- <p>Shirt</p> -->
+                    </a>
+                    <h3 class="mb-3 price">&#8377; <%= product.price %>
+                    </h3>
+                    <a href="/user/productpage/<%= product._id %>" class="btn btn-warning shadow-0 me-1">Buy Now</a>
                     <a href="/user/cart/<%= product._id %>" class="btn btn-primary shadow-0 me-1">Add to cart</a>
-                   
+
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <% }); %>
+              <% }); %>
 
           </div>
-        
+
         </div>
       </section>
-        
-     
+
+
 
 
       <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
         <ul class="pagination">
-            <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
-                <a class="page-link" href="/?page=1" aria-label="First">
-                    <span aria-hidden="true">&laquo;&laquo;</span>
-                </a>
-            </li>
-            <% for (let i = 1; i <= totalPages; i++) { %>
-                <li class="page-item <%= i === currentPage ? 'active' : '' %>">
-                    <a class="page-link" href="/?page=<%= i %>"><%= i %></a>
-                </li>
-            <% } %>
-            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
-                <a class="page-link" href="/?page=<%= totalPages %>" aria-label="Last">
-                    <span aria-hidden="true">&raquo;&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-
-      
-      <!-- Pagination -->  
-      </div>
-      </main>
-       <!--Main layout-->
-       <!-- #607D8B -->
-      
-      <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
-        
-
-
-        <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-12 col-lg-3 col-sm-12 mb-2">
-              <!-- Content -->
-              <a href="/" target="_blank" class="text-white h2">
-                <h3 class="text text-primary">e_Shopee</h3>
+          <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+            <a class="page-link" href="/?page=1" aria-label="First">
+              <span aria-hidden="true">&laquo;&laquo;</span>
+            </a>
+          </li>
+          <% for (let i=1; i <=totalPages; i++) { %>
+            <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+              <a class="page-link" href="/?page=<%= i %>">
+                <%= i %>
               </a>
-              <p class="mt-1 text-white">
-                Experiance the feel of SHopping
-              </p>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-6 col-sm-4 col-lg-2">
-              <!-- Links -->
-              <h6 class="text-uppercase text-white fw-bold mb-2 ">
-                Store
-              </h6>
-              <ul class="list-unstyled mb-4">
-                <li><a class="text-white-50" href="/">Home</a></li>
-                <li><a class="text-white-50" href="#">About us</a></li>
-                <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
-                <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
-              
-              </ul>
-            </div>
-            <!-- Grid column -->
-    
-            <!-- Grid column -->
-            <div class="col-6 col-sm-4 col-lg-2">
-              <!-- Links -->
-              <h6 class="text-uppercase text-white fw-bold mb-2">
-                Information
-              </h6>
-              <ul class="list-unstyled mb-4">
-                <li><a class="text-white-50" href="#">Help center</a></li>
-                <li><a class="text-white-50" href="#">Money refund</a></li>
-                <li><a class="text-white-50" href="#">Shipping info</a></li>
-                <li><a class="text-white-50" href="#">Refunds</a></li>
-              </ul>
-            </div>
+            </li>
+            <% } %>
+              <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+                <a class="page-link" href="/?page=<%= totalPages %>" aria-label="Last">
+                  <span aria-hidden="true">&raquo;&raquo;</span>
+                </a>
+              </li>
+        </ul>
+      </nav>
+
+
+
+      <!-- Pagination -->
+    </div>
+  </main>
+  <!--Main layout-->
+  <!-- #607D8B -->
+
+  <footer class="text-center text-white mt-4" style="background-color:rgb(19, 1, 1)">
+
+
+
+    <div class="container text-center justify-content-center pt-4 pb-4 ps-5 ">
+      <!-- Grid row -->
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-12 col-lg-3 col-sm-12 mb-2">
+          <!-- Content -->
+          <a href="/" target="_blank" class="text-white h2">
+            <h3 class="text text-primary">e_Shopee</h3>
+          </a>
+          <p class="mt-1 text-white">
+            Experiance the feel of SHopping
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-6 col-sm-4 col-lg-2">
+          <!-- Links -->
+          <h6 class="text-uppercase text-white fw-bold mb-2 ">
+            Store
+          </h6>
+          <ul class="list-unstyled mb-4">
+            <li><a class="text-white-50" href="/">Home</a></li>
+            <li><a class="text-white-50" href="#">About us</a></li>
+            <li><a class="text-white-50" href="/user/productlists">Find store</a></li>
+            <li><a class="text-white-50" href="/user/productlists">Categories</a></li>
+
+          </ul>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-6 col-sm-4 col-lg-2">
+          <!-- Links -->
+          <h6 class="text-uppercase text-white fw-bold mb-2">
+            Information
+          </h6>
+          <ul class="list-unstyled mb-4">
+            <li><a class="text-white-50" href="#">Help center</a></li>
+            <li><a class="text-white-50" href="#">Money refund</a></li>
+            <li><a class="text-white-50" href="#">Shipping info</a></li>
+            <li><a class="text-white-50" href="#">Refunds</a></li>
+          </ul>
+        </div>
 
         <!--Call to action-->
-         
-          <!--/.Call to action-->
-        
-      
-          </section>
-          <!-- Section: Social media -->
-        </div>
-        <!-- Grid container -->
-      
-     
-      
-      </footer>
- 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          // Initialize the carousel
-          var myCarousel = new mdb.Carousel(document.getElementById('carouselExampleCaptions'));
-      
-          // Start the carousel automatically
-          myCarousel.cycle();
-        });
-      </script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!--/.Call to action-->
+
+
+        </section>
+        <!-- Section: Social media -->
+      </div>
+      <!-- Grid container -->
+
+
+
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Initialize the carousel
+      var myCarousel = new mdb.Carousel(document.getElementById('carouselExampleCaptions'));
+
+      // Start the carousel automatically
+      myCarousel.cycle();
+    });
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
 
 </body>
-</html> 
+
+</html>
