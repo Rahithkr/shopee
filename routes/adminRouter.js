@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const router = express.Router()
 
-const adminRouter = require('../controller/adminController')
+const adminRouter = require('../controller/admincontroller')
 const productController = require("../controller/productController")
 const categoryController = require("../controller/categoryController")
 const couponController = require("../controller/couponController")
