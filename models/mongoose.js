@@ -7,8 +7,8 @@ mongoose.connect(process.env.MONGODB_URI, {
     .then(() => {
         console.log("mongodb connected properly")
     })
-    .catch(() => {
-        console.log("mongodb doesn't connect properly")
+    .catch((err) => {
+        console.log(err)
     })
 
 const userRegister = new mongoose.Schema({
