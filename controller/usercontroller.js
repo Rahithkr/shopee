@@ -22,7 +22,7 @@ let otp;
 let user = false
 let userData;
 let transporter;
-let newPassword;
+// let newPassword;
 let email;
 
 
@@ -38,7 +38,7 @@ function sentOtp(otp, email) {
 
   const mailOptions = {
     from: "rahithkr3@gmail.com",
-    to: "rahithkr3@gmail.com",
+    to: `${email}`,
     subject: "Your OTP code",
     text: `Your OTP code is:${otp}`
   };
@@ -104,6 +104,9 @@ const signupPost = async (req, res) => {
         password: req.body.password,
         mobile: req.body.mobile,
       }
+      const email = user.email;
+      req.session.email = email;
+
 
 
       otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
@@ -124,11 +127,12 @@ const signupPost = async (req, res) => {
 const newOtp = async (req, res) => {
   try {
 
-
+    const email = req.session.email;
+    console.log("22222", email);
     otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
 
 
-    sentOtp(otp)
+    sentOtp(otp, email)
 
 
 
@@ -163,9 +167,16 @@ const getOtp = async (req, res) => {
 
 
 const passOtp = (req, res) => {
+  const otp = req.session.otp
+  console.log('potp od', otp);
   const check = req.session.check
-  console.log(check);
-  res.render("user/passotp");
+  console.log('chec i dd', check)
+  if(req.session.invalid){
+    req.session.invalid = false
+    res.render("user/passotp",{message :req.session.errmsg });
+
+  }
+  res.render("user/passotp",{message:''});
 }
 
 
@@ -206,6 +217,7 @@ const loginPost = async (req, res) => {
     if (check) {
       if (check && check.password === req.body.password) {
         req.session.userId = check._id.toString();
+
         console.log("Login successful. User ID:", req.session.userId);
         const isUserBlocked1 = await userCollection.findOne({ _id: req.session.userId }, { blocked: 1 })
         const isUserBlocked = isUserBlocked1.blocked
@@ -237,72 +249,57 @@ const loginPost = async (req, res) => {
 
 
 const forgotPass = (req, res) => {
-  res.render("user/forgotpass")
+  if (req.session.invalid) {
+    req.session.invalid = false
+    res.render("user/forgotpass", { message: req.session.errmsg })
+
+  }
+  res.render("user/forgotpass", { message: '' })
 }
 
 const forgotPassPost = async (req, res) => {
   try {
-    email = req.body.email
+    const email = req.body.email;
 
-    const check = await userCollection.findOne({ email: req.body.email });
-    req.session.check = check
+    // Check if the email exists in the database
+    const check = await userCollection.findOne({ email });
 
-    if (check.email == req.body.email) {
-
-
-      otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
-
-      sentOtp(otp)
-      // transporter = nodemailer.createTransport({
-      //   service: 'gmail',
-      //   auth: {
-      //     user: 'testtdemoo11111@gmail.com',
-      //     pass: 'wikvaxsgqyebphvh',
-      //   },
-      // }); const mailOptions = {
-      //   from: "rahithkr3@gmail.com",
-      //   to: "rahithkr3@gmail.com",
-      //   subject: "Your OTP code",
-      //   text: `Your OTP code is:${otp}`
-      // };
-
-
-      // transporter.sendMail(mailOptions, (error, info) => {
-      //   if (error) {
-      //     console.error('Error sending OTP:', error);
-      //   } else {
-      //     console.log('OTP sent:', info.response);
-      //     // Store the OTP and user's email in your database for verification
-      //   }
-      // });
-      res.redirect("/user/passotp")
-
-
-
+    if (!check) {
+      // User not found
+      req.session.invalid = true;
+      req.session.errmsg = 'Invalid Email';
+      return res.redirect("/user/forgotpass");
+      ;
     }
-    else {
-      // Handle login failure, e.g., show an error message
-      res.send("Invalid email or password");
-    }
+
+    // Generate OTP and send it to the user
+    const otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
+    sentOtp(otp, email);
+    console.log('oto is', otp);
+
+    // Store the check result in the session (if needed)
+    req.session.check = check;
+    req.session.otp = otp
+
+    // Redirect to the OTP verification page
+    res.redirect("/user/passotp");
   } catch (error) {
     console.error(error);
     // Handle any errors that occurred during the database query
     res.status(500).send("Internal server error");
-
   }
+};
 
-}
 
 
 
 const newPassOtp = (req, res) => {
   try {
-
-    otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
-    sentOtp(otp)
-
-
-
+    const email = req.session.check.email
+    console.log('check isdf rf r',email);
+      otp = generateOtp.generate(6, { digits: true, alphabets: false, specialChars: false });
+    sentOtp(otp,email)
+    req.session.otp = otp
     res.redirect("/user/passotp")
 
   } catch (error) {
@@ -318,30 +315,23 @@ const reOtp = (req, res) => {
 }
 
 
-
-
-const rePassOtp = (req, res) => {
-  const check = req.session.check
-  console.log(check);
-  res.render("user/passotp");
-}
-
 const rePassOtpPost = async (req, res) => {
   try {
-
+    const otp = req.session.otp
     const enterOtp = req.body.otp;
-    console.log(enterOtp)
-    console.log(otp)
+    console.log('enterdotp is', enterOtp)
+    console.log('otp is', otp)
+    // console.log(otp)
     if (otp == enterOtp) {
       console.log("completed")
-
-
-      res.render("user/newpass")
+      res.redirect("/user/newpass")
       //  res.send("done")
     }
     else {
-      res.redirect("/user/passotp")
-      // res.send("fail")
+      req.session.invalid = true
+      req.session.errmsg = 'Invalid OTP'
+      return res.redirect("/user/passotp");
+      
     }
   }
   catch (error) {
@@ -358,8 +348,10 @@ const renewPass = (req, res) => {
 }
 const renewPassPost = async (req, res) => {
   try {
-    console.log(email)
-    newPassword = req.body.password
+    const email = req.session.check.email
+    console.log('check is un',email)
+    const newPassword = req.body.password
+    console.log('body password',newPassword);
     await userCollection.updateOne({ email: email }, { $set: { password: newPassword } })
     res.redirect('/user/login')
 
@@ -703,8 +695,8 @@ const invoice = async (req, res) => {
       information: {
         date: new Date().toLocaleDateString(),
         number: `INV_${order._id}`,
-    },
-     
+      },
+
       "products": [
         {
           "product Name": productName,
@@ -812,7 +804,7 @@ const brandPage = async (req, res) => {
 
 const userRouter = {
   login, signup, signupPost, newOtp, getOtp, passOtp, otpPost, loginPost, forgotPass, forgotPassPost, newPassOtp,
-  reOtp, rePassOtp, rePassOtpPost, renewPass, renewPassPost, productPage, productList, home, logout,
+  reOtp, rePassOtpPost, renewPass, renewPassPost, productPage, productList, home, logout,
   verifyCoupon, verifyCoupen, clearCoupen, invoice, categoryPage, brandPage
 }
 
