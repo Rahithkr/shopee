@@ -54,9 +54,9 @@
           <!-- Right elements -->
           <div class="col-lg-5 col-md-12 col-12">
             <div class="input-group float-center">
-              <div class="form-outline">
-                <input type="search" id="form1" class="form-control" oninput="searchProducts()" />
-                <label class="form-label" for="form1">Search</label>
+              <div class="form-dark-outline">
+                <input   placeholder="Search Product Name"  type="search" id="form1" class="form-control" oninput="searchProducts()" />
+                <label class="form-label" for="form1"></label>
               </div>
               <form action="" method="post">
                 <button type="button" class="btn btn-primary shadow-0">
@@ -110,7 +110,7 @@
 
             <div class="accordion" id="accordionPanelsStayOpenExample">
               <div class="accordion-item">
-                <h6>Category Filter</h6>
+                <h6 class="text bg-dark  text-white text-center " >Category Filter</h6>
                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
                   aria-labelledby="headingOne">
                   <select id="categoryFilter" class="form-select">
@@ -126,7 +126,7 @@
 
 
                 </div>
-                <h6>Brand Filter</h6>
+                <h6 class="text bg-dark  text-white text-center " >Brand Filter</h6>
                 <select id="brandFilter" class="form-select">
                   <option value="all">All Brands </option>
                   <% brand.forEach(element=> { %>
@@ -147,19 +147,22 @@
 
 
               <div class="accordion-item">
+                <h6 class="text bg-dark  text-white text-center " >Sort</h6>
                 <select id="sortFilter">
+                 
                   <option value="default">Default</option>
                   <option value="priceLowToHigh">Price: Low to High</option>
                   <option value="priceHighToLow">Price: High to Low</option>
                 </select>
 
-                <h2 class="accordion-header" id="headingThree">
+                <!-- <h2 class="accordion-header" id="headingThree">
                   <button class="accordion-button text-dark bg-light" type="button" data-mdb-toggle="collapse"
                     data-mdb-target="#panelsStayOpen-collapseThree" aria-expanded="false"
                     aria-controls="panelsStayOpen-collapseThree">
                     Price
                   </button>
-                </h2>
+                </h2> -->
+                <h6 class="text bg-dark  text-white text-center " >Price Range</h6>
                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show"
                   aria-labelledby="headingThree">
                   <div class="accordion-body">
@@ -173,16 +176,16 @@
 
                       <div class="col-6">
                         <p class="mb-0">Min</p>
-                        <div class="form-outline">
-                          <input type="number" min="0" id="typeNumberMin" class="form-control" />
-                          <label class="form-label" min="0" for="typeNumberMin">&#8377; 0</label>
+                        <div class="form-dark-outline">
+                          <input type="number"  placeholder="&#8377;" min="0" id="typeNumberMin" class="form-control" />
+                          <label class="form-label" min="0" for="typeNumberMin" ></label>
                         </div>
                       </div>
                       <div class="col-6">
                         <p class="mb-0">Max</p>
-                        <div class="form-outline">
-                          <input type="number" min="0" id="typeNumberMax" class="form-control" />
-                          <label class="form-label" for="typeNumberMax">&#8377; 200000</label>
+                        <div class="form-dark-outline ">
+                          <input type="number" min="0" id="typeNumberMax"  placeholder="&#8377;"  class="form-control" />
+                          <label class="form-label" for="typeNumberMax"></label>
                         </div>
                       </div>
 
@@ -251,8 +254,8 @@
                       </a>
                       <h3 class="mb-3 price">&#8377; <%= product.price %>
                       </h3>
-                      <a href="#!" class="btn btn-warning shadow-0 me-1">Buy Now</a>
-                      <a href="#!" class="btn btn-primary shadow-0 me-1">Add to cart</a>
+                      <a href="/user/productpage/<%= product._id %>" class="btn btn-warning shadow-0 me-1">Buy Now</a>
+                      <a href="/user/productpage/<%= product._id %>" class="btn btn-primary shadow-0 me-1">Add to cart</a>
                       <!-- <a href="#!" class="btn btn-light border icon-hover px-2 pt-2"><i class="fas fa-heart fa-lg text-secondary px-1"></i></a> -->
 
                     </div>

@@ -89,6 +89,8 @@
         </div>
     </section>
 
+
+
     <script>
         function validateForm() {
             // Get input values
@@ -97,74 +99,90 @@
             const password = document.getElementById("form3Example4cg").value;
             const confirmPassword = document.getElementById("form3Example5cg").value;
             const mobile = document.getElementById("form3Example4cdg").value;
-
-            // Regular expressions for name (letters only) and mobile (10-digit number)
-            // const namePattern = /^[A-Za-z]+$/;
-            const namePattern = /^[A-Za-z ]+$/;
+    
+            // Regular expressions for name (letters only), mobile (10-digit number), and email
+            const namePattern = /^[A-Za-z]+$/;  // Updated pattern to disallow whitespace
             const mobilePattern = /^\d{10}$/;
-
+            const emailPattern = /\S+@\S+\.\S+/;
+    
             // Password criteria
             const minLength = 8;
             const hasUppercase = /[A-Z]/;
             const hasLowercase = /[a-z]/;
             const hasNumber = /[0-9]/;
             const hasSpecialCharacter = /[$@$!%*?&#]/;
-
+    
             // Validation checks
             const nameErrorMessage = document.getElementById("nameErrorMessage");
             const emailErrorMessage = document.getElementById("emailErrorMessage");
             const passwordErrorMessage = document.getElementById("passwordErrorMessage");
             const confirmPasswordErrorMessage = document.getElementById("confirmPasswordErrorMessage");
             const mobileErrorMessage = document.getElementById("mobileErrorMessage");
-
-            nameErrorMessage.textContent = ""; // Clear previous error messages
+    
+            // Clear previous error messages
+            nameErrorMessage.textContent = "";
             emailErrorMessage.textContent = "";
             passwordErrorMessage.textContent = "";
             confirmPasswordErrorMessage.textContent = "";
             mobileErrorMessage.textContent = "";
-
+    
+            // Array to store error messages
+            const errorMessages = [];
+    
+            // Validate Name
             if (name === "") {
+                errorMessages.push("Name field cannot be empty.");
                 nameErrorMessage.textContent = "Name field cannot be empty.";
-                return false;
+            } else if (!namePattern.test(name)) {
+                errorMessages.push("Name must contain letters only and cannot contain whitespace.");
+                nameErrorMessage.textContent = "Name must contain letters only and cannot contain whitespace.";
             }
-
-            if (!namePattern.test(name)) {
-                nameErrorMessage.textContent = "Name must contain letters only.";
-                return false;
+    
+            // Validate Email
+            if (email === "") {
+                errorMessages.push("Email field cannot be empty.");
+                emailErrorMessage.textContent = "Email field cannot be empty.";
+            } else if (!emailPattern.test(email)) {
+                errorMessages.push("Enter a valid email address.");
+                emailErrorMessage.textContent = "Enter a valid email address.";
             }
-
+    
+            // Validate Mobile
             if (isNaN(mobile) || mobile === "") {
+                errorMessages.push("Mobile field must be a valid 10-digit number.");
                 mobileErrorMessage.textContent = "Mobile field must be a valid 10-digit number.";
-                return false;
-            }
-
-            if (!mobilePattern.test(mobile)) {
+            } else if (!mobilePattern.test(mobile)) {
+                errorMessages.push("Mobile must be a 10-digit number.");
                 mobileErrorMessage.textContent = "Mobile must be a 10-digit number.";
-                return false;
             }
-
+    
+            // Validate Password
             if (password.length < minLength) {
+                errorMessages.push(`Password must be at least ${minLength} characters long.`);
                 passwordErrorMessage.textContent = `Password must be at least ${minLength} characters long.`;
-                return false;
+            } else if (!hasUppercase.test(password) || !hasLowercase.test(password) || !hasNumber.test(password) || !hasSpecialCharacter.test(password)) {
+                errorMessages.push("Password must contain a special character.");
+                passwordErrorMessage.textContent = "Password must contain a special character.";
             }
-
-            if (!hasUppercase.test(password) || !hasLowercase.test(password) || !hasNumber.test(password) || !hasSpecialCharacter.test(password)) {
-                passwordErrorMessage.textContent = "Password must contain  special character.";
-                return false;
-            }
-
+    
+            // Validate Confirm Password
             if (password !== confirmPassword) {
+                errorMessages.push("Passwords do not match.");
                 confirmPasswordErrorMessage.textContent = "Passwords do not match.";
+            }
+    
+            // Display all error messages
+            if (errorMessages.length > 0) {
                 return false;
             }
-
-            // You can add more validation checks as needed
-
+    
             // If all checks pass, the form will be submitted
             return true;
         }
     </script>
+    
 
+   
 </body>
 
 </html>

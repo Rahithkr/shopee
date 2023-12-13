@@ -36,7 +36,7 @@
 
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                                            <span class="h1 fw-bold mb-0">Logo</span>
+                                            <span class="h1 fw-bold mb-0">Login</span>
                                         </div>
 
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your
@@ -78,7 +78,51 @@
 
 
 
+
     <script>
+        function validateForm() {
+            const email = document.getElementById('form2Example17').value;
+            const password = document.getElementById('form2Example27').value;
+            const emailError = document.getElementById('emailError');
+            const passwordError = document.getElementById('passwordError');
+    
+            // Reset error messages
+            emailError.innerText = 'Email address';
+            emailError.classList.remove('error-message');
+            passwordError.innerText = 'Password';
+            passwordError.classList.remove('error-message');
+    
+            // Check email
+            if (!email || !validateEmail(email)) {
+                emailError.innerText = 'Invalid Email Address';
+                emailError.classList.add('error-message');
+            }
+    
+            // Check password
+            if (!password || password.length < 8) {
+                passwordError.innerText = 'Invalid Password (Minimum 8 characters)';
+                passwordError.classList.add('error-message');
+            }
+    
+            // If there are any error messages, prevent form submission
+            if (emailError.classList.contains('error-message') || passwordError.classList.contains('error-message')) {
+                return false;
+            }
+    
+            return true;
+        }
+    
+        function validateEmail(email) {
+            const re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+    </script>
+    
+
+
+
+
+    <!-- <script>
         function validateForm() {
             const email = document.getElementById('form2Example17').value;
             const password = document.getElementById('form2Example27').value;
@@ -110,7 +154,7 @@
             const re = /\S+@\S+\.\S+/;
             return re.test(email);
         }
-    </script>
+    </script> -->
 
 
 </body>
